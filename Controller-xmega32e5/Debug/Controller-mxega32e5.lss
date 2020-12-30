@@ -3,33 +3,33 @@ Controller-mxega32e5.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000014da  00000000  00000000  00000094  2**1
+  0 .text         000014d4  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000004  00802000  000014da  0000156e  2**0
+  1 .data         00000004  00802000  000014d4  00001568  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          000002d9  00802004  00802004  00001572  2**0
+  2 .bss          000002d9  00802004  00802004  0000156c  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00001572  2**0
+  3 .comment      00000030  00000000  00000000  0000156c  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000015a4  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000159c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000130  00000000  00000000  000015e8  2**3
+  5 .debug_aranges 00000180  00000000  00000000  000015e0  2**3
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00004511  00000000  00000000  00001718  2**0
+  6 .debug_info   0000537d  00000000  00000000  00001760  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001d97  00000000  00000000  00005c29  2**0
+  7 .debug_abbrev 00001fa2  00000000  00000000  00006add  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d59  00000000  00000000  000079c0  2**0
+  8 .debug_line   000011b2  00000000  00000000  00008a7f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000002dc  00000000  00000000  0000871c  2**2
+  9 .debug_frame  00000360  00000000  00000000  00009c34  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0001cb33  00000000  00000000  000089f8  2**0
+ 10 .debug_str    0001cc25  00000000  00000000  00009f94  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000045e  00000000  00000000  0002552b  2**0
+ 11 .debug_loc    0000045e  00000000  00000000  00026bb9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000100  00000000  00000000  00025989  2**0
+ 12 .debug_ranges 00000140  00000000  00000000  00027017  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  00007c7c  00000000  00000000  00025a89  2**0
+ 13 .debug_macro  00007da1  00000000  00000000  00027157  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -41,13 +41,13 @@ Disassembly of section .text:
        6:	00 00       	nop
        8:	6e c0       	rjmp	.+220    	; 0xe6 <__bad_interrupt>
        a:	00 00       	nop
-       c:	0c 94 99 09 	jmp	0x1332	; 0x1332 <__vector_3>
+       c:	0c 94 96 09 	jmp	0x132c	; 0x132c <__vector_3>
       10:	6a c0       	rjmp	.+212    	; 0xe6 <__bad_interrupt>
       12:	00 00       	nop
-      14:	0c 94 35 09 	jmp	0x126a	; 0x126a <__vector_5>
+      14:	0c 94 32 09 	jmp	0x1264	; 0x1264 <__vector_5>
       18:	66 c0       	rjmp	.+204    	; 0xe6 <__bad_interrupt>
       1a:	00 00       	nop
-      1c:	0c 94 dc 09 	jmp	0x13b8	; 0x13b8 <__vector_7>
+      1c:	0c 94 d9 09 	jmp	0x13b2	; 0x13b2 <__vector_7>
       20:	62 c0       	rjmp	.+196    	; 0xe6 <__bad_interrupt>
       22:	00 00       	nop
       24:	60 c0       	rjmp	.+192    	; 0xe6 <__bad_interrupt>
@@ -68,7 +68,7 @@ Disassembly of section .text:
       42:	00 00       	nop
       44:	50 c0       	rjmp	.+160    	; 0xe6 <__bad_interrupt>
       46:	00 00       	nop
-      48:	0c 94 c2 09 	jmp	0x1384	; 0x1384 <__vector_18>
+      48:	0c 94 bf 09 	jmp	0x137e	; 0x137e <__vector_18>
       4c:	4c c0       	rjmp	.+152    	; 0xe6 <__bad_interrupt>
       4e:	00 00       	nop
       50:	4a c0       	rjmp	.+148    	; 0xe6 <__bad_interrupt>
@@ -130,7 +130,7 @@ Disassembly of section .text:
       b8:	10 e2       	ldi	r17, 0x20	; 32
       ba:	a0 e0       	ldi	r26, 0x00	; 0
       bc:	b0 e2       	ldi	r27, 0x20	; 32
-      be:	ea ed       	ldi	r30, 0xDA	; 218
+      be:	e4 ed       	ldi	r30, 0xD4	; 212
       c0:	f4 e1       	ldi	r31, 0x14	; 20
       c2:	02 c0       	rjmp	.+4      	; 0xc8 <__do_copy_data+0x10>
       c4:	05 90       	lpm	r0, Z+
@@ -152,8 +152,8 @@ Disassembly of section .text:
       d8:	ad 3d       	cpi	r26, 0xDD	; 221
       da:	b2 07       	cpc	r27, r18
       dc:	e1 f7       	brne	.-8      	; 0xd6 <.do_clear_bss_loop>
-      de:	0e 94 a9 08 	call	0x1152	; 0x1152 <main>
-      e2:	0c 94 6b 0a 	jmp	0x14d6	; 0x14d6 <_exit>
+      de:	0e 94 d3 08 	call	0x11a6	; 0x11a6 <main>
+      e2:	0c 94 68 0a 	jmp	0x14d0	; 0x14d0 <_exit>
 
 000000e6 <__bad_interrupt>:
       e6:	8c cf       	rjmp	.-232    	; 0x0 <__vectors>
@@ -222,7 +222,7 @@ _1101010110_:
      126:	b0 e0       	ldi	r27, 0x00	; 0
      128:	e8 e9       	ldi	r30, 0x98	; 152
      12a:	f0 e0       	ldi	r31, 0x00	; 0
-     12c:	0c 94 31 0a 	jmp	0x1462	; 0x1462 <__prologue_saves__+0xc>
+     12c:	0c 94 2e 0a 	jmp	0x145c	; 0x145c <__prologue_saves__+0xc>
      130:	ff b6       	in	r15, 0x3f	; 63
      132:	90 e8       	ldi	r25, 0x80	; 128
      134:	f9 22       	and	r15, r25
@@ -280,16 +280,16 @@ _1101010110_:
      1a4:	ac df       	rcall	.-168    	; 0xfe <_1101010111_>
      1a6:	0f 5f       	subi	r16, 0xFF	; 255
      1a8:	1f 4f       	sbci	r17, 0xFF	; 255
-     1aa:	90 91 00 20 	lds	r25, 0x2000	; 0x802000 <__data_start>
+     1aa:	90 91 00 20 	lds	r25, 0x2000	; 0x802000 <__DATA_REGION_ORIGIN__>
      1ae:	9f 5f       	subi	r25, 0xFF	; 255
-     1b0:	90 93 00 20 	sts	0x2000, r25	; 0x802000 <__data_start>
+     1b0:	90 93 00 20 	sts	0x2000, r25	; 0x802000 <__DATA_REGION_ORIGIN__>
      1b4:	92 30       	cpi	r25, 0x02	; 2
      1b6:	30 f0       	brcs	.+12     	; 0x1c4 <burst_1_1_00_0_1+0xa0>
      1b8:	92 30       	cpi	r25, 0x02	; 2
      1ba:	21 f0       	breq	.+8      	; 0x1c4 <burst_1_1_00_0_1+0xa0>
      1bc:	93 30       	cpi	r25, 0x03	; 3
      1be:	11 f0       	breq	.+4      	; 0x1c4 <burst_1_1_00_0_1+0xa0>
-     1c0:	10 92 00 20 	sts	0x2000, r1	; 0x802000 <__data_start>
+     1c0:	10 92 00 20 	sts	0x2000, r1	; 0x802000 <__DATA_REGION_ORIGIN__>
      1c4:	88 23       	and	r24, r24
      1c6:	e9 f2       	breq	.-70     	; 0x182 <burst_1_1_00_0_1+0x5e>
      1c8:	90 91 4c 20 	lds	r25, 0x204C	; 0x80204c <SNS_array+0x1>
@@ -409,7 +409,7 @@ _1101010110_:
      2c2:	8f bf       	out	0x3f, r24	; 63
      2c4:	21 96       	adiw	r28, 0x01	; 1
      2c6:	ec e0       	ldi	r30, 0x0C	; 12
-     2c8:	0c 94 4a 0a 	jmp	0x1494	; 0x1494 <__epilogue_restores__+0xc>
+     2c8:	0c 94 47 0a 	jmp	0x148e	; 0x148e <__epilogue_restores__+0xc>
 
 000002cc <qt_init_sensing_with_burst>:
      2cc:	ff 92       	push	r15
@@ -436,7 +436,7 @@ _1101010110_:
      300:	cd b7       	in	r28, 0x3d	; 61
      302:	de b7       	in	r29, 0x3e	; 62
      304:	e5 e0       	ldi	r30, 0x05	; 5
-     306:	0c 94 51 0a 	jmp	0x14a2	; 0x14a2 <__epilogue_restores__+0x1a>
+     306:	0c 94 4e 0a 	jmp	0x149c	; 0x149c <__epilogue_restores__+0x1a>
 
 0000030a <qt_get_library_sig>:
      30a:	fc 01       	movw	r30, r24
@@ -1425,13 +1425,13 @@ _1101010110_:
      b6e:	09 95       	icall
      b70:	08 95       	ret
 
-00000b72 <init_pins>:
+00000b72 <init_pins_normal>:
 
-}
-
-void init_audio_timer()
+void init_input_timeout_timer()
 {
-	TCC4.CTRLA =
+	RTC.PER = INPUT_TIMEOUT_PER_MS;
+	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
+	RTC.INTCTRL = RTC_OVFINTLVL_LO_gc;
      b72:	85 e0       	ldi	r24, 0x05	; 5
      b74:	80 93 01 06 	sts	0x0601, r24	; 0x800601 <__TEXT_REGION_LENGTH__+0x7f7601>
      b78:	e0 e6       	ldi	r30, 0x60	; 96
@@ -1451,7 +1451,7 @@ void init_audio_timer()
      b94:	81 83       	std	Z+1, r24	; 0x01
      b96:	08 95       	ret
 
-00000b98 <init_clock>:
+00000b98 <init_clock_normal>:
      b98:	e0 e5       	ldi	r30, 0x50	; 80
      b9a:	f0 e0       	ldi	r31, 0x00	; 0
      b9c:	80 81       	ld	r24, Z
@@ -1461,7 +1461,7 @@ void init_audio_timer()
      ba4:	f0 e0       	ldi	r31, 0x00	; 0
      ba6:	80 81       	ld	r24, Z
      ba8:	81 ff       	sbrs	r24, 1
-     baa:	fd cf       	rjmp	.-6      	; 0xba6 <init_clock+0xe>
+     baa:	fd cf       	rjmp	.-6      	; 0xba6 <init_clock_normal+0xe>
      bac:	88 ed       	ldi	r24, 0xD8	; 216
      bae:	84 bf       	out	0x34, r24	; 52
      bb0:	e0 e4       	ldi	r30, 0x40	; 64
@@ -1471,7 +1471,7 @@ void init_audio_timer()
      bb8:	83 83       	std	Z+3, r24	; 0x03
      bba:	08 95       	ret
 
-00000bbc <init_usart>:
+00000bbc <init_usart_normal>:
      bbc:	e0 ec       	ldi	r30, 0xC0	; 192
      bbe:	f9 e0       	ldi	r31, 0x09	; 9
      bc0:	12 82       	std	Z+2, r1	; 0x02
@@ -1496,7 +1496,7 @@ void init_audio_timer()
      be8:	83 83       	std	Z+3, r24	; 0x03
      bea:	08 95       	ret
 
-00000bec <init_edma>:
+00000bec <init_edma_normal>:
      bec:	e0 e0       	ldi	r30, 0x00	; 0
      bee:	f1 e0       	ldi	r31, 0x01	; 1
      bf0:	94 e0       	ldi	r25, 0x04	; 4
@@ -1558,20 +1558,11 @@ void init_audio_timer()
      c68:	08 95       	ret
 
 00000c6a <init_light_map_timer>:
-		TC_CLKSEL_DIV1_gc;		//  prescaler clk/1	
-}
-
-void init_light_map_timer()
-{
-	TCC5_CTRLA = 0; //Prescaler off
      c6a:	e0 e4       	ldi	r30, 0x40	; 64
      c6c:	f8 e0       	ldi	r31, 0x08	; 8
      c6e:	10 82       	st	Z, r1
-	TCC5_INTCTRLA = TC_OVFINTLVL_LO_gc;
      c70:	81 e0       	ldi	r24, 0x01	; 1
      c72:	80 93 46 08 	sts	0x0846, r24	; 0x800846 <__TEXT_REGION_LENGTH__+0x7f7846>
-
-	TCC5.PER = TIMER_PER_MS;
      c76:	8d e7       	ldi	r24, 0x7D	; 125
      c78:	90 e0       	ldi	r25, 0x00	; 0
      c7a:	86 a3       	std	Z+38, r24	; 0x26
@@ -1579,21 +1570,14 @@ void init_light_map_timer()
      c7e:	08 95       	ret
 
 00000c80 <init_qTouch_timer>:
-}
-
-void init_qTouch_timer()
-{
-	RTC.PER = TICKS_PER_MS * qt_measurement_period_msec;
      c80:	80 91 02 20 	lds	r24, 0x2002	; 0x802002 <qt_measurement_period_msec>
      c84:	90 91 03 20 	lds	r25, 0x2003	; 0x802003 <qt_measurement_period_msec+0x1>
      c88:	e0 e0       	ldi	r30, 0x00	; 0
      c8a:	f4 e0       	ldi	r31, 0x04	; 4
      c8c:	82 87       	std	Z+10, r24	; 0x0a
      c8e:	93 87       	std	Z+11, r25	; 0x0b
-	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
      c90:	81 e0       	ldi	r24, 0x01	; 1
      c92:	80 83       	st	Z, r24
-	RTC.INTCTRL = RTC_OVFINTLVL_LO_gc;
      c94:	82 83       	std	Z+2, r24	; 0x02
      c96:	08 95       	ret
 
@@ -1634,1394 +1618,1401 @@ void init_DAC()
      cb0:	f3 e0       	ldi	r31, 0x03	; 3
      cb2:	82 e2       	ldi	r24, 0x22	; 34
      cb4:	81 83       	std	Z+1, r24	; 0x01
-		DAC_CHSEL_SINGLE1_gc |          // DAC ch1 is active
-		DAC_CH1TRIG_bm;			// DAC ch1 auto triggered by an event (CH1)
+	DAC_CHSEL_SINGLE1_gc |          // DAC ch1 is active
+	DAC_CH1TRIG_bm;			// DAC ch1 auto triggered by an event (CH1)
 	DACA.CTRLC =
      cb6:	88 e0       	ldi	r24, 0x08	; 8
      cb8:	82 83       	std	Z+2, r24	; 0x02
-		DAC_REFSEL_AVCC_gc;// | DAC_LEFTADJ_bm ;             // Use AVCC (3.3v), non-left adj
+	DAC_REFSEL_AVCC_gc;// | DAC_LEFTADJ_bm ;             // Use AVCC (3.3v), non-left adj
 	DACA.EVCTRL =
      cba:	81 e0       	ldi	r24, 0x01	; 1
      cbc:	83 83       	std	Z+3, r24	; 0x03
-		DAC_EVSEL_1_gc;                 // Event Ch1 triggers the DAC conversion
-		DACA.CTRLA = DAC_CH1EN_bm | DAC_ENABLE_bm;  // enable DACA channel 1	
+	DAC_EVSEL_1_gc;                 // Event Ch1 triggers the DAC conversion
+	DACA.CTRLA = DAC_CH1EN_bm | DAC_ENABLE_bm;  // enable DACA channel 1
      cbe:	89 e0       	ldi	r24, 0x09	; 9
      cc0:	80 83       	st	Z, r24
      cc2:	08 95       	ret
 
-00000cc4 <read_mem>:
+00000cc4 <qt_set_parameters>:
 }
-
-
-
-void read_mem(uint32_t starting_address, uint8_t *buffer, uint8_t len)
-{
-     cc4:	cf 92       	push	r12
-     cc6:	df 92       	push	r13
-     cc8:	ef 92       	push	r14
-     cca:	ff 92       	push	r15
-     ccc:	cf 93       	push	r28
-     cce:	df 93       	push	r29
-     cd0:	00 d0       	rcall	.+0      	; 0xcd2 <read_mem+0xe>
-     cd2:	00 d0       	rcall	.+0      	; 0xcd4 <read_mem+0x10>
-     cd4:	cd b7       	in	r28, 0x3d	; 61
-     cd6:	de b7       	in	r29, 0x3e	; 62
-	volatile uint8_t read[4];
-	int trash;
-	_readingMem = 1;
-     cd8:	31 e0       	ldi	r19, 0x01	; 1
-     cda:	30 93 4f 20 	sts	0x204F, r19	; 0x80204f <_readingMem>
-	_setCS = 0;
-     cde:	10 92 50 20 	sts	0x2050, r1	; 0x802050 <_setCS>
-	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
-     ce2:	30 e1       	ldi	r19, 0x10	; 16
-     ce4:	30 93 66 06 	sts	0x0666, r19	; 0x800666 <__TEXT_REGION_LENGTH__+0x7f7666>
-		
-	read[0] = MEM_READ_DATA;
-     ce8:	33 e0       	ldi	r19, 0x03	; 3
-     cea:	39 83       	std	Y+1, r19	; 0x01
-	read[1] = (starting_address >> 16) & 0xFF;
-     cec:	6c 01       	movw	r12, r24
-     cee:	ee 24       	eor	r14, r14
-     cf0:	ff 24       	eor	r15, r15
-     cf2:	ca 82       	std	Y+2, r12	; 0x02
-	read[2] = (starting_address >> 8) & 0xFF;
-     cf4:	c7 2e       	mov	r12, r23
-     cf6:	d8 2e       	mov	r13, r24
-     cf8:	e9 2e       	mov	r14, r25
-     cfa:	ff 24       	eor	r15, r15
-     cfc:	cb 82       	std	Y+3, r12	; 0x03
-	read[3] = (starting_address >> 0) & 0xFF;
-     cfe:	6c 83       	std	Y+4, r22	; 0x04
-
-	EDMA.CH0.TRFCNT = 4;
-     d00:	e0 e0       	ldi	r30, 0x00	; 0
-     d02:	f1 e0       	ldi	r31, 0x01	; 1
-     d04:	64 e0       	ldi	r22, 0x04	; 4
-     d06:	70 e0       	ldi	r23, 0x00	; 0
-     d08:	66 8b       	std	Z+22, r22	; 0x16
-     d0a:	77 8b       	std	Z+23, r23	; 0x17
-	EDMA.CH0.ADDR = (uint16_t)buffer;
-     d0c:	40 8f       	std	Z+24, r20	; 0x18
-     d0e:	51 8f       	std	Z+25, r21	; 0x19
-	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
-     d10:	80 89       	ldd	r24, Z+16	; 0x10
-     d12:	80 68       	ori	r24, 0x80	; 128
-     d14:	80 8b       	std	Z+16, r24	; 0x10
-	
-	
-	EDMA.CH1.TRFCNT = 4;
-     d16:	66 a3       	std	Z+38, r22	; 0x26
-     d18:	77 a3       	std	Z+39, r23	; 0x27
-	EDMA.CH1.ADDR = read;
-     d1a:	ce 01       	movw	r24, r28
-     d1c:	01 96       	adiw	r24, 0x01	; 1
-     d1e:	80 a7       	std	Z+40, r24	; 0x28
-     d20:	91 a7       	std	Z+41, r25	; 0x29
-	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
-     d22:	81 e3       	ldi	r24, 0x31	; 49
-     d24:	82 a3       	std	Z+34, r24	; 0x22
-	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
-     d26:	80 a1       	ldd	r24, Z+32	; 0x20
-     d28:	80 69       	ori	r24, 0x90	; 144
-     d2a:	80 a3       	std	Z+32, r24	; 0x20
-	
-	while(_readingMem);
-     d2c:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-     d30:	81 11       	cpse	r24, r1
-     d32:	fc cf       	rjmp	.-8      	; 0xd2c <read_mem+0x68>
-	_readingMem = 1;	
-     d34:	81 e0       	ldi	r24, 0x01	; 1
-     d36:	80 93 4f 20 	sts	0x204F, r24	; 0x80204f <_readingMem>
-	_setCS = 1;
-     d3a:	80 93 50 20 	sts	0x2050, r24	; 0x802050 <_setCS>
-	
-	EDMA.CH0.TRFCNT = len;
-     d3e:	30 e0       	ldi	r19, 0x00	; 0
-     d40:	e0 e0       	ldi	r30, 0x00	; 0
-     d42:	f1 e0       	ldi	r31, 0x01	; 1
-     d44:	26 8b       	std	Z+22, r18	; 0x16
-     d46:	37 8b       	std	Z+23, r19	; 0x17
-	EDMA.CH0.ADDR = (uint16_t)buffer;
-     d48:	40 8f       	std	Z+24, r20	; 0x18
-     d4a:	51 8f       	std	Z+25, r21	; 0x19
-	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
-     d4c:	80 89       	ldd	r24, Z+16	; 0x10
-     d4e:	80 68       	ori	r24, 0x80	; 128
-     d50:	80 8b       	std	Z+16, r24	; 0x10
-	
-	EDMA.CH1.TRFCNT = len;
-     d52:	26 a3       	std	Z+38, r18	; 0x26
-     d54:	37 a3       	std	Z+39, r19	; 0x27
-	EDMA.CH1.ADDR = (uint16_t)&TX_DATA;
-     d56:	81 e0       	ldi	r24, 0x01	; 1
-     d58:	90 e2       	ldi	r25, 0x20	; 32
-     d5a:	80 a7       	std	Z+40, r24	; 0x28
-     d5c:	91 a7       	std	Z+41, r25	; 0x29
-	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
-     d5e:	80 e3       	ldi	r24, 0x30	; 48
-     d60:	82 a3       	std	Z+34, r24	; 0x22
-	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
-     d62:	80 a1       	ldd	r24, Z+32	; 0x20
-     d64:	80 69       	ori	r24, 0x90	; 144
-     d66:	80 a3       	std	Z+32, r24	; 0x20
-	
-	//Read is finished by interrupt handler.
-	
-}
-     d68:	24 96       	adiw	r28, 0x04	; 4
-     d6a:	cd bf       	out	0x3d, r28	; 61
-     d6c:	de bf       	out	0x3e, r29	; 62
-     d6e:	df 91       	pop	r29
-     d70:	cf 91       	pop	r28
-     d72:	ff 90       	pop	r15
-     d74:	ef 90       	pop	r14
-     d76:	df 90       	pop	r13
-     d78:	cf 90       	pop	r12
-     d7a:	08 95       	ret
-
-00000d7c <write_lights>:
-
-
-
-void write_lights()
-{
-	EDMA.CH3.ADDR = (uint16_t)_lightMap.lights;
-     d7c:	80 e6       	ldi	r24, 0x60	; 96
-     d7e:	91 e2       	ldi	r25, 0x21	; 33
-     d80:	80 93 48 01 	sts	0x0148, r24	; 0x800148 <__TEXT_REGION_LENGTH__+0x7f7148>
-     d84:	90 93 49 01 	sts	0x0149, r25	; 0x800149 <__TEXT_REGION_LENGTH__+0x7f7149>
-	EDMA.CH3.TRFCNT = _lightMetadata.lightCount * 3;
-     d88:	80 91 f4 20 	lds	r24, 0x20F4	; 0x8020f4 <_lightMetadata+0x2>
-     d8c:	90 91 f5 20 	lds	r25, 0x20F5	; 0x8020f5 <_lightMetadata+0x3>
-     d90:	9c 01       	movw	r18, r24
-     d92:	22 0f       	add	r18, r18
-     d94:	33 1f       	adc	r19, r19
-     d96:	82 0f       	add	r24, r18
-     d98:	93 1f       	adc	r25, r19
-     d9a:	80 93 46 01 	sts	0x0146, r24	; 0x800146 <__TEXT_REGION_LENGTH__+0x7f7146>
-     d9e:	90 93 47 01 	sts	0x0147, r25	; 0x800147 <__TEXT_REGION_LENGTH__+0x7f7147>
-	EDMA.CH3.CTRLA = EDMA_CH_ENABLE_bm | EDMA_CH_SINGLE_bm; // Start DMA transfer to LEDs	
-     da2:	84 e8       	ldi	r24, 0x84	; 132
-     da4:	80 93 40 01 	sts	0x0140, r24	; 0x800140 <__TEXT_REGION_LENGTH__+0x7f7140>
-     da8:	08 95       	ret
-
-00000daa <load_entry_count>:
-}
-
-void load_entry_count()
-{
-	read_mem(0, &_entryCount, 2);
-     daa:	22 e0       	ldi	r18, 0x02	; 2
-     dac:	4b e5       	ldi	r20, 0x5B	; 91
-     dae:	50 e2       	ldi	r21, 0x20	; 32
-     db0:	60 e0       	ldi	r22, 0x00	; 0
-     db2:	70 e0       	ldi	r23, 0x00	; 0
-     db4:	cb 01       	movw	r24, r22
-     db6:	86 df       	rcall	.-244    	; 0xcc4 <read_mem>
-	while(_readingMem);
-     db8:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-     dbc:	81 11       	cpse	r24, r1
-     dbe:	fc cf       	rjmp	.-8      	; 0xdb8 <load_entry_count+0xe>
-}
-     dc0:	08 95       	ret
-
-00000dc2 <load_starting_addresses>:
-//entryNum is 0-based index
-void load_starting_addresses(uint16_t entryNum)
-{
-
-	uint32_t filesAddressesAndSizesAddress = (entryNum * 8) + 2; //(4 bytes for each address) * 2 addresses + 2 to skip the count
-	read_mem(filesAddressesAndSizesAddress, &_addresses, FILE_ENTRY_BUFF_LEN);
-     dc2:	88 0f       	add	r24, r24
-     dc4:	99 1f       	adc	r25, r25
-     dc6:	88 0f       	add	r24, r24
-     dc8:	99 1f       	adc	r25, r25
-     dca:	88 0f       	add	r24, r24
-     dcc:	99 1f       	adc	r25, r25
-     dce:	bc 01       	movw	r22, r24
-     dd0:	6e 5f       	subi	r22, 0xFE	; 254
-     dd2:	7f 4f       	sbci	r23, 0xFF	; 255
-     dd4:	80 e0       	ldi	r24, 0x00	; 0
-     dd6:	90 e0       	ldi	r25, 0x00	; 0
-     dd8:	28 e0       	ldi	r18, 0x08	; 8
-     dda:	40 e6       	ldi	r20, 0x60	; 96
-     ddc:	50 e2       	ldi	r21, 0x20	; 32
-     dde:	72 df       	rcall	.-284    	; 0xcc4 <read_mem>
-	while(_readingMem);
-     de0:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-     de4:	81 11       	cpse	r24, r1
-     de6:	fc cf       	rjmp	.-8      	; 0xde0 <load_starting_addresses+0x1e>
-	
-
-}
-     de8:	08 95       	ret
-
-00000dea <load_wav_metadata>:
-
-void load_wav_metadata()
-{
-	read_mem(_addresses.wavFileAddress, &_wavMetadata, WAV_METADATA_LEN );
-     dea:	60 91 60 20 	lds	r22, 0x2060	; 0x802060 <_addresses>
-     dee:	70 91 61 20 	lds	r23, 0x2061	; 0x802061 <_addresses+0x1>
-     df2:	80 91 62 20 	lds	r24, 0x2062	; 0x802062 <_addresses+0x2>
-     df6:	90 91 63 20 	lds	r25, 0x2063	; 0x802063 <_addresses+0x3>
-     dfa:	29 e0       	ldi	r18, 0x09	; 9
-     dfc:	48 e6       	ldi	r20, 0x68	; 104
-     dfe:	50 e2       	ldi	r21, 0x20	; 32
-     e00:	61 df       	rcall	.-318    	; 0xcc4 <read_mem>
-	while(_readingMem);
-     e02:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-     e06:	81 11       	cpse	r24, r1
-     e08:	fc cf       	rjmp	.-8      	; 0xe02 <load_wav_metadata+0x18>
-	
-	_addresses.wavFileAddress += WAV_METADATA_LEN; //Increment the current read address for the wav data
-     e0a:	e0 e6       	ldi	r30, 0x60	; 96
-     e0c:	f0 e2       	ldi	r31, 0x20	; 32
-     e0e:	80 81       	ld	r24, Z
-     e10:	91 81       	ldd	r25, Z+1	; 0x01
-     e12:	a2 81       	ldd	r26, Z+2	; 0x02
-     e14:	b3 81       	ldd	r27, Z+3	; 0x03
-     e16:	09 96       	adiw	r24, 0x09	; 9
-     e18:	a1 1d       	adc	r26, r1
-     e1a:	b1 1d       	adc	r27, r1
-     e1c:	80 83       	st	Z, r24
-     e1e:	91 83       	std	Z+1, r25	; 0x01
-     e20:	a2 83       	std	Z+2, r26	; 0x02
-     e22:	b3 83       	std	Z+3, r27	; 0x03
-	_totalSampleBytes = _wavMetadata.sampleCount * 2; // * 2 because each sample is 2 bytes
-     e24:	80 91 6d 20 	lds	r24, 0x206D	; 0x80206d <_wavMetadata+0x5>
-     e28:	90 91 6e 20 	lds	r25, 0x206E	; 0x80206e <_wavMetadata+0x6>
-     e2c:	a0 91 6f 20 	lds	r26, 0x206F	; 0x80206f <_wavMetadata+0x7>
-     e30:	b0 91 70 20 	lds	r27, 0x2070	; 0x802070 <_wavMetadata+0x8>
-     e34:	88 0f       	add	r24, r24
-     e36:	99 1f       	adc	r25, r25
-     e38:	aa 1f       	adc	r26, r26
-     e3a:	bb 1f       	adc	r27, r27
-     e3c:	80 93 53 20 	sts	0x2053, r24	; 0x802053 <_totalSampleBytes>
-     e40:	90 93 54 20 	sts	0x2054, r25	; 0x802054 <_totalSampleBytes+0x1>
-     e44:	a0 93 55 20 	sts	0x2055, r26	; 0x802055 <_totalSampleBytes+0x2>
-     e48:	b0 93 56 20 	sts	0x2056, r27	; 0x802056 <_totalSampleBytes+0x3>
-     e4c:	08 95       	ret
-
-00000e4e <load_light_sequenc_metadata>:
-}
-
-void load_light_sequenc_metadata()
-{
-
-	read_mem(_addresses.lightFileAddress, &_lightMetadata, LIGHT_METADATA_LEN );
-     e4e:	60 91 64 20 	lds	r22, 0x2064	; 0x802064 <_addresses+0x4>
-     e52:	70 91 65 20 	lds	r23, 0x2065	; 0x802065 <_addresses+0x5>
-     e56:	80 91 66 20 	lds	r24, 0x2066	; 0x802066 <_addresses+0x6>
-     e5a:	90 91 67 20 	lds	r25, 0x2067	; 0x802067 <_addresses+0x7>
-     e5e:	24 e0       	ldi	r18, 0x04	; 4
-     e60:	42 ef       	ldi	r20, 0xF2	; 242
-     e62:	50 e2       	ldi	r21, 0x20	; 32
-     e64:	2f df       	rcall	.-418    	; 0xcc4 <read_mem>
-	
-	while(_readingMem);
-     e66:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-     e6a:	81 11       	cpse	r24, r1
-     e6c:	fc cf       	rjmp	.-8      	; 0xe66 <load_light_sequenc_metadata+0x18>
-	
-	_addresses.lightFileAddress += LIGHT_METADATA_LEN; //Increment the current read address for the light sequence data
-     e6e:	e0 e6       	ldi	r30, 0x60	; 96
-     e70:	f0 e2       	ldi	r31, 0x20	; 32
-     e72:	84 81       	ldd	r24, Z+4	; 0x04
-     e74:	95 81       	ldd	r25, Z+5	; 0x05
-     e76:	a6 81       	ldd	r26, Z+6	; 0x06
-     e78:	b7 81       	ldd	r27, Z+7	; 0x07
-     e7a:	04 96       	adiw	r24, 0x04	; 4
-     e7c:	a1 1d       	adc	r26, r1
-     e7e:	b1 1d       	adc	r27, r1
-     e80:	84 83       	std	Z+4, r24	; 0x04
-     e82:	95 83       	std	Z+5, r25	; 0x05
-     e84:	a6 83       	std	Z+6, r26	; 0x06
-     e86:	b7 83       	std	Z+7, r27	; 0x07
-     e88:	08 95       	ret
-
-00000e8a <load_next_light_map>:
-}
-
-void load_next_light_map()
-{
-     e8a:	cf 93       	push	r28
-	//2 bytes for the hold time + 3 * the light count (3 bytes per light)
-	uint8_t len = 2 + (_lightMetadata.lightCount * 3);
-     e8c:	c0 91 f4 20 	lds	r28, 0x20F4	; 0x8020f4 <_lightMetadata+0x2>
-     e90:	8c 2f       	mov	r24, r28
-     e92:	88 0f       	add	r24, r24
-     e94:	c8 0f       	add	r28, r24
-     e96:	ce 5f       	subi	r28, 0xFE	; 254
-	//Clear the flag and stop the counter
-	_holdTimerCounter = 0;
-     e98:	10 92 59 20 	sts	0x2059, r1	; 0x802059 <_holdTimerCounter>
-     e9c:	10 92 5a 20 	sts	0x205A, r1	; 0x80205a <_holdTimerCounter+0x1>
-
-
-	TCC5.CTRLA = 0; //prescaler off
-     ea0:	10 92 40 08 	sts	0x0840, r1	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
-	//perform the mem read for the light map data
-	
-	//Make sure nothing else is reading the mem.
-	
-	read_mem(_addresses.lightFileAddress, &_lightMap, len);
-     ea4:	60 91 64 20 	lds	r22, 0x2064	; 0x802064 <_addresses+0x4>
-     ea8:	70 91 65 20 	lds	r23, 0x2065	; 0x802065 <_addresses+0x5>
-     eac:	80 91 66 20 	lds	r24, 0x2066	; 0x802066 <_addresses+0x6>
-     eb0:	90 91 67 20 	lds	r25, 0x2067	; 0x802067 <_addresses+0x7>
-     eb4:	2c 2f       	mov	r18, r28
-     eb6:	4e e5       	ldi	r20, 0x5E	; 94
-     eb8:	51 e2       	ldi	r21, 0x21	; 33
-     eba:	04 df       	rcall	.-504    	; 0xcc4 <read_mem>
-	while(_readingMem);	
-     ebc:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-     ec0:	81 11       	cpse	r24, r1
-     ec2:	fc cf       	rjmp	.-8      	; 0xebc <load_next_light_map+0x32>
-	
-	//update the _addresses.lightFileAddress and decrement the _lightMetadata.mapCount
-	_addresses.lightFileAddress += len;
-     ec4:	e0 e6       	ldi	r30, 0x60	; 96
-     ec6:	f0 e2       	ldi	r31, 0x20	; 32
-     ec8:	84 81       	ldd	r24, Z+4	; 0x04
-     eca:	95 81       	ldd	r25, Z+5	; 0x05
-     ecc:	a6 81       	ldd	r26, Z+6	; 0x06
-     ece:	b7 81       	ldd	r27, Z+7	; 0x07
-     ed0:	8c 0f       	add	r24, r28
-     ed2:	91 1d       	adc	r25, r1
-     ed4:	a1 1d       	adc	r26, r1
-     ed6:	b1 1d       	adc	r27, r1
-     ed8:	84 83       	std	Z+4, r24	; 0x04
-     eda:	95 83       	std	Z+5, r25	; 0x05
-     edc:	a6 83       	std	Z+6, r26	; 0x06
-     ede:	b7 83       	std	Z+7, r27	; 0x07
-	_lightMetadata.mapCount--;
-     ee0:	e2 ef       	ldi	r30, 0xF2	; 242
-     ee2:	f0 e2       	ldi	r31, 0x20	; 32
-     ee4:	80 81       	ld	r24, Z
-     ee6:	91 81       	ldd	r25, Z+1	; 0x01
-     ee8:	01 97       	sbiw	r24, 0x01	; 1
-     eea:	80 83       	st	Z, r24
-     eec:	91 83       	std	Z+1, r25	; 0x01
-		
-	//start the light hold timer
-	//TIMER_PER_MS is based on 256 prediv of 32MHz clock on the timer
-	//Should result in a 1ms timer interval
-	TCC5_CTRLA = TC_CLKSEL_DIV256_gc;
-     eee:	86 e0       	ldi	r24, 0x06	; 6
-     ef0:	80 93 40 08 	sts	0x0840, r24	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
-
-	//Start the light output process. 
-	write_lights();
-     ef4:	43 df       	rcall	.-378    	; 0xd7c <write_lights>
-}
-     ef6:	cf 91       	pop	r28
-     ef8:	08 95       	ret
-
-00000efa <calc_clock_per>:
-{
-	//We are going to assume that, if this is a 2-channel wav, we can play one sample of one channel and then
-	//one sample of the other channel, instead of mixing by sum.
-	//rate indicates how many times per second we need to output a sample
-	//We will double the rate for 2 channel audio
-	uint32_t rate = _wavMetadata.sampleRate * _wavMetadata.numChannels; //shoud be 1 or 2;
-     efa:	e8 e6       	ldi	r30, 0x68	; 104
-     efc:	f0 e2       	ldi	r31, 0x20	; 32
-	
-	//delay = cpu_f / rate. Assuming timer clk div is 1
-	_clkPer = F_CPU/rate; //using a global var because the clock per will have to be reset again, so avoiding recalculating it
-     efe:	a4 81       	ldd	r26, Z+4	; 0x04
-     f00:	20 81       	ld	r18, Z
-     f02:	31 81       	ldd	r19, Z+1	; 0x01
-     f04:	42 81       	ldd	r20, Z+2	; 0x02
-     f06:	53 81       	ldd	r21, Z+3	; 0x03
-     f08:	b0 e0       	ldi	r27, 0x00	; 0
-     f0a:	9b d2       	rcall	.+1334   	; 0x1442 <__muluhisi3>
-     f0c:	9b 01       	movw	r18, r22
-     f0e:	ac 01       	movw	r20, r24
-     f10:	60 e0       	ldi	r22, 0x00	; 0
-     f12:	78 e4       	ldi	r23, 0x48	; 72
-     f14:	88 ee       	ldi	r24, 0xE8	; 232
-     f16:	91 e0       	ldi	r25, 0x01	; 1
-     f18:	72 d2       	rcall	.+1252   	; 0x13fe <__udivmodsi4>
-     f1a:	20 93 51 20 	sts	0x2051, r18	; 0x802051 <_clkPer>
-     f1e:	30 93 52 20 	sts	0x2052, r19	; 0x802052 <_clkPer+0x1>
-     f22:	08 95       	ret
-
-00000f24 <load_input_buffer>:
-
-}
-
-void load_input_buffer()
-{
-     f24:	0f 93       	push	r16
-     f26:	1f 93       	push	r17
-     f28:	cf 93       	push	r28
-     f2a:	df 93       	push	r29
-	//The first byte of the input buffer holds the length
-	
-	_inputBuff[0] = WAV_FILE_BUFF_LEN;
-     f2c:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
-     f30:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
-     f34:	80 e8       	ldi	r24, 0x80	; 128
-     f36:	80 83       	st	Z, r24
-	
-	if (_totalSampleBytes < _inputBuff[0])
-     f38:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
-     f3c:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
-     f40:	40 91 53 20 	lds	r20, 0x2053	; 0x802053 <_totalSampleBytes>
-     f44:	50 91 54 20 	lds	r21, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
-     f48:	60 91 55 20 	lds	r22, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
-     f4c:	70 91 56 20 	lds	r23, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
-     f50:	80 81       	ld	r24, Z
-     f52:	90 e0       	ldi	r25, 0x00	; 0
-     f54:	a0 e0       	ldi	r26, 0x00	; 0
-     f56:	b0 e0       	ldi	r27, 0x00	; 0
-     f58:	48 17       	cp	r20, r24
-     f5a:	59 07       	cpc	r21, r25
-     f5c:	6a 07       	cpc	r22, r26
-     f5e:	7b 07       	cpc	r23, r27
-     f60:	18 f4       	brcc	.+6      	; 0xf68 <load_input_buffer+0x44>
-	{
-		_inputBuff[0] = _wavMetadata.sampleCount;
-     f62:	80 91 6d 20 	lds	r24, 0x206D	; 0x80206d <_wavMetadata+0x5>
-     f66:	80 83       	st	Z, r24
-	}
-	
-	//Update the number of sample bytes left
-	if (_inputBuff[0] > _totalSampleBytes)
-     f68:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
-     f6c:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
-     f70:	80 81       	ld	r24, Z
-     f72:	90 e0       	ldi	r25, 0x00	; 0
-     f74:	a0 e0       	ldi	r26, 0x00	; 0
-     f76:	b0 e0       	ldi	r27, 0x00	; 0
-     f78:	40 91 53 20 	lds	r20, 0x2053	; 0x802053 <_totalSampleBytes>
-     f7c:	50 91 54 20 	lds	r21, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
-     f80:	60 91 55 20 	lds	r22, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
-     f84:	70 91 56 20 	lds	r23, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
-     f88:	48 17       	cp	r20, r24
-     f8a:	59 07       	cpc	r21, r25
-     f8c:	6a 07       	cpc	r22, r26
-     f8e:	7b 07       	cpc	r23, r27
-     f90:	48 f4       	brcc	.+18     	; 0xfa4 <load_input_buffer+0x80>
-	{
-		_totalSampleBytes = 0;
-     f92:	10 92 53 20 	sts	0x2053, r1	; 0x802053 <_totalSampleBytes>
-     f96:	10 92 54 20 	sts	0x2054, r1	; 0x802054 <_totalSampleBytes+0x1>
-     f9a:	10 92 55 20 	sts	0x2055, r1	; 0x802055 <_totalSampleBytes+0x2>
-     f9e:	10 92 56 20 	sts	0x2056, r1	; 0x802056 <_totalSampleBytes+0x3>
-     fa2:	16 c0       	rjmp	.+44     	; 0xfd0 <load_input_buffer+0xac>
-	}
-	else
-	{
-		_totalSampleBytes -= _inputBuff[0];
-     fa4:	40 91 53 20 	lds	r20, 0x2053	; 0x802053 <_totalSampleBytes>
-     fa8:	50 91 54 20 	lds	r21, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
-     fac:	60 91 55 20 	lds	r22, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
-     fb0:	70 91 56 20 	lds	r23, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
-     fb4:	8a 01       	movw	r16, r20
-     fb6:	9b 01       	movw	r18, r22
-     fb8:	08 1b       	sub	r16, r24
-     fba:	19 0b       	sbc	r17, r25
-     fbc:	2a 0b       	sbc	r18, r26
-     fbe:	3b 0b       	sbc	r19, r27
-     fc0:	00 93 53 20 	sts	0x2053, r16	; 0x802053 <_totalSampleBytes>
-     fc4:	10 93 54 20 	sts	0x2054, r17	; 0x802054 <_totalSampleBytes+0x1>
-     fc8:	20 93 55 20 	sts	0x2055, r18	; 0x802055 <_totalSampleBytes+0x2>
-     fcc:	30 93 56 20 	sts	0x2056, r19	; 0x802056 <_totalSampleBytes+0x3>
-	//When number of sample bytes <= 0, we reached the end.
-	
-	//Make sure nothing else is reading the mem.
-	//Not ideal making the audio wait but might be the only way.
-	
-	read_mem(_addresses.wavFileAddress, _inputBuff + 1, _inputBuff[0]);
-     fd0:	af 01       	movw	r20, r30
-     fd2:	4f 5f       	subi	r20, 0xFF	; 255
-     fd4:	5f 4f       	sbci	r21, 0xFF	; 255
-     fd6:	c0 e6       	ldi	r28, 0x60	; 96
-     fd8:	d0 e2       	ldi	r29, 0x20	; 32
-     fda:	68 81       	ld	r22, Y
-     fdc:	79 81       	ldd	r23, Y+1	; 0x01
-     fde:	8a 81       	ldd	r24, Y+2	; 0x02
-     fe0:	9b 81       	ldd	r25, Y+3	; 0x03
-     fe2:	20 81       	ld	r18, Z
-     fe4:	6f de       	rcall	.-802    	; 0xcc4 <read_mem>
-	
-	_addresses.wavFileAddress += _inputBuff[0];
-     fe6:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
-     fea:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
-     fee:	20 81       	ld	r18, Z
-     ff0:	88 81       	ld	r24, Y
-     ff2:	99 81       	ldd	r25, Y+1	; 0x01
-     ff4:	aa 81       	ldd	r26, Y+2	; 0x02
-     ff6:	bb 81       	ldd	r27, Y+3	; 0x03
-     ff8:	82 0f       	add	r24, r18
-     ffa:	91 1d       	adc	r25, r1
-     ffc:	a1 1d       	adc	r26, r1
-     ffe:	b1 1d       	adc	r27, r1
-    1000:	88 83       	st	Y, r24
-    1002:	99 83       	std	Y+1, r25	; 0x01
-    1004:	aa 83       	std	Y+2, r26	; 0x02
-    1006:	bb 83       	std	Y+3, r27	; 0x03
-	
-
-	
-}
-    1008:	df 91       	pop	r29
-    100a:	cf 91       	pop	r28
-    100c:	1f 91       	pop	r17
-    100e:	0f 91       	pop	r16
-    1010:	08 95       	ret
-
-00001012 <swap_buffers>:
-
-void swap_buffers()
-{
-	if (_inputBuff == _wavBuff0)
-    1012:	80 91 5c 21 	lds	r24, 0x215C	; 0x80215c <_inputBuff>
-    1016:	90 91 5d 21 	lds	r25, 0x215D	; 0x80215d <_inputBuff+0x1>
-    101a:	8c 55       	subi	r24, 0x5C	; 92
-    101c:	92 42       	sbci	r25, 0x22	; 34
-    101e:	69 f4       	brne	.+26     	; 0x103a <swap_buffers+0x28>
-	{
-		_inputBuff = _wavBuff1;
-    1020:	81 e7       	ldi	r24, 0x71	; 113
-    1022:	90 e2       	ldi	r25, 0x20	; 32
-    1024:	80 93 5c 21 	sts	0x215C, r24	; 0x80215c <_inputBuff>
-    1028:	90 93 5d 21 	sts	0x215D, r25	; 0x80215d <_inputBuff+0x1>
-		_outputBuff = _wavBuff0;		
-    102c:	8c e5       	ldi	r24, 0x5C	; 92
-    102e:	92 e2       	ldi	r25, 0x22	; 34
-    1030:	80 93 f6 20 	sts	0x20F6, r24	; 0x8020f6 <_outputBuff>
-    1034:	90 93 f7 20 	sts	0x20F7, r25	; 0x8020f7 <_outputBuff+0x1>
-    1038:	08 95       	ret
-	}
-	else
-	{
-		_inputBuff = _wavBuff0;
-    103a:	8c e5       	ldi	r24, 0x5C	; 92
-    103c:	92 e2       	ldi	r25, 0x22	; 34
-    103e:	80 93 5c 21 	sts	0x215C, r24	; 0x80215c <_inputBuff>
-    1042:	90 93 5d 21 	sts	0x215D, r25	; 0x80215d <_inputBuff+0x1>
-		_outputBuff = _wavBuff1;		
-    1046:	81 e7       	ldi	r24, 0x71	; 113
-    1048:	90 e2       	ldi	r25, 0x20	; 32
-    104a:	80 93 f6 20 	sts	0x20F6, r24	; 0x8020f6 <_outputBuff>
-    104e:	90 93 f7 20 	sts	0x20F7, r25	; 0x8020f7 <_outputBuff+0x1>
-    1052:	08 95       	ret
-
-00001054 <start_audio_output>:
-}
-
-void start_audio_output()
-{
-	//Since we are starting the song, swap the input and output buffers and load the next buffer
-	swap_buffers();
-    1054:	de df       	rcall	.-68     	; 0x1012 <swap_buffers>
-	load_input_buffer();
-    1056:	66 df       	rcall	.-308    	; 0xf24 <load_input_buffer>
-    1058:	a0 91 f6 20 	lds	r26, 0x20F6	; 0x8020f6 <_outputBuff>
-	
-	//Set up EDMA and trigger the output DMA transfer by starting the clock
-	EDMA.CH2.TRFCNT = _outputBuff[0] ;                  // buff len is stored in first byte of buff
-    105c:	b0 91 f7 20 	lds	r27, 0x20F7	; 0x8020f7 <_outputBuff+0x1>
-    1060:	8d 91       	ld	r24, X+
-    1062:	90 e0       	ldi	r25, 0x00	; 0
-    1064:	e0 e0       	ldi	r30, 0x00	; 0
-    1066:	f1 e0       	ldi	r31, 0x01	; 1
-    1068:	86 ab       	std	Z+54, r24	; 0x36
-    106a:	97 ab       	std	Z+55, r25	; 0x37
-    106c:	a0 af       	std	Z+56, r26	; 0x38
-	EDMA.CH2.ADDR = (uint16_t)_outputBuff + 1;           // this is the source SRAM address, skip first 1 bytes
-    106e:	b1 af       	std	Z+57, r27	; 0x39
-    1070:	80 a9       	ldd	r24, Z+48	; 0x30
-	EDMA.CH2.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
-    1072:	80 69       	ori	r24, 0x90	; 144
-    1074:	80 ab       	std	Z+48, r24	; 0x30
-    1076:	80 91 51 20 	lds	r24, 0x2051	; 0x802051 <_clkPer>
-	TCC4.PER = _clkPer;
-    107a:	90 91 52 20 	lds	r25, 0x2052	; 0x802052 <_clkPer+0x1>
-    107e:	80 93 26 08 	sts	0x0826, r24	; 0x800826 <__TEXT_REGION_LENGTH__+0x7f7826>
-    1082:	90 93 27 08 	sts	0x0827, r25	; 0x800827 <__TEXT_REGION_LENGTH__+0x7f7827>
-    1086:	08 95       	ret
-
-00001088 <play_entry>:
-    1088:	9c 01       	movw	r18, r24
-
-void play_entry(uint16_t entryNum)
-{	
-	//Ensure that the audio edma and timer is disabled in case a new song is started before the current one is finished
-
-	while(_readingMem);
-    108a:	90 91 4f 20 	lds	r25, 0x204F	; 0x80204f <_readingMem>
-    108e:	91 11       	cpse	r25, r1
-    1090:	fc cf       	rjmp	.-8      	; 0x108a <play_entry+0x2>
-	TCC4.PER = 0;
-    1092:	10 92 26 08 	sts	0x0826, r1	; 0x800826 <__TEXT_REGION_LENGTH__+0x7f7826>
-    1096:	10 92 27 08 	sts	0x0827, r1	; 0x800827 <__TEXT_REGION_LENGTH__+0x7f7827>
-	//Disable light timer
-	TCC5.CTRLA = 0;
-    109a:	10 92 40 08 	sts	0x0840, r1	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
-	
-	//Get audio metadata
-	load_starting_addresses(entryNum);
-    109e:	c9 01       	movw	r24, r18
-    10a0:	90 de       	rcall	.-736    	; 0xdc2 <load_starting_addresses>
-	load_wav_metadata();	
-    10a2:	a3 de       	rcall	.-698    	; 0xdea <load_wav_metadata>
-	calc_clock_per();
-    10a4:	2a df       	rcall	.-428    	; 0xefa <calc_clock_per>
-    10a6:	80 91 64 20 	lds	r24, 0x2064	; 0x802064 <_addresses+0x4>
-	
-	//if light file address == 0, the lights are skipped
-	if (_addresses.lightFileAddress != 0)
-    10aa:	90 91 65 20 	lds	r25, 0x2065	; 0x802065 <_addresses+0x5>
-    10ae:	a0 91 66 20 	lds	r26, 0x2066	; 0x802066 <_addresses+0x6>
-    10b2:	b0 91 67 20 	lds	r27, 0x2067	; 0x802067 <_addresses+0x7>
-    10b6:	89 2b       	or	r24, r25
-    10b8:	8a 2b       	or	r24, r26
-    10ba:	8b 2b       	or	r24, r27
-    10bc:	09 f0       	breq	.+2      	; 0x10c0 <play_entry+0x38>
-	{
-		load_light_sequenc_metadata();
-    10be:	c7 de       	rcall	.-626    	; 0xe4e <load_light_sequenc_metadata>
-    10c0:	8c e5       	ldi	r24, 0x5C	; 92
-	}
-	
-	//Load the first buffer.
-	_inputBuff = _wavBuff0;
-    10c2:	92 e2       	ldi	r25, 0x22	; 34
-    10c4:	80 93 5c 21 	sts	0x215C, r24	; 0x80215c <_inputBuff>
-    10c8:	90 93 5d 21 	sts	0x215D, r25	; 0x80215d <_inputBuff+0x1>
-	load_input_buffer();
-    10cc:	2b df       	rcall	.-426    	; 0xf24 <load_input_buffer>
-    10ce:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
-	while(_readingMem);
-    10d2:	81 11       	cpse	r24, r1
-    10d4:	fc cf       	rjmp	.-8      	; 0x10ce <play_entry+0x46>
-    10d6:	80 91 64 20 	lds	r24, 0x2064	; 0x802064 <_addresses+0x4>
-	
-	//if light file address == 0, the lights are skipped
-	if (_addresses.lightFileAddress != 0)
-    10da:	90 91 65 20 	lds	r25, 0x2065	; 0x802065 <_addresses+0x5>
-    10de:	a0 91 66 20 	lds	r26, 0x2066	; 0x802066 <_addresses+0x6>
-    10e2:	b0 91 67 20 	lds	r27, 0x2067	; 0x802067 <_addresses+0x7>
-    10e6:	89 2b       	or	r24, r25
-    10e8:	8a 2b       	or	r24, r26
-    10ea:	8b 2b       	or	r24, r27
-	{
-		load_next_light_map();
-    10ec:	09 f0       	breq	.+2      	; 0x10f0 <play_entry+0x68>
-    10ee:	cd de       	rcall	.-614    	; 0xe8a <load_next_light_map>
-			
-	}
-	
-	//Start the audio
-	start_audio_output();
-    10f0:	b1 cf       	rjmp	.-158    	; 0x1054 <start_audio_output>
-    10f2:	08 95       	ret
-
-000010f4 <blank_lights>:
-    10f4:	84 e5       	ldi	r24, 0x54	; 84
-	
-}
-
-void blank_lights()
-{
-	_lightMetadata.lightCount = MAX_LIGHT_COUNT;
-    10f6:	90 e0       	ldi	r25, 0x00	; 0
-    10f8:	80 93 f4 20 	sts	0x20F4, r24	; 0x8020f4 <_lightMetadata+0x2>
-    10fc:	90 93 f5 20 	sts	0x20F5, r25	; 0x8020f5 <_lightMetadata+0x3>
-    1100:	e0 e6       	ldi	r30, 0x60	; 96
-    1102:	f1 e2       	ldi	r31, 0x21	; 33
-    1104:	8c e5       	ldi	r24, 0x5C	; 92
-    1106:	92 e2       	ldi	r25, 0x22	; 34
-	for (uint8_t i = 0; i < MAX_LIGHT_COUNT * 3; i++)
-	{
-		_lightMap.lights[i] = 0;
-    1108:	11 92       	st	Z+, r1
-}
-
-void blank_lights()
-{
-	_lightMetadata.lightCount = MAX_LIGHT_COUNT;
-	for (uint8_t i = 0; i < MAX_LIGHT_COUNT * 3; i++)
-    110a:	e8 17       	cp	r30, r24
-    110c:	f9 07       	cpc	r31, r25
-    110e:	e1 f7       	brne	.-8      	; 0x1108 <blank_lights+0x14>
-	{
-		_lightMap.lights[i] = 0;
-	}
-	
-	write_lights();
-    1110:	35 ce       	rjmp	.-918    	; 0xd7c <write_lights>
-    1112:	08 95       	ret
-
-00001114 <qt_set_parameters>:
-============================================================================*/
 
 void qt_set_parameters( void )
 {
-    /*  This will be modified by the user to different values   */
-    qt_config_data.qt_di              = DEF_QT_DI;
-    1114:	ee e1       	ldi	r30, 0x1E	; 30
-    1116:	f0 e2       	ldi	r31, 0x20	; 32
-    1118:	84 e0       	ldi	r24, 0x04	; 4
-    111a:	81 83       	std	Z+1, r24	; 0x01
-    qt_config_data.qt_neg_drift_rate  = DEF_QT_NEG_DRIFT_RATE;
-    111c:	84 e1       	ldi	r24, 0x14	; 20
-    111e:	84 83       	std	Z+4, r24	; 0x04
-    qt_config_data.qt_pos_drift_rate  = DEF_QT_POS_DRIFT_RATE;
-    1120:	95 e0       	ldi	r25, 0x05	; 5
-    1122:	95 83       	std	Z+5, r25	; 0x05
-    qt_config_data.qt_max_on_duration = DEF_QT_MAX_ON_DURATION;
-    1124:	13 82       	std	Z+3, r1	; 0x03
-    qt_config_data.qt_drift_hold_time = DEF_QT_DRIFT_HOLD_TIME;
-    1126:	82 83       	std	Z+2, r24	; 0x02
-    qt_config_data.qt_recal_threshold = DEF_QT_RECAL_THRESHOLD;
-    1128:	81 e0       	ldi	r24, 0x01	; 1
-    112a:	80 83       	st	Z, r24
-    qt_config_data.qt_pos_recal_delay = DEF_QT_POS_RECAL_DELAY;
-    112c:	83 e0       	ldi	r24, 0x03	; 3
-    112e:	86 83       	std	Z+6, r24	; 0x06
-    1130:	08 95       	ret
+	/*  This will be modified by the user to different values   */
+	qt_config_data.qt_di              = DEF_QT_DI;
+     cc4:	ee e1       	ldi	r30, 0x1E	; 30
+     cc6:	f0 e2       	ldi	r31, 0x20	; 32
+     cc8:	84 e0       	ldi	r24, 0x04	; 4
+     cca:	81 83       	std	Z+1, r24	; 0x01
+	qt_config_data.qt_neg_drift_rate  = DEF_QT_NEG_DRIFT_RATE;
+     ccc:	84 e1       	ldi	r24, 0x14	; 20
+     cce:	84 83       	std	Z+4, r24	; 0x04
+	qt_config_data.qt_pos_drift_rate  = DEF_QT_POS_DRIFT_RATE;
+     cd0:	95 e0       	ldi	r25, 0x05	; 5
+     cd2:	95 83       	std	Z+5, r25	; 0x05
+	qt_config_data.qt_max_on_duration = DEF_QT_MAX_ON_DURATION;
+     cd4:	13 82       	std	Z+3, r1	; 0x03
+	qt_config_data.qt_drift_hold_time = DEF_QT_DRIFT_HOLD_TIME;
+     cd6:	82 83       	std	Z+2, r24	; 0x02
+	qt_config_data.qt_recal_threshold = DEF_QT_RECAL_THRESHOLD;
+     cd8:	81 e0       	ldi	r24, 0x01	; 1
+     cda:	80 83       	st	Z, r24
+	qt_config_data.qt_pos_recal_delay = DEF_QT_POS_RECAL_DELAY;
+     cdc:	83 e0       	ldi	r24, 0x03	; 3
+     cde:	86 83       	std	Z+6, r24	; 0x06
+     ce0:	08 95       	ret
 
-00001132 <config_keys>:
+00000ce2 <config_keys>:
 }
 
- void config_keys(void)
+void config_keys(void)
 {
 	/*  enable sensors 0..3: keys on channels 0..3  */
 	qt_enable_key( CHANNEL_0, NO_AKS_GROUP, 10u, HYST_6_25 );
-    1132:	23 e0       	ldi	r18, 0x03	; 3
-    1134:	4a e0       	ldi	r20, 0x0A	; 10
-    1136:	60 e0       	ldi	r22, 0x00	; 0
-    1138:	80 e0       	ldi	r24, 0x00	; 0
-    113a:	92 d9       	rcall	.-3292   	; 0x460 <qt_enable_key>
+     ce2:	23 e0       	ldi	r18, 0x03	; 3
+     ce4:	4a e0       	ldi	r20, 0x0A	; 10
+     ce6:	60 e0       	ldi	r22, 0x00	; 0
+     ce8:	80 e0       	ldi	r24, 0x00	; 0
+     cea:	ba db       	rcall	.-2188   	; 0x460 <qt_enable_key>
 	qt_enable_key( CHANNEL_1, NO_AKS_GROUP, 10u, HYST_6_25 );
-    113c:	23 e0       	ldi	r18, 0x03	; 3
-    113e:	4a e0       	ldi	r20, 0x0A	; 10
-    1140:	60 e0       	ldi	r22, 0x00	; 0
-    1142:	81 e0       	ldi	r24, 0x01	; 1
-    1144:	8d d9       	rcall	.-3302   	; 0x460 <qt_enable_key>
+     cec:	23 e0       	ldi	r18, 0x03	; 3
+     cee:	4a e0       	ldi	r20, 0x0A	; 10
+     cf0:	60 e0       	ldi	r22, 0x00	; 0
+     cf2:	81 e0       	ldi	r24, 0x01	; 1
+     cf4:	b5 db       	rcall	.-2198   	; 0x460 <qt_enable_key>
 	qt_enable_key( CHANNEL_2, NO_AKS_GROUP, 10u, HYST_6_25 );
-    1146:	23 e0       	ldi	r18, 0x03	; 3
-    1148:	4a e0       	ldi	r20, 0x0A	; 10
-    114a:	60 e0       	ldi	r22, 0x00	; 0
-    114c:	82 e0       	ldi	r24, 0x02	; 2
-    114e:	88 c9       	rjmp	.-3312   	; 0x460 <qt_enable_key>
-    1150:	08 95       	ret
+     cf6:	23 e0       	ldi	r18, 0x03	; 3
+     cf8:	4a e0       	ldi	r20, 0x0A	; 10
+     cfa:	60 e0       	ldi	r22, 0x00	; 0
+     cfc:	82 e0       	ldi	r24, 0x02	; 2
+     cfe:	b0 cb       	rjmp	.-2208   	; 0x460 <qt_enable_key>
+     d00:	08 95       	ret
 
-00001152 <main>:
+00000d02 <init_main_config>:
+}
+
+
+void init_main_config()
 {
-	//status flags to indicate the re-burst for library
-	uint16_t status_flag = 0;
-	uint16_t burst_flag = 0;
-	#ifdef QTOUCH_STUDIO_MASKS
-	SNS_array[0][0]= 0x51;
-    1152:	eb e4       	ldi	r30, 0x4B	; 75
-    1154:	f0 e2       	ldi	r31, 0x20	; 32
-    1156:	81 e5       	ldi	r24, 0x51	; 81
-    1158:	80 83       	st	Z, r24
-	SNS_array[0][1]= 0x0;
-    115a:	11 82       	std	Z+1, r1	; 0x01
-	SNS_array[1][0]= 0x0;
-    115c:	12 82       	std	Z+2, r1	; 0x02
-	SNS_array[1][1]= 0x0;
-    115e:	13 82       	std	Z+3, r1	; 0x03
-
-	SNSK_array[0][0]= 0xa2;
-    1160:	e7 e4       	ldi	r30, 0x47	; 71
-    1162:	f0 e2       	ldi	r31, 0x20	; 32
-    1164:	82 ea       	ldi	r24, 0xA2	; 162
-    1166:	80 83       	st	Z, r24
-	SNSK_array[0][1]= 0x0;
-    1168:	11 82       	std	Z+1, r1	; 0x01
-	SNSK_array[1][0]= 0x0;
-    116a:	12 82       	std	Z+2, r1	; 0x02
-	SNSK_array[1][1]= 0x0;
-    116c:	13 82       	std	Z+3, r1	; 0x03
-	#endif
-		
-	init_pins();
-    116e:	01 dd       	rcall	.-1534   	; 0xb72 <init_pins>
-
+	init_pins_normal();
+     d02:	37 df       	rcall	.-402    	; 0xb72 <init_pins_normal>
+	//TODO:Make sure USARTC Pins are set up;
 }
 
 void enable_interrupts()
 {
-	PMIC.CTRL = PMIC_HILVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_LOLVLEN_bm 	;	  //  enable interrupts		
-    1170:	87 e0       	ldi	r24, 0x07	; 7
-    1172:	80 93 a2 00 	sts	0x00A2, r24	; 0x8000a2 <__TEXT_REGION_LENGTH__+0x7f70a2>
-	init_pins();
+	PMIC.CTRL = PMIC_HILVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_LOLVLEN_bm 	;	  //  enable interrupts
+     d04:	87 e0       	ldi	r24, 0x07	; 7
+     d06:	80 93 a2 00 	sts	0x00A2, r24	; 0x8000a2 <__TEXT_REGION_LENGTH__+0x7f70a2>
+{
+	init_pins_normal();
 	enable_interrupts();
-		
+	
+	#ifdef QTOUCH_STUDIO_MASKS
+	SNS_array[0][0]= 0x51;
+     d0a:	eb e4       	ldi	r30, 0x4B	; 75
+     d0c:	f0 e2       	ldi	r31, 0x20	; 32
+     d0e:	81 e5       	ldi	r24, 0x51	; 81
+     d10:	80 83       	st	Z, r24
+	SNS_array[0][1]= 0x0;
+     d12:	11 82       	std	Z+1, r1	; 0x01
+	SNS_array[1][0]= 0x0;
+     d14:	12 82       	std	Z+2, r1	; 0x02
+	SNS_array[1][1]= 0x0;
+     d16:	13 82       	std	Z+3, r1	; 0x03
+
+	SNSK_array[0][0]= 0xa2;
+     d18:	e7 e4       	ldi	r30, 0x47	; 71
+     d1a:	f0 e2       	ldi	r31, 0x20	; 32
+     d1c:	82 ea       	ldi	r24, 0xA2	; 162
+     d1e:	80 83       	st	Z, r24
+	SNSK_array[0][1]= 0x0;
+     d20:	11 82       	std	Z+1, r1	; 0x01
+	SNSK_array[1][0]= 0x0;
+     d22:	12 82       	std	Z+2, r1	; 0x02
+	SNSK_array[1][1]= 0x0;
+     d24:	13 82       	std	Z+3, r1	; 0x03
+	#endif	
+	
 	cli();
 	
-	init_clock();
-    1176:	f8 94       	cli
-	init_usart();
-    1178:	0f dd       	rcall	.-1506   	; 0xb98 <init_clock>
-	init_edma();
-    117a:	20 dd       	rcall	.-1472   	; 0xbbc <init_usart>
-    117c:	37 dd       	rcall	.-1426   	; 0xbec <init_edma>
+	init_clock_normal();
+     d26:	f8 94       	cli
+	init_usart_normal();
+     d28:	37 df       	rcall	.-402    	; 0xb98 <init_clock_normal>
+	init_edma_normal();
+     d2a:	48 df       	rcall	.-368    	; 0xbbc <init_usart_normal>
+     d2c:	5f df       	rcall	.-322    	; 0xbec <init_edma_normal>
 	
 	init_event_channels();
-    117e:	8c dd       	rcall	.-1256   	; 0xc98 <init_event_channels>
+     d2e:	b4 df       	rcall	.-152    	; 0xc98 <init_event_channels>
 
 }
 
 void init_audio_timer()
 {
 	TCC4.CTRLA =
-    1180:	c0 e0       	ldi	r28, 0x00	; 0
-    1182:	d8 e0       	ldi	r29, 0x08	; 8
-	init_usart();
-	init_edma();
+     d30:	81 e0       	ldi	r24, 0x01	; 1
+	init_usart_normal();
+	init_edma_normal();
 	
 	init_event_channels();
 	init_audio_timer();
 	init_qTouch_timer();
-    1184:	81 e0       	ldi	r24, 0x01	; 1
-    1186:	88 83       	st	Y, r24
+     d32:	80 93 00 08 	sts	0x0800, r24	; 0x800800 <__TEXT_REGION_LENGTH__+0x7f7800>
 	init_DAC();
-    1188:	7b dd       	rcall	.-1290   	; 0xc80 <init_qTouch_timer>
-    118a:	91 dd       	rcall	.-1246   	; 0xcae <init_DAC>
+     d36:	a4 df       	rcall	.-184    	; 0xc80 <init_qTouch_timer>
+     d38:	ba df       	rcall	.-140    	; 0xcae <init_DAC>
 	
 	init_light_map_timer();
-    118c:	6e dd       	rcall	.-1316   	; 0xc6a <init_light_map_timer>
+     d3a:	97 df       	rcall	.-210    	; 0xc6a <init_light_map_timer>
 	init_xcl();
-    118e:	58 dd       	rcall	.-1360   	; 0xc40 <init_xcl>
-    1190:	d0 df       	rcall	.-96     	; 0x1132 <config_keys>
+     d3c:	81 df       	rcall	.-254    	; 0xc40 <init_xcl>
+     d3e:	d1 df       	rcall	.-94     	; 0xce2 <config_keys>
 	
 	//Configure the Sensors as keys
 	config_keys();
-    1192:	60 e0       	ldi	r22, 0x00	; 0
-    1194:	70 e0       	ldi	r23, 0x00	; 0
-	
+     d40:	60 e0       	ldi	r22, 0x00	; 0
+     d42:	70 e0       	ldi	r23, 0x00	; 0
+		
 	//initialize touch sensing
 	qt_init_sensing();
-    1196:	82 e9       	ldi	r24, 0x92	; 146
-    1198:	90 e0       	ldi	r25, 0x00	; 0
-    119a:	98 d8       	rcall	.-3792   	; 0x2cc <qt_init_sensing_with_burst>
-    119c:	bb df       	rcall	.-138    	; 0x1114 <qt_set_parameters>
-    119e:	78 94       	sei
-	
+     d44:	82 e9       	ldi	r24, 0x92	; 146
+     d46:	90 e0       	ldi	r25, 0x00	; 0
+     d48:	c1 da       	rcall	.-2686   	; 0x2cc <qt_init_sensing_with_burst>
+     d4a:	bc df       	rcall	.-136    	; 0xcc4 <qt_set_parameters>
+     d4c:	78 94       	sei
+     d4e:	80 e1       	ldi	r24, 0x10	; 16
+		
 	//Set the parameters like recalibration threshold, Max_On_Duration etc in this function by the user */
-	qt_set_parameters( );	
-    11a0:	c0 93 18 03 	sts	0x0318, r28	; 0x800318 <__TEXT_REGION_LENGTH__+0x7f7318>
+	qt_set_parameters( );
+     d50:	80 93 65 06 	sts	0x0665, r24	; 0x800665 <__TEXT_REGION_LENGTH__+0x7f7665>
 	
 	sei();
-    11a4:	d0 93 19 03 	sts	0x0319, r29	; 0x800319 <__TEXT_REGION_LENGTH__+0x7f7319>
-	
-	//TODO: Remove this line
-	DACA.CH0DATA = 2048;
-    11a8:	80 e1       	ldi	r24, 0x10	; 16
-    11aa:	80 93 65 06 	sts	0x0665, r24	; 0x800665 <__TEXT_REGION_LENGTH__+0x7f7665>
+     d54:	08 95       	ret
+
+00000d56 <read_mem>:
 	
 	//Set CS high
 	PORTD.OUTSET = PIN4_bm;
-    11ae:	fd dd       	rcall	.-1030   	; 0xdaa <load_entry_count>
-    11b0:	0d e0       	ldi	r16, 0x0D	; 13
-    11b2:	10 e2       	ldi	r17, 0x20	; 32
+     d56:	cf 92       	push	r12
+     d58:	df 92       	push	r13
+     d5a:	ef 92       	push	r14
+     d5c:	ff 92       	push	r15
+
+
+
+
+void read_mem(uint32_t starting_address, uint8_t *buffer, uint8_t len)
+{
+     d5e:	cf 93       	push	r28
+     d60:	df 93       	push	r29
+     d62:	00 d0       	rcall	.+0      	; 0xd64 <read_mem+0xe>
+     d64:	00 d0       	rcall	.+0      	; 0xd66 <read_mem+0x10>
+     d66:	cd b7       	in	r28, 0x3d	; 61
+     d68:	de b7       	in	r29, 0x3e	; 62
+	volatile uint8_t read[4];
+	int trash;
+	_readingMem = 1;
+     d6a:	31 e0       	ldi	r19, 0x01	; 1
+     d6c:	30 93 4f 20 	sts	0x204F, r19	; 0x80204f <_readingMem>
+	_setCS = 0;
+     d70:	10 92 50 20 	sts	0x2050, r1	; 0x802050 <_setCS>
+	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
+     d74:	30 e1       	ldi	r19, 0x10	; 16
+     d76:	30 93 66 06 	sts	0x0666, r19	; 0x800666 <__TEXT_REGION_LENGTH__+0x7f7666>
+		
+	read[0] = MEM_READ_DATA;
+     d7a:	33 e0       	ldi	r19, 0x03	; 3
+     d7c:	39 83       	std	Y+1, r19	; 0x01
+	read[1] = (starting_address >> 16) & 0xFF;
+     d7e:	6c 01       	movw	r12, r24
+     d80:	ee 24       	eor	r14, r14
+     d82:	ff 24       	eor	r15, r15
+     d84:	ca 82       	std	Y+2, r12	; 0x02
+	read[2] = (starting_address >> 8) & 0xFF;
+     d86:	c7 2e       	mov	r12, r23
+     d88:	d8 2e       	mov	r13, r24
+     d8a:	e9 2e       	mov	r14, r25
+     d8c:	ff 24       	eor	r15, r15
+     d8e:	cb 82       	std	Y+3, r12	; 0x03
+	read[3] = (starting_address >> 0) & 0xFF;
+     d90:	6c 83       	std	Y+4, r22	; 0x04
+
+	EDMA.CH0.TRFCNT = 4;
+     d92:	e0 e0       	ldi	r30, 0x00	; 0
+     d94:	f1 e0       	ldi	r31, 0x01	; 1
+     d96:	64 e0       	ldi	r22, 0x04	; 4
+     d98:	70 e0       	ldi	r23, 0x00	; 0
+     d9a:	66 8b       	std	Z+22, r22	; 0x16
+     d9c:	77 8b       	std	Z+23, r23	; 0x17
+	EDMA.CH0.ADDR = (uint16_t)buffer;
+     d9e:	40 8f       	std	Z+24, r20	; 0x18
+     da0:	51 8f       	std	Z+25, r21	; 0x19
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+     da2:	80 89       	ldd	r24, Z+16	; 0x10
+     da4:	80 68       	ori	r24, 0x80	; 128
+     da6:	80 8b       	std	Z+16, r24	; 0x10
+	
+	
+	EDMA.CH1.TRFCNT = 4;
+     da8:	66 a3       	std	Z+38, r22	; 0x26
+     daa:	77 a3       	std	Z+39, r23	; 0x27
+	EDMA.CH1.ADDR = read;
+     dac:	ce 01       	movw	r24, r28
+     dae:	01 96       	adiw	r24, 0x01	; 1
+     db0:	80 a7       	std	Z+40, r24	; 0x28
+     db2:	91 a7       	std	Z+41, r25	; 0x29
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+     db4:	81 e3       	ldi	r24, 0x31	; 49
+     db6:	82 a3       	std	Z+34, r24	; 0x22
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+     db8:	80 a1       	ldd	r24, Z+32	; 0x20
+     dba:	80 69       	ori	r24, 0x90	; 144
+     dbc:	80 a3       	std	Z+32, r24	; 0x20
+	
+	while(_readingMem);
+     dbe:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+     dc2:	81 11       	cpse	r24, r1
+     dc4:	fc cf       	rjmp	.-8      	; 0xdbe <read_mem+0x68>
+	_readingMem = 1;	
+     dc6:	81 e0       	ldi	r24, 0x01	; 1
+     dc8:	80 93 4f 20 	sts	0x204F, r24	; 0x80204f <_readingMem>
+	_setCS = 1;
+     dcc:	80 93 50 20 	sts	0x2050, r24	; 0x802050 <_setCS>
+	
+	EDMA.CH0.TRFCNT = len;
+     dd0:	30 e0       	ldi	r19, 0x00	; 0
+     dd2:	e0 e0       	ldi	r30, 0x00	; 0
+     dd4:	f1 e0       	ldi	r31, 0x01	; 1
+     dd6:	26 8b       	std	Z+22, r18	; 0x16
+     dd8:	37 8b       	std	Z+23, r19	; 0x17
+	EDMA.CH0.ADDR = (uint16_t)buffer;
+     dda:	40 8f       	std	Z+24, r20	; 0x18
+     ddc:	51 8f       	std	Z+25, r21	; 0x19
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+     dde:	80 89       	ldd	r24, Z+16	; 0x10
+     de0:	80 68       	ori	r24, 0x80	; 128
+     de2:	80 8b       	std	Z+16, r24	; 0x10
+	
+	EDMA.CH1.TRFCNT = len;
+     de4:	26 a3       	std	Z+38, r18	; 0x26
+     de6:	37 a3       	std	Z+39, r19	; 0x27
+	EDMA.CH1.ADDR = (uint16_t)&TX_DATA;
+     de8:	81 e0       	ldi	r24, 0x01	; 1
+     dea:	90 e2       	ldi	r25, 0x20	; 32
+     dec:	80 a7       	std	Z+40, r24	; 0x28
+     dee:	91 a7       	std	Z+41, r25	; 0x29
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
+     df0:	80 e3       	ldi	r24, 0x30	; 48
+     df2:	82 a3       	std	Z+34, r24	; 0x22
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+     df4:	80 a1       	ldd	r24, Z+32	; 0x20
+     df6:	80 69       	ori	r24, 0x90	; 144
+     df8:	80 a3       	std	Z+32, r24	; 0x20
+	
+	//Read is finished by interrupt handler.
+	
+}
+     dfa:	24 96       	adiw	r28, 0x04	; 4
+     dfc:	cd bf       	out	0x3d, r28	; 61
+     dfe:	de bf       	out	0x3e, r29	; 62
+     e00:	df 91       	pop	r29
+     e02:	cf 91       	pop	r28
+     e04:	ff 90       	pop	r15
+     e06:	ef 90       	pop	r14
+     e08:	df 90       	pop	r13
+     e0a:	cf 90       	pop	r12
+     e0c:	08 95       	ret
+
+00000e0e <write_lights>:
+
+
+
+void write_lights()
+{
+	EDMA.CH3.ADDR = (uint16_t)_lightMap.lights;
+     e0e:	80 e6       	ldi	r24, 0x60	; 96
+     e10:	91 e2       	ldi	r25, 0x21	; 33
+     e12:	80 93 48 01 	sts	0x0148, r24	; 0x800148 <__TEXT_REGION_LENGTH__+0x7f7148>
+     e16:	90 93 49 01 	sts	0x0149, r25	; 0x800149 <__TEXT_REGION_LENGTH__+0x7f7149>
+	EDMA.CH3.TRFCNT = _lightMetadata.lightCount * 3;
+     e1a:	80 91 f4 20 	lds	r24, 0x20F4	; 0x8020f4 <_lightMetadata+0x2>
+     e1e:	90 91 f5 20 	lds	r25, 0x20F5	; 0x8020f5 <_lightMetadata+0x3>
+     e22:	9c 01       	movw	r18, r24
+     e24:	22 0f       	add	r18, r18
+     e26:	33 1f       	adc	r19, r19
+     e28:	82 0f       	add	r24, r18
+     e2a:	93 1f       	adc	r25, r19
+     e2c:	80 93 46 01 	sts	0x0146, r24	; 0x800146 <__TEXT_REGION_LENGTH__+0x7f7146>
+     e30:	90 93 47 01 	sts	0x0147, r25	; 0x800147 <__TEXT_REGION_LENGTH__+0x7f7147>
+	EDMA.CH3.CTRLA = EDMA_CH_ENABLE_bm | EDMA_CH_SINGLE_bm; // Start DMA transfer to LEDs	
+     e34:	84 e8       	ldi	r24, 0x84	; 132
+     e36:	80 93 40 01 	sts	0x0140, r24	; 0x800140 <__TEXT_REGION_LENGTH__+0x7f7140>
+     e3a:	08 95       	ret
+
+00000e3c <load_entry_count>:
+}
+
+void load_entry_count()
+{
+	read_mem(0, &_entryCount, 2);
+     e3c:	22 e0       	ldi	r18, 0x02	; 2
+     e3e:	4b e5       	ldi	r20, 0x5B	; 91
+     e40:	50 e2       	ldi	r21, 0x20	; 32
+     e42:	60 e0       	ldi	r22, 0x00	; 0
+     e44:	70 e0       	ldi	r23, 0x00	; 0
+     e46:	cb 01       	movw	r24, r22
+     e48:	86 df       	rcall	.-244    	; 0xd56 <read_mem>
+	while(_readingMem);
+     e4a:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+     e4e:	81 11       	cpse	r24, r1
+     e50:	fc cf       	rjmp	.-8      	; 0xe4a <load_entry_count+0xe>
+}
+     e52:	08 95       	ret
+
+00000e54 <load_starting_addresses>:
+//entryNum is 0-based index
+void load_starting_addresses(uint16_t entryNum)
+{
+
+	uint32_t filesAddressesAndSizesAddress = (entryNum * 8) + 2; //(4 bytes for each address) * 2 addresses + 2 to skip the count
+	read_mem(filesAddressesAndSizesAddress, &_addresses, FILE_ENTRY_BUFF_LEN);
+     e54:	88 0f       	add	r24, r24
+     e56:	99 1f       	adc	r25, r25
+     e58:	88 0f       	add	r24, r24
+     e5a:	99 1f       	adc	r25, r25
+     e5c:	88 0f       	add	r24, r24
+     e5e:	99 1f       	adc	r25, r25
+     e60:	bc 01       	movw	r22, r24
+     e62:	6e 5f       	subi	r22, 0xFE	; 254
+     e64:	7f 4f       	sbci	r23, 0xFF	; 255
+     e66:	80 e0       	ldi	r24, 0x00	; 0
+     e68:	90 e0       	ldi	r25, 0x00	; 0
+     e6a:	28 e0       	ldi	r18, 0x08	; 8
+     e6c:	40 e6       	ldi	r20, 0x60	; 96
+     e6e:	50 e2       	ldi	r21, 0x20	; 32
+     e70:	72 df       	rcall	.-284    	; 0xd56 <read_mem>
+	while(_readingMem);
+     e72:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+     e76:	81 11       	cpse	r24, r1
+     e78:	fc cf       	rjmp	.-8      	; 0xe72 <load_starting_addresses+0x1e>
+	
+
+}
+     e7a:	08 95       	ret
+
+00000e7c <load_wav_metadata>:
+
+void load_wav_metadata()
+{
+	read_mem(_addresses.wavFileAddress, &_wavMetadata, WAV_METADATA_LEN );
+     e7c:	60 91 60 20 	lds	r22, 0x2060	; 0x802060 <_addresses>
+     e80:	70 91 61 20 	lds	r23, 0x2061	; 0x802061 <_addresses+0x1>
+     e84:	80 91 62 20 	lds	r24, 0x2062	; 0x802062 <_addresses+0x2>
+     e88:	90 91 63 20 	lds	r25, 0x2063	; 0x802063 <_addresses+0x3>
+     e8c:	29 e0       	ldi	r18, 0x09	; 9
+     e8e:	48 e6       	ldi	r20, 0x68	; 104
+     e90:	50 e2       	ldi	r21, 0x20	; 32
+     e92:	61 df       	rcall	.-318    	; 0xd56 <read_mem>
+	while(_readingMem);
+     e94:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+     e98:	81 11       	cpse	r24, r1
+     e9a:	fc cf       	rjmp	.-8      	; 0xe94 <load_wav_metadata+0x18>
+	
+	_addresses.wavFileAddress += WAV_METADATA_LEN; //Increment the current read address for the wav data
+     e9c:	e0 e6       	ldi	r30, 0x60	; 96
+     e9e:	f0 e2       	ldi	r31, 0x20	; 32
+     ea0:	80 81       	ld	r24, Z
+     ea2:	91 81       	ldd	r25, Z+1	; 0x01
+     ea4:	a2 81       	ldd	r26, Z+2	; 0x02
+     ea6:	b3 81       	ldd	r27, Z+3	; 0x03
+     ea8:	09 96       	adiw	r24, 0x09	; 9
+     eaa:	a1 1d       	adc	r26, r1
+     eac:	b1 1d       	adc	r27, r1
+     eae:	80 83       	st	Z, r24
+     eb0:	91 83       	std	Z+1, r25	; 0x01
+     eb2:	a2 83       	std	Z+2, r26	; 0x02
+     eb4:	b3 83       	std	Z+3, r27	; 0x03
+	_totalSampleBytes = _wavMetadata.sampleCount * 2; // * 2 because each sample is 2 bytes
+     eb6:	80 91 6d 20 	lds	r24, 0x206D	; 0x80206d <_wavMetadata+0x5>
+     eba:	90 91 6e 20 	lds	r25, 0x206E	; 0x80206e <_wavMetadata+0x6>
+     ebe:	a0 91 6f 20 	lds	r26, 0x206F	; 0x80206f <_wavMetadata+0x7>
+     ec2:	b0 91 70 20 	lds	r27, 0x2070	; 0x802070 <_wavMetadata+0x8>
+     ec6:	88 0f       	add	r24, r24
+     ec8:	99 1f       	adc	r25, r25
+     eca:	aa 1f       	adc	r26, r26
+     ecc:	bb 1f       	adc	r27, r27
+     ece:	80 93 53 20 	sts	0x2053, r24	; 0x802053 <_totalSampleBytes>
+     ed2:	90 93 54 20 	sts	0x2054, r25	; 0x802054 <_totalSampleBytes+0x1>
+     ed6:	a0 93 55 20 	sts	0x2055, r26	; 0x802055 <_totalSampleBytes+0x2>
+     eda:	b0 93 56 20 	sts	0x2056, r27	; 0x802056 <_totalSampleBytes+0x3>
+     ede:	08 95       	ret
+
+00000ee0 <load_light_sequenc_metadata>:
+}
+
+void load_light_sequenc_metadata()
+{
+
+	read_mem(_addresses.lightFileAddress, &_lightMetadata, LIGHT_METADATA_LEN );
+     ee0:	60 91 64 20 	lds	r22, 0x2064	; 0x802064 <_addresses+0x4>
+     ee4:	70 91 65 20 	lds	r23, 0x2065	; 0x802065 <_addresses+0x5>
+     ee8:	80 91 66 20 	lds	r24, 0x2066	; 0x802066 <_addresses+0x6>
+     eec:	90 91 67 20 	lds	r25, 0x2067	; 0x802067 <_addresses+0x7>
+     ef0:	24 e0       	ldi	r18, 0x04	; 4
+     ef2:	42 ef       	ldi	r20, 0xF2	; 242
+     ef4:	50 e2       	ldi	r21, 0x20	; 32
+     ef6:	2f df       	rcall	.-418    	; 0xd56 <read_mem>
+	
+	while(_readingMem);
+     ef8:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+     efc:	81 11       	cpse	r24, r1
+     efe:	fc cf       	rjmp	.-8      	; 0xef8 <load_light_sequenc_metadata+0x18>
+	
+	_addresses.lightFileAddress += LIGHT_METADATA_LEN; //Increment the current read address for the light sequence data
+     f00:	e0 e6       	ldi	r30, 0x60	; 96
+     f02:	f0 e2       	ldi	r31, 0x20	; 32
+     f04:	84 81       	ldd	r24, Z+4	; 0x04
+     f06:	95 81       	ldd	r25, Z+5	; 0x05
+     f08:	a6 81       	ldd	r26, Z+6	; 0x06
+     f0a:	b7 81       	ldd	r27, Z+7	; 0x07
+     f0c:	04 96       	adiw	r24, 0x04	; 4
+     f0e:	a1 1d       	adc	r26, r1
+     f10:	b1 1d       	adc	r27, r1
+     f12:	84 83       	std	Z+4, r24	; 0x04
+     f14:	95 83       	std	Z+5, r25	; 0x05
+     f16:	a6 83       	std	Z+6, r26	; 0x06
+     f18:	b7 83       	std	Z+7, r27	; 0x07
+     f1a:	08 95       	ret
+
+00000f1c <load_next_light_map>:
+}
+
+void load_next_light_map()
+{
+     f1c:	cf 93       	push	r28
+	//2 bytes for the hold time + 3 * the light count (3 bytes per light)
+	uint8_t len = 2 + (_lightMetadata.lightCount * 3);
+     f1e:	c0 91 f4 20 	lds	r28, 0x20F4	; 0x8020f4 <_lightMetadata+0x2>
+     f22:	8c 2f       	mov	r24, r28
+     f24:	88 0f       	add	r24, r24
+     f26:	c8 0f       	add	r28, r24
+     f28:	ce 5f       	subi	r28, 0xFE	; 254
+	//Clear the flag and stop the counter
+	_holdTimerCounter = 0;
+     f2a:	10 92 59 20 	sts	0x2059, r1	; 0x802059 <_holdTimerCounter>
+     f2e:	10 92 5a 20 	sts	0x205A, r1	; 0x80205a <_holdTimerCounter+0x1>
+
+
+	TCC5.CTRLA = 0; //prescaler off
+     f32:	10 92 40 08 	sts	0x0840, r1	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
+	//perform the mem read for the light map data
+	
+	//Make sure nothing else is reading the mem.
+	
+	read_mem(_addresses.lightFileAddress, &_lightMap, len);
+     f36:	60 91 64 20 	lds	r22, 0x2064	; 0x802064 <_addresses+0x4>
+     f3a:	70 91 65 20 	lds	r23, 0x2065	; 0x802065 <_addresses+0x5>
+     f3e:	80 91 66 20 	lds	r24, 0x2066	; 0x802066 <_addresses+0x6>
+     f42:	90 91 67 20 	lds	r25, 0x2067	; 0x802067 <_addresses+0x7>
+     f46:	2c 2f       	mov	r18, r28
+     f48:	4e e5       	ldi	r20, 0x5E	; 94
+     f4a:	51 e2       	ldi	r21, 0x21	; 33
+     f4c:	04 df       	rcall	.-504    	; 0xd56 <read_mem>
+	while(_readingMem);	
+     f4e:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+     f52:	81 11       	cpse	r24, r1
+     f54:	fc cf       	rjmp	.-8      	; 0xf4e <load_next_light_map+0x32>
+	
+	//update the _addresses.lightFileAddress and decrement the _lightMetadata.mapCount
+	_addresses.lightFileAddress += len;
+     f56:	e0 e6       	ldi	r30, 0x60	; 96
+     f58:	f0 e2       	ldi	r31, 0x20	; 32
+     f5a:	84 81       	ldd	r24, Z+4	; 0x04
+     f5c:	95 81       	ldd	r25, Z+5	; 0x05
+     f5e:	a6 81       	ldd	r26, Z+6	; 0x06
+     f60:	b7 81       	ldd	r27, Z+7	; 0x07
+     f62:	8c 0f       	add	r24, r28
+     f64:	91 1d       	adc	r25, r1
+     f66:	a1 1d       	adc	r26, r1
+     f68:	b1 1d       	adc	r27, r1
+     f6a:	84 83       	std	Z+4, r24	; 0x04
+     f6c:	95 83       	std	Z+5, r25	; 0x05
+     f6e:	a6 83       	std	Z+6, r26	; 0x06
+     f70:	b7 83       	std	Z+7, r27	; 0x07
+	_lightMetadata.mapCount--;
+     f72:	e2 ef       	ldi	r30, 0xF2	; 242
+     f74:	f0 e2       	ldi	r31, 0x20	; 32
+     f76:	80 81       	ld	r24, Z
+     f78:	91 81       	ldd	r25, Z+1	; 0x01
+     f7a:	01 97       	sbiw	r24, 0x01	; 1
+     f7c:	80 83       	st	Z, r24
+     f7e:	91 83       	std	Z+1, r25	; 0x01
+		
+	//start the light hold timer
+	//TIMER_PER_MS is based on 256 prediv of 32MHz clock on the timer
+	//Should result in a 1ms timer interval
+	TCC5_CTRLA = TC_CLKSEL_DIV256_gc;
+     f80:	86 e0       	ldi	r24, 0x06	; 6
+     f82:	80 93 40 08 	sts	0x0840, r24	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
+
+	//Start the light output process. 
+	write_lights();
+     f86:	43 df       	rcall	.-378    	; 0xe0e <write_lights>
+}
+     f88:	cf 91       	pop	r28
+     f8a:	08 95       	ret
+
+00000f8c <calc_clock_per>:
+{
+	//We are going to assume that, if this is a 2-channel wav, we can play one sample of one channel and then
+	//one sample of the other channel, instead of mixing by sum.
+	//rate indicates how many times per second we need to output a sample
+	//We will double the rate for 2 channel audio
+	uint32_t rate = _wavMetadata.sampleRate * _wavMetadata.numChannels; //shoud be 1 or 2;
+     f8c:	e8 e6       	ldi	r30, 0x68	; 104
+     f8e:	f0 e2       	ldi	r31, 0x20	; 32
+	
+	//delay = cpu_f / rate. Assuming timer clk div is 1
+	_clkPer = F_CPU/rate; //using a global var because the clock per will have to be reset again, so avoiding recalculating it
+     f90:	a4 81       	ldd	r26, Z+4	; 0x04
+     f92:	20 81       	ld	r18, Z
+     f94:	31 81       	ldd	r19, Z+1	; 0x01
+     f96:	42 81       	ldd	r20, Z+2	; 0x02
+     f98:	53 81       	ldd	r21, Z+3	; 0x03
+     f9a:	b0 e0       	ldi	r27, 0x00	; 0
+     f9c:	4f d2       	rcall	.+1182   	; 0x143c <__muluhisi3>
+     f9e:	9b 01       	movw	r18, r22
+     fa0:	ac 01       	movw	r20, r24
+     fa2:	60 e0       	ldi	r22, 0x00	; 0
+     fa4:	78 e4       	ldi	r23, 0x48	; 72
+     fa6:	88 ee       	ldi	r24, 0xE8	; 232
+     fa8:	91 e0       	ldi	r25, 0x01	; 1
+     faa:	26 d2       	rcall	.+1100   	; 0x13f8 <__udivmodsi4>
+     fac:	20 93 51 20 	sts	0x2051, r18	; 0x802051 <_clkPer>
+     fb0:	30 93 52 20 	sts	0x2052, r19	; 0x802052 <_clkPer+0x1>
+     fb4:	08 95       	ret
+
+00000fb6 <load_input_buffer>:
+
+}
+
+void load_input_buffer()
+{
+     fb6:	0f 93       	push	r16
+     fb8:	1f 93       	push	r17
+     fba:	cf 93       	push	r28
+     fbc:	df 93       	push	r29
+	//The first byte of the input buffer holds the length
+	
+	_inputBuff[0] = WAV_FILE_BUFF_LEN;
+     fbe:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
+     fc2:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
+     fc6:	80 e8       	ldi	r24, 0x80	; 128
+     fc8:	80 83       	st	Z, r24
+	
+	if (_totalSampleBytes < _inputBuff[0])
+     fca:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
+     fce:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
+     fd2:	40 91 53 20 	lds	r20, 0x2053	; 0x802053 <_totalSampleBytes>
+     fd6:	50 91 54 20 	lds	r21, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
+     fda:	60 91 55 20 	lds	r22, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
+     fde:	70 91 56 20 	lds	r23, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
+     fe2:	80 81       	ld	r24, Z
+     fe4:	90 e0       	ldi	r25, 0x00	; 0
+     fe6:	a0 e0       	ldi	r26, 0x00	; 0
+     fe8:	b0 e0       	ldi	r27, 0x00	; 0
+     fea:	48 17       	cp	r20, r24
+     fec:	59 07       	cpc	r21, r25
+     fee:	6a 07       	cpc	r22, r26
+     ff0:	7b 07       	cpc	r23, r27
+     ff2:	18 f4       	brcc	.+6      	; 0xffa <load_input_buffer+0x44>
+	{
+		_inputBuff[0] = _wavMetadata.sampleCount;
+     ff4:	80 91 6d 20 	lds	r24, 0x206D	; 0x80206d <_wavMetadata+0x5>
+     ff8:	80 83       	st	Z, r24
+	}
+	
+	//Update the number of sample bytes left
+	if (_inputBuff[0] > _totalSampleBytes)
+     ffa:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
+     ffe:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
+    1002:	80 81       	ld	r24, Z
+    1004:	90 e0       	ldi	r25, 0x00	; 0
+    1006:	a0 e0       	ldi	r26, 0x00	; 0
+    1008:	b0 e0       	ldi	r27, 0x00	; 0
+    100a:	40 91 53 20 	lds	r20, 0x2053	; 0x802053 <_totalSampleBytes>
+    100e:	50 91 54 20 	lds	r21, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
+    1012:	60 91 55 20 	lds	r22, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
+    1016:	70 91 56 20 	lds	r23, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
+    101a:	48 17       	cp	r20, r24
+    101c:	59 07       	cpc	r21, r25
+    101e:	6a 07       	cpc	r22, r26
+    1020:	7b 07       	cpc	r23, r27
+    1022:	48 f4       	brcc	.+18     	; 0x1036 <__DATA_REGION_LENGTH__+0x36>
+	{
+		_totalSampleBytes = 0;
+    1024:	10 92 53 20 	sts	0x2053, r1	; 0x802053 <_totalSampleBytes>
+    1028:	10 92 54 20 	sts	0x2054, r1	; 0x802054 <_totalSampleBytes+0x1>
+    102c:	10 92 55 20 	sts	0x2055, r1	; 0x802055 <_totalSampleBytes+0x2>
+    1030:	10 92 56 20 	sts	0x2056, r1	; 0x802056 <_totalSampleBytes+0x3>
+    1034:	16 c0       	rjmp	.+44     	; 0x1062 <__DATA_REGION_LENGTH__+0x62>
+	}
+	else
+	{
+		_totalSampleBytes -= _inputBuff[0];
+    1036:	40 91 53 20 	lds	r20, 0x2053	; 0x802053 <_totalSampleBytes>
+    103a:	50 91 54 20 	lds	r21, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
+    103e:	60 91 55 20 	lds	r22, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
+    1042:	70 91 56 20 	lds	r23, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
+    1046:	8a 01       	movw	r16, r20
+    1048:	9b 01       	movw	r18, r22
+    104a:	08 1b       	sub	r16, r24
+    104c:	19 0b       	sbc	r17, r25
+    104e:	2a 0b       	sbc	r18, r26
+    1050:	3b 0b       	sbc	r19, r27
+    1052:	00 93 53 20 	sts	0x2053, r16	; 0x802053 <_totalSampleBytes>
+    1056:	10 93 54 20 	sts	0x2054, r17	; 0x802054 <_totalSampleBytes+0x1>
+    105a:	20 93 55 20 	sts	0x2055, r18	; 0x802055 <_totalSampleBytes+0x2>
+    105e:	30 93 56 20 	sts	0x2056, r19	; 0x802056 <_totalSampleBytes+0x3>
+	//When number of sample bytes <= 0, we reached the end.
+	
+	//Make sure nothing else is reading the mem.
+	//Not ideal making the audio wait but might be the only way.
+	
+	read_mem(_addresses.wavFileAddress, _inputBuff + 1, _inputBuff[0]);
+    1062:	af 01       	movw	r20, r30
+    1064:	4f 5f       	subi	r20, 0xFF	; 255
+    1066:	5f 4f       	sbci	r21, 0xFF	; 255
+    1068:	c0 e6       	ldi	r28, 0x60	; 96
+    106a:	d0 e2       	ldi	r29, 0x20	; 32
+    106c:	68 81       	ld	r22, Y
+    106e:	79 81       	ldd	r23, Y+1	; 0x01
+    1070:	8a 81       	ldd	r24, Y+2	; 0x02
+    1072:	9b 81       	ldd	r25, Y+3	; 0x03
+    1074:	20 81       	ld	r18, Z
+    1076:	6f de       	rcall	.-802    	; 0xd56 <read_mem>
+	
+	_addresses.wavFileAddress += _inputBuff[0];
+    1078:	e0 91 5c 21 	lds	r30, 0x215C	; 0x80215c <_inputBuff>
+    107c:	f0 91 5d 21 	lds	r31, 0x215D	; 0x80215d <_inputBuff+0x1>
+    1080:	20 81       	ld	r18, Z
+    1082:	88 81       	ld	r24, Y
+    1084:	99 81       	ldd	r25, Y+1	; 0x01
+    1086:	aa 81       	ldd	r26, Y+2	; 0x02
+    1088:	bb 81       	ldd	r27, Y+3	; 0x03
+    108a:	82 0f       	add	r24, r18
+    108c:	91 1d       	adc	r25, r1
+    108e:	a1 1d       	adc	r26, r1
+    1090:	b1 1d       	adc	r27, r1
+    1092:	88 83       	st	Y, r24
+    1094:	99 83       	std	Y+1, r25	; 0x01
+    1096:	aa 83       	std	Y+2, r26	; 0x02
+    1098:	bb 83       	std	Y+3, r27	; 0x03
+	
+
+	
+}
+    109a:	df 91       	pop	r29
+    109c:	cf 91       	pop	r28
+    109e:	1f 91       	pop	r17
+    10a0:	0f 91       	pop	r16
+    10a2:	08 95       	ret
+
+000010a4 <swap_buffers>:
+
+void swap_buffers()
+{
+	if (_inputBuff == _wavBuff0)
+    10a4:	80 91 5c 21 	lds	r24, 0x215C	; 0x80215c <_inputBuff>
+    10a8:	90 91 5d 21 	lds	r25, 0x215D	; 0x80215d <_inputBuff+0x1>
+    10ac:	8c 55       	subi	r24, 0x5C	; 92
+    10ae:	92 42       	sbci	r25, 0x22	; 34
+    10b0:	69 f4       	brne	.+26     	; 0x10cc <swap_buffers+0x28>
+	{
+		_inputBuff = _wavBuff1;
+    10b2:	81 e7       	ldi	r24, 0x71	; 113
+    10b4:	90 e2       	ldi	r25, 0x20	; 32
+    10b6:	80 93 5c 21 	sts	0x215C, r24	; 0x80215c <_inputBuff>
+    10ba:	90 93 5d 21 	sts	0x215D, r25	; 0x80215d <_inputBuff+0x1>
+		_outputBuff = _wavBuff0;		
+    10be:	8c e5       	ldi	r24, 0x5C	; 92
+    10c0:	92 e2       	ldi	r25, 0x22	; 34
+    10c2:	80 93 f6 20 	sts	0x20F6, r24	; 0x8020f6 <_outputBuff>
+    10c6:	90 93 f7 20 	sts	0x20F7, r25	; 0x8020f7 <_outputBuff+0x1>
+    10ca:	08 95       	ret
+	}
+	else
+	{
+		_inputBuff = _wavBuff0;
+    10cc:	8c e5       	ldi	r24, 0x5C	; 92
+    10ce:	92 e2       	ldi	r25, 0x22	; 34
+    10d0:	80 93 5c 21 	sts	0x215C, r24	; 0x80215c <_inputBuff>
+    10d4:	90 93 5d 21 	sts	0x215D, r25	; 0x80215d <_inputBuff+0x1>
+		_outputBuff = _wavBuff1;		
+    10d8:	81 e7       	ldi	r24, 0x71	; 113
+    10da:	90 e2       	ldi	r25, 0x20	; 32
+    10dc:	80 93 f6 20 	sts	0x20F6, r24	; 0x8020f6 <_outputBuff>
+    10e0:	90 93 f7 20 	sts	0x20F7, r25	; 0x8020f7 <_outputBuff+0x1>
+    10e4:	08 95       	ret
+
+000010e6 <start_audio_output>:
+}
+
+void start_audio_output()
+{
+	//Since we are starting the song, swap the input and output buffers and load the next buffer
+	swap_buffers();
+    10e6:	de df       	rcall	.-68     	; 0x10a4 <swap_buffers>
+	load_input_buffer();
+    10e8:	66 df       	rcall	.-308    	; 0xfb6 <load_input_buffer>
+    10ea:	a0 91 f6 20 	lds	r26, 0x20F6	; 0x8020f6 <_outputBuff>
+	
+	//Set up EDMA and trigger the output DMA transfer by starting the clock
+	EDMA.CH2.TRFCNT = _outputBuff[0] ;                  // buff len is stored in first byte of buff
+    10ee:	b0 91 f7 20 	lds	r27, 0x20F7	; 0x8020f7 <_outputBuff+0x1>
+    10f2:	8d 91       	ld	r24, X+
+    10f4:	90 e0       	ldi	r25, 0x00	; 0
+    10f6:	e0 e0       	ldi	r30, 0x00	; 0
+    10f8:	f1 e0       	ldi	r31, 0x01	; 1
+    10fa:	86 ab       	std	Z+54, r24	; 0x36
+    10fc:	97 ab       	std	Z+55, r25	; 0x37
+    10fe:	a0 af       	std	Z+56, r26	; 0x38
+	EDMA.CH2.ADDR = (uint16_t)_outputBuff + 1;           // this is the source SRAM address, skip first 1 bytes
+    1100:	b1 af       	std	Z+57, r27	; 0x39
+    1102:	80 a9       	ldd	r24, Z+48	; 0x30
+	EDMA.CH2.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+    1104:	80 69       	ori	r24, 0x90	; 144
+    1106:	80 ab       	std	Z+48, r24	; 0x30
+    1108:	80 91 51 20 	lds	r24, 0x2051	; 0x802051 <_clkPer>
+	TCC4.PER = _clkPer;
+    110c:	90 91 52 20 	lds	r25, 0x2052	; 0x802052 <_clkPer+0x1>
+    1110:	80 93 26 08 	sts	0x0826, r24	; 0x800826 <__TEXT_REGION_LENGTH__+0x7f7826>
+    1114:	90 93 27 08 	sts	0x0827, r25	; 0x800827 <__TEXT_REGION_LENGTH__+0x7f7827>
+    1118:	08 95       	ret
+
+0000111a <play_entry>:
+    111a:	9c 01       	movw	r18, r24
+
+void play_entry(uint16_t entryNum)
+{	
+	//Ensure that the audio edma and timer is disabled in case a new song is started before the current one is finished
+
+	while(_readingMem);
+    111c:	90 91 4f 20 	lds	r25, 0x204F	; 0x80204f <_readingMem>
+    1120:	91 11       	cpse	r25, r1
+    1122:	fc cf       	rjmp	.-8      	; 0x111c <play_entry+0x2>
+	TCC4.PER = 0;
+    1124:	10 92 26 08 	sts	0x0826, r1	; 0x800826 <__TEXT_REGION_LENGTH__+0x7f7826>
+    1128:	10 92 27 08 	sts	0x0827, r1	; 0x800827 <__TEXT_REGION_LENGTH__+0x7f7827>
+	//Disable light timer
+	TCC5.CTRLA = 0;
+    112c:	10 92 40 08 	sts	0x0840, r1	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
+	
+	//Get audio metadata
+	load_starting_addresses(entryNum);
+    1130:	c9 01       	movw	r24, r18
+    1132:	90 de       	rcall	.-736    	; 0xe54 <load_starting_addresses>
+	load_wav_metadata();	
+    1134:	a3 de       	rcall	.-698    	; 0xe7c <load_wav_metadata>
+	calc_clock_per();
+    1136:	2a df       	rcall	.-428    	; 0xf8c <calc_clock_per>
+    1138:	80 91 64 20 	lds	r24, 0x2064	; 0x802064 <_addresses+0x4>
+	
+	//if light file address == 0, the lights are skipped
+	if (_addresses.lightFileAddress != 0)
+    113c:	90 91 65 20 	lds	r25, 0x2065	; 0x802065 <_addresses+0x5>
+    1140:	a0 91 66 20 	lds	r26, 0x2066	; 0x802066 <_addresses+0x6>
+    1144:	b0 91 67 20 	lds	r27, 0x2067	; 0x802067 <_addresses+0x7>
+    1148:	89 2b       	or	r24, r25
+    114a:	8a 2b       	or	r24, r26
+    114c:	8b 2b       	or	r24, r27
+    114e:	09 f0       	breq	.+2      	; 0x1152 <play_entry+0x38>
+	{
+		load_light_sequenc_metadata();
+    1150:	c7 de       	rcall	.-626    	; 0xee0 <load_light_sequenc_metadata>
+    1152:	8c e5       	ldi	r24, 0x5C	; 92
+	}
+	
+	//Load the first buffer.
+	_inputBuff = _wavBuff0;
+    1154:	92 e2       	ldi	r25, 0x22	; 34
+    1156:	80 93 5c 21 	sts	0x215C, r24	; 0x80215c <_inputBuff>
+    115a:	90 93 5d 21 	sts	0x215D, r25	; 0x80215d <_inputBuff+0x1>
+	load_input_buffer();
+    115e:	2b df       	rcall	.-426    	; 0xfb6 <load_input_buffer>
+    1160:	80 91 4f 20 	lds	r24, 0x204F	; 0x80204f <_readingMem>
+	while(_readingMem);
+    1164:	81 11       	cpse	r24, r1
+    1166:	fc cf       	rjmp	.-8      	; 0x1160 <play_entry+0x46>
+    1168:	80 91 64 20 	lds	r24, 0x2064	; 0x802064 <_addresses+0x4>
+	
+	//if light file address == 0, the lights are skipped
+	if (_addresses.lightFileAddress != 0)
+    116c:	90 91 65 20 	lds	r25, 0x2065	; 0x802065 <_addresses+0x5>
+    1170:	a0 91 66 20 	lds	r26, 0x2066	; 0x802066 <_addresses+0x6>
+    1174:	b0 91 67 20 	lds	r27, 0x2067	; 0x802067 <_addresses+0x7>
+    1178:	89 2b       	or	r24, r25
+    117a:	8a 2b       	or	r24, r26
+    117c:	8b 2b       	or	r24, r27
+	{
+		load_next_light_map();
+    117e:	09 f0       	breq	.+2      	; 0x1182 <play_entry+0x68>
+    1180:	cd de       	rcall	.-614    	; 0xf1c <load_next_light_map>
+			
+	}
+	
+	//Start the audio
+	start_audio_output();
+    1182:	b1 cf       	rjmp	.-158    	; 0x10e6 <start_audio_output>
+    1184:	08 95       	ret
+
+00001186 <blank_lights>:
+    1186:	84 e5       	ldi	r24, 0x54	; 84
+	
+}
+
+void blank_lights()
+{
+	_lightMetadata.lightCount = MAX_LIGHT_COUNT;
+    1188:	90 e0       	ldi	r25, 0x00	; 0
+    118a:	80 93 f4 20 	sts	0x20F4, r24	; 0x8020f4 <_lightMetadata+0x2>
+    118e:	90 93 f5 20 	sts	0x20F5, r25	; 0x8020f5 <_lightMetadata+0x3>
+    1192:	e0 e6       	ldi	r30, 0x60	; 96
+    1194:	f1 e2       	ldi	r31, 0x21	; 33
+    1196:	8c e5       	ldi	r24, 0x5C	; 92
+    1198:	92 e2       	ldi	r25, 0x22	; 34
+	for (uint8_t i = 0; i < MAX_LIGHT_COUNT * 3; i++)
+	{
+		_lightMap.lights[i] = 0;
+    119a:	11 92       	st	Z+, r1
+}
+
+void blank_lights()
+{
+	_lightMetadata.lightCount = MAX_LIGHT_COUNT;
+	for (uint8_t i = 0; i < MAX_LIGHT_COUNT * 3; i++)
+    119c:	e8 17       	cp	r30, r24
+    119e:	f9 07       	cpc	r31, r25
+    11a0:	e1 f7       	brne	.-8      	; 0x119a <blank_lights+0x14>
+	{
+		_lightMap.lights[i] = 0;
+	}
+	
+	write_lights();
+    11a2:	35 ce       	rjmp	.-918    	; 0xe0e <write_lights>
+    11a4:	08 95       	ret
+
+000011a6 <main>:
+	//status flags to indicate the re-burst for library
+	uint16_t status_flag = 0;
+	uint16_t burst_flag = 0;
+
+		
+	init_main_config();
+    11a6:	ad dd       	rcall	.-1190   	; 0xd02 <init_main_config>
+	
+
 	
 	load_entry_count();
-    11b4:	80 91 5f 20 	lds	r24, 0x205F	; 0x80205f <time_to_measure_touch>
+    11a8:	49 de       	rcall	.-878    	; 0xe3c <load_entry_count>
+    11aa:	0d e0       	ldi	r16, 0x0D	; 13
 	        do {
 		        /*  one time measure touch sensors    */
 		        status_flag = qt_measure_sensors( current_time_ms_touch );
 		        if (status_flag & QTLIB_STATUS_CHANGE)
 		        {
 					if (qt_measure_data.qt_touch_status.sensor_states[0] == 1)
-    11b8:	88 23       	and	r24, r24
+    11ac:	10 e2       	ldi	r17, 0x20	; 32
+    11ae:	80 91 5f 20 	lds	r24, 0x205F	; 0x80205f <time_to_measure_touch>
 	
 	load_entry_count();
 	
     while (1) 
     {
         if(time_to_measure_touch )
-    11ba:	e1 f3       	breq	.-8      	; 0x11b4 <main+0x62>
-    11bc:	10 92 5f 20 	sts	0x205F, r1	; 0x80205f <time_to_measure_touch>
-    11c0:	80 91 5d 20 	lds	r24, 0x205D	; 0x80205d <current_time_ms_touch>
+    11b2:	88 23       	and	r24, r24
+    11b4:	e1 f3       	breq	.-8      	; 0x11ae <main+0x8>
+    11b6:	10 92 5f 20 	sts	0x205F, r1	; 0x80205f <time_to_measure_touch>
         {
 
 	        /*  clear flag: it's time to measure touch  */
 	        time_to_measure_touch = 0u;
-    11c4:	90 91 5e 20 	lds	r25, 0x205E	; 0x80205e <current_time_ms_touch+0x1>
+    11ba:	80 91 5d 20 	lds	r24, 0x205D	; 0x80205d <current_time_ms_touch>
 
 	        do {
 		        /*  one time measure touch sensors    */
 		        status_flag = qt_measure_sensors( current_time_ms_touch );
-    11c8:	d3 d8       	rcall	.-3674   	; 0x370 <qt_measure_sensors>
-    11ca:	ec 01       	movw	r28, r24
-    11cc:	81 ff       	sbrs	r24, 1
-    11ce:	4a c0       	rjmp	.+148    	; 0x1264 <main+0x112>
-    11d0:	f8 01       	movw	r30, r16
+    11be:	90 91 5e 20 	lds	r25, 0x205E	; 0x80205e <current_time_ms_touch+0x1>
+    11c2:	d6 d8       	rcall	.-3668   	; 0x370 <qt_measure_sensors>
+    11c4:	ec 01       	movw	r28, r24
+    11c6:	81 ff       	sbrs	r24, 1
 		        if (status_flag & QTLIB_STATUS_CHANGE)
-    11d2:	80 89       	ldd	r24, Z+16	; 0x10
-    11d4:	81 30       	cpi	r24, 0x01	; 1
+    11c8:	4a c0       	rjmp	.+148    	; 0x125e <main+0xb8>
+    11ca:	f8 01       	movw	r30, r16
 		        {
 					if (qt_measure_data.qt_touch_status.sensor_states[0] == 1)
-    11d6:	31 f4       	brne	.+12     	; 0x11e4 <main+0x92>
-    11d8:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
-    11dc:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    11cc:	80 89       	ldd	r24, Z+16	; 0x10
+    11ce:	81 30       	cpi	r24, 0x01	; 1
+    11d0:	31 f4       	brne	.+12     	; 0x11de <main+0x38>
+    11d2:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
 					{
 						play_entry(_entryIndex);
-    11e0:	53 df       	rcall	.-346    	; 0x1088 <play_entry>
-    11e2:	40 c0       	rjmp	.+128    	; 0x1264 <main+0x112>
-    11e4:	82 30       	cpi	r24, 0x02	; 2
-    11e6:	f1 f4       	brne	.+60     	; 0x1224 <main+0xd2>
-    11e8:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
+    11d6:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    11da:	9f df       	rcall	.-194    	; 0x111a <play_entry>
+    11dc:	40 c0       	rjmp	.+128    	; 0x125e <main+0xb8>
+    11de:	82 30       	cpi	r24, 0x02	; 2
 					}
 					else if (qt_measure_data.qt_touch_status.sensor_states[0] == 2)
-    11ec:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    11e0:	f1 f4       	brne	.+60     	; 0x121e <main+0x78>
+    11e2:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
 					{
 						
 						_entryIndex++;
-    11f0:	01 96       	adiw	r24, 0x01	; 1
-    11f2:	80 93 57 20 	sts	0x2057, r24	; 0x802057 <_entryIndex>
-    11f6:	90 93 58 20 	sts	0x2058, r25	; 0x802058 <_entryIndex+0x1>
-    11fa:	20 91 57 20 	lds	r18, 0x2057	; 0x802057 <_entryIndex>
-    11fe:	30 91 58 20 	lds	r19, 0x2058	; 0x802058 <_entryIndex+0x1>
+    11e6:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    11ea:	01 96       	adiw	r24, 0x01	; 1
+    11ec:	80 93 57 20 	sts	0x2057, r24	; 0x802057 <_entryIndex>
+    11f0:	90 93 58 20 	sts	0x2058, r25	; 0x802058 <_entryIndex+0x1>
+    11f4:	20 91 57 20 	lds	r18, 0x2057	; 0x802057 <_entryIndex>
 						
 						if (_entryIndex == _entryCount)
-    1202:	80 91 5b 20 	lds	r24, 0x205B	; 0x80205b <_entryCount>
-    1206:	90 91 5c 20 	lds	r25, 0x205C	; 0x80205c <_entryCount+0x1>
-    120a:	28 17       	cp	r18, r24
-    120c:	39 07       	cpc	r19, r25
-    120e:	21 f4       	brne	.+8      	; 0x1218 <main+0xc6>
-    1210:	10 92 57 20 	sts	0x2057, r1	; 0x802057 <_entryIndex>
-    1214:	10 92 58 20 	sts	0x2058, r1	; 0x802058 <_entryIndex+0x1>
+    11f8:	30 91 58 20 	lds	r19, 0x2058	; 0x802058 <_entryIndex+0x1>
+    11fc:	80 91 5b 20 	lds	r24, 0x205B	; 0x80205b <_entryCount>
+    1200:	90 91 5c 20 	lds	r25, 0x205C	; 0x80205c <_entryCount+0x1>
+    1204:	28 17       	cp	r18, r24
+    1206:	39 07       	cpc	r19, r25
+    1208:	21 f4       	brne	.+8      	; 0x1212 <main+0x6c>
+    120a:	10 92 57 20 	sts	0x2057, r1	; 0x802057 <_entryIndex>
 						{
 							_entryIndex = 0;
-    1218:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
-    121c:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    120e:	10 92 58 20 	sts	0x2058, r1	; 0x802058 <_entryIndex+0x1>
+    1212:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
 						}
 						
 						play_entry(_entryIndex);
-    1220:	33 df       	rcall	.-410    	; 0x1088 <play_entry>
-    1222:	20 c0       	rjmp	.+64     	; 0x1264 <main+0x112>
-    1224:	84 30       	cpi	r24, 0x04	; 4
-    1226:	f1 f4       	brne	.+60     	; 0x1264 <main+0x112>
-    1228:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
+    1216:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    121a:	7f df       	rcall	.-258    	; 0x111a <play_entry>
+    121c:	20 c0       	rjmp	.+64     	; 0x125e <main+0xb8>
+    121e:	84 30       	cpi	r24, 0x04	; 4
 					}
 					else if (qt_measure_data.qt_touch_status.sensor_states[0] == 4)
-    122c:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    1220:	f1 f4       	brne	.+60     	; 0x125e <main+0xb8>
+    1222:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
 					{
 						if (_entryIndex > 0)
-    1230:	89 2b       	or	r24, r25
-    1232:	51 f0       	breq	.+20     	; 0x1248 <main+0xf6>
-    1234:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
-    1238:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    1226:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    122a:	89 2b       	or	r24, r25
+    122c:	51 f0       	breq	.+20     	; 0x1242 <main+0x9c>
+    122e:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
 						{
 							_entryIndex--;
-    123c:	01 97       	sbiw	r24, 0x01	; 1
-    123e:	80 93 57 20 	sts	0x2057, r24	; 0x802057 <_entryIndex>
-    1242:	90 93 58 20 	sts	0x2058, r25	; 0x802058 <_entryIndex+0x1>
-    1246:	09 c0       	rjmp	.+18     	; 0x125a <main+0x108>
-    1248:	80 91 5b 20 	lds	r24, 0x205B	; 0x80205b <_entryCount>
-    124c:	90 91 5c 20 	lds	r25, 0x205C	; 0x80205c <_entryCount+0x1>
+    1232:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    1236:	01 97       	sbiw	r24, 0x01	; 1
+    1238:	80 93 57 20 	sts	0x2057, r24	; 0x802057 <_entryIndex>
+    123c:	90 93 58 20 	sts	0x2058, r25	; 0x802058 <_entryIndex+0x1>
+    1240:	09 c0       	rjmp	.+18     	; 0x1254 <main+0xae>
+    1242:	80 91 5b 20 	lds	r24, 0x205B	; 0x80205b <_entryCount>
 						}
 						else
 						{
 							_entryIndex = _entryCount - 1;
-    1250:	01 97       	sbiw	r24, 0x01	; 1
-    1252:	80 93 57 20 	sts	0x2057, r24	; 0x802057 <_entryIndex>
-    1256:	90 93 58 20 	sts	0x2058, r25	; 0x802058 <_entryIndex+0x1>
-    125a:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
-    125e:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    1246:	90 91 5c 20 	lds	r25, 0x205C	; 0x80205c <_entryCount+0x1>
+    124a:	01 97       	sbiw	r24, 0x01	; 1
+    124c:	80 93 57 20 	sts	0x2057, r24	; 0x802057 <_entryIndex>
+    1250:	90 93 58 20 	sts	0x2058, r25	; 0x802058 <_entryIndex+0x1>
 						}
 						play_entry(_entryIndex);
-    1262:	12 df       	rcall	.-476    	; 0x1088 <play_entry>
-    1264:	d0 fd       	sbrc	r29, 0
-    1266:	ac cf       	rjmp	.-168    	; 0x11c0 <main+0x6e>
-    1268:	a5 cf       	rjmp	.-182    	; 0x11b4 <main+0x62>
-
-0000126a <__vector_5>:
-    126a:	1f 92       	push	r1
+    1254:	80 91 57 20 	lds	r24, 0x2057	; 0x802057 <_entryIndex>
+    1258:	90 91 58 20 	lds	r25, 0x2058	; 0x802058 <_entryIndex+0x1>
+    125c:	5e df       	rcall	.-324    	; 0x111a <play_entry>
+    125e:	d0 fd       	sbrc	r29, 0
 		        
 		        burst_flag = status_flag & QTLIB_BURST_AGAIN;
 
 		        /* Time-critical host application code goes here */
 
 	        }while (burst_flag) ;
-    126c:	0f 92       	push	r0
-    126e:	0f b6       	in	r0, 0x3f	; 63
-    1270:	0f 92       	push	r0
+    1260:	ac cf       	rjmp	.-168    	; 0x11ba <main+0x14>
+    1262:	a5 cf       	rjmp	.-182    	; 0x11ae <main+0x8>
+
+00001264 <__vector_5>:
+    1264:	1f 92       	push	r1
     }
 }
 
 //IRQ handled when data is done being send to the DAC
 ISR(EDMA_CH2_vect)
 {	
-    1272:	11 24       	eor	r1, r1
-    1274:	2f 93       	push	r18
-    1276:	3f 93       	push	r19
-    1278:	4f 93       	push	r20
-    127a:	5f 93       	push	r21
-    127c:	6f 93       	push	r22
-    127e:	7f 93       	push	r23
-    1280:	8f 93       	push	r24
-    1282:	9f 93       	push	r25
-    1284:	af 93       	push	r26
-    1286:	bf 93       	push	r27
-    1288:	ef 93       	push	r30
-    128a:	ff 93       	push	r31
+    1266:	0f 92       	push	r0
+    1268:	0f b6       	in	r0, 0x3f	; 63
+    126a:	0f 92       	push	r0
+    126c:	11 24       	eor	r1, r1
+    126e:	2f 93       	push	r18
+    1270:	3f 93       	push	r19
+    1272:	4f 93       	push	r20
+    1274:	5f 93       	push	r21
+    1276:	6f 93       	push	r22
+    1278:	7f 93       	push	r23
+    127a:	8f 93       	push	r24
+    127c:	9f 93       	push	r25
+    127e:	af 93       	push	r26
+    1280:	bf 93       	push	r27
+    1282:	ef 93       	push	r30
+    1284:	ff 93       	push	r31
 	while( (EDMA.CH2.CTRLB & EDMA_CH_TRNIF_bm) == 0);
-    128c:	e0 e0       	ldi	r30, 0x00	; 0
-    128e:	f1 e0       	ldi	r31, 0x01	; 1
-    1290:	81 a9       	ldd	r24, Z+49	; 0x31
-    1292:	84 ff       	sbrs	r24, 4
-    1294:	fd cf       	rjmp	.-6      	; 0x1290 <__vector_5+0x26>
+    1286:	e0 e0       	ldi	r30, 0x00	; 0
+    1288:	f1 e0       	ldi	r31, 0x01	; 1
+    128a:	81 a9       	ldd	r24, Z+49	; 0x31
+    128c:	84 ff       	sbrs	r24, 4
+    128e:	fd cf       	rjmp	.-6      	; 0x128a <__vector_5+0x26>
 	//if number of sample bytes is <= 0 then we reached the end of the audio file
 	if (_totalSampleBytes > 0)
-    1296:	80 91 53 20 	lds	r24, 0x2053	; 0x802053 <_totalSampleBytes>
-    129a:	90 91 54 20 	lds	r25, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
-    129e:	a0 91 55 20 	lds	r26, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
-    12a2:	b0 91 56 20 	lds	r27, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
-    12a6:	89 2b       	or	r24, r25
-    12a8:	8a 2b       	or	r24, r26
-    12aa:	8b 2b       	or	r24, r27
-    12ac:	29 f1       	breq	.+74     	; 0x12f8 <__vector_5+0x8e>
+    1290:	80 91 53 20 	lds	r24, 0x2053	; 0x802053 <_totalSampleBytes>
+    1294:	90 91 54 20 	lds	r25, 0x2054	; 0x802054 <_totalSampleBytes+0x1>
+    1298:	a0 91 55 20 	lds	r26, 0x2055	; 0x802055 <_totalSampleBytes+0x2>
+    129c:	b0 91 56 20 	lds	r27, 0x2056	; 0x802056 <_totalSampleBytes+0x3>
+    12a0:	89 2b       	or	r24, r25
+    12a2:	8a 2b       	or	r24, r26
+    12a4:	8b 2b       	or	r24, r27
+    12a6:	29 f1       	breq	.+74     	; 0x12f2 <__vector_5+0x8e>
 	{
 		EDMA.CH2.CTRLB &= EDMA_CH_TRNIF_bm | 0x0F; //Only clear the TRNIF flag and not the INT LVLs
-    12ae:	e0 e0       	ldi	r30, 0x00	; 0
-    12b0:	f1 e0       	ldi	r31, 0x01	; 1
-    12b2:	81 a9       	ldd	r24, Z+49	; 0x31
-    12b4:	8f 71       	andi	r24, 0x1F	; 31
-    12b6:	81 ab       	std	Z+49, r24	; 0x31
+    12a8:	e0 e0       	ldi	r30, 0x00	; 0
+    12aa:	f1 e0       	ldi	r31, 0x01	; 1
+    12ac:	81 a9       	ldd	r24, Z+49	; 0x31
+    12ae:	8f 71       	andi	r24, 0x1F	; 31
+    12b0:	81 ab       	std	Z+49, r24	; 0x31
 		
 
 		//light file address of 0 means skip lights
 		//_loadNextLightMap will be non-zero when we are ready to load the next light map
 		//Also make sure we have not reached 0 in the map count
 		if (_addresses.lightFileAddress != 0 && _holdTimerCounter > _lightMap.holdTime && _lightMetadata.mapCount)
-    12b8:	80 91 64 20 	lds	r24, 0x2064	; 0x802064 <_addresses+0x4>
-    12bc:	90 91 65 20 	lds	r25, 0x2065	; 0x802065 <_addresses+0x5>
-    12c0:	a0 91 66 20 	lds	r26, 0x2066	; 0x802066 <_addresses+0x6>
-    12c4:	b0 91 67 20 	lds	r27, 0x2067	; 0x802067 <_addresses+0x7>
-    12c8:	89 2b       	or	r24, r25
-    12ca:	8a 2b       	or	r24, r26
-    12cc:	8b 2b       	or	r24, r27
-    12ce:	91 f0       	breq	.+36     	; 0x12f4 <__vector_5+0x8a>
-    12d0:	80 91 59 20 	lds	r24, 0x2059	; 0x802059 <_holdTimerCounter>
-    12d4:	90 91 5a 20 	lds	r25, 0x205A	; 0x80205a <_holdTimerCounter+0x1>
-    12d8:	20 91 5e 21 	lds	r18, 0x215E	; 0x80215e <_lightMap>
-    12dc:	30 91 5f 21 	lds	r19, 0x215F	; 0x80215f <_lightMap+0x1>
-    12e0:	28 17       	cp	r18, r24
-    12e2:	39 07       	cpc	r19, r25
-    12e4:	38 f4       	brcc	.+14     	; 0x12f4 <__vector_5+0x8a>
-    12e6:	80 91 f2 20 	lds	r24, 0x20F2	; 0x8020f2 <_lightMetadata>
-    12ea:	90 91 f3 20 	lds	r25, 0x20F3	; 0x8020f3 <_lightMetadata+0x1>
-    12ee:	89 2b       	or	r24, r25
-    12f0:	09 f0       	breq	.+2      	; 0x12f4 <__vector_5+0x8a>
+    12b2:	80 91 64 20 	lds	r24, 0x2064	; 0x802064 <_addresses+0x4>
+    12b6:	90 91 65 20 	lds	r25, 0x2065	; 0x802065 <_addresses+0x5>
+    12ba:	a0 91 66 20 	lds	r26, 0x2066	; 0x802066 <_addresses+0x6>
+    12be:	b0 91 67 20 	lds	r27, 0x2067	; 0x802067 <_addresses+0x7>
+    12c2:	89 2b       	or	r24, r25
+    12c4:	8a 2b       	or	r24, r26
+    12c6:	8b 2b       	or	r24, r27
+    12c8:	91 f0       	breq	.+36     	; 0x12ee <__vector_5+0x8a>
+    12ca:	80 91 59 20 	lds	r24, 0x2059	; 0x802059 <_holdTimerCounter>
+    12ce:	90 91 5a 20 	lds	r25, 0x205A	; 0x80205a <_holdTimerCounter+0x1>
+    12d2:	20 91 5e 21 	lds	r18, 0x215E	; 0x80215e <_lightMap>
+    12d6:	30 91 5f 21 	lds	r19, 0x215F	; 0x80215f <_lightMap+0x1>
+    12da:	28 17       	cp	r18, r24
+    12dc:	39 07       	cpc	r19, r25
+    12de:	38 f4       	brcc	.+14     	; 0x12ee <__vector_5+0x8a>
+    12e0:	80 91 f2 20 	lds	r24, 0x20F2	; 0x8020f2 <_lightMetadata>
+    12e4:	90 91 f3 20 	lds	r25, 0x20F3	; 0x8020f3 <_lightMetadata+0x1>
+    12e8:	89 2b       	or	r24, r25
+    12ea:	09 f0       	breq	.+2      	; 0x12ee <__vector_5+0x8a>
 		{
 			load_next_light_map();		//This calls read_mem which can't be done within the IRQ handler
-    12f2:	cb dd       	rcall	.-1130   	; 0xe8a <load_next_light_map>
+    12ec:	17 de       	rcall	.-978    	; 0xf1c <load_next_light_map>
 			//_readLightMem = 1;
 		}
 	
 		start_audio_output();
-    12f4:	af de       	rcall	.-674    	; 0x1054 <start_audio_output>
-    12f6:	0c c0       	rjmp	.+24     	; 0x1310 <__vector_5+0xa6>
-    12f8:	e0 e0       	ldi	r30, 0x00	; 0
+    12ee:	fb de       	rcall	.-522    	; 0x10e6 <start_audio_output>
+    12f0:	0c c0       	rjmp	.+24     	; 0x130a <__vector_5+0xa6>
+    12f2:	e0 e0       	ldi	r30, 0x00	; 0
 	}
 	else
 	{
 		//Disable audio edma and timer
 		EDMA.CH2.CTRLB |= EDMA_CH_TRNIF_bm;
-    12fa:	f1 e0       	ldi	r31, 0x01	; 1
-    12fc:	81 a9       	ldd	r24, Z+49	; 0x31
-    12fe:	80 61       	ori	r24, 0x10	; 16
-    1300:	81 ab       	std	Z+49, r24	; 0x31
-    1302:	10 92 26 08 	sts	0x0826, r1	; 0x800826 <__TEXT_REGION_LENGTH__+0x7f7826>
+    12f4:	f1 e0       	ldi	r31, 0x01	; 1
+    12f6:	81 a9       	ldd	r24, Z+49	; 0x31
+    12f8:	80 61       	ori	r24, 0x10	; 16
+    12fa:	81 ab       	std	Z+49, r24	; 0x31
+    12fc:	10 92 26 08 	sts	0x0826, r1	; 0x800826 <__TEXT_REGION_LENGTH__+0x7f7826>
 		TCC4.PER = 0;
-    1306:	10 92 27 08 	sts	0x0827, r1	; 0x800827 <__TEXT_REGION_LENGTH__+0x7f7827>
-    130a:	10 92 40 08 	sts	0x0840, r1	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
+    1300:	10 92 27 08 	sts	0x0827, r1	; 0x800827 <__TEXT_REGION_LENGTH__+0x7f7827>
+    1304:	10 92 40 08 	sts	0x0840, r1	; 0x800840 <__TEXT_REGION_LENGTH__+0x7f7840>
 		//Disable light timer
 		TCC5.CTRLA = 0;
 		blank_lights();
-    130e:	f2 de       	rcall	.-540    	; 0x10f4 <blank_lights>
-    1310:	ff 91       	pop	r31
+    1308:	3e df       	rcall	.-388    	; 0x1186 <blank_lights>
+    130a:	ff 91       	pop	r31
 	}
 
 }
-    1312:	ef 91       	pop	r30
-    1314:	bf 91       	pop	r27
-    1316:	af 91       	pop	r26
-    1318:	9f 91       	pop	r25
-    131a:	8f 91       	pop	r24
-    131c:	7f 91       	pop	r23
-    131e:	6f 91       	pop	r22
-    1320:	5f 91       	pop	r21
-    1322:	4f 91       	pop	r20
-    1324:	3f 91       	pop	r19
-    1326:	2f 91       	pop	r18
-    1328:	0f 90       	pop	r0
-    132a:	0f be       	out	0x3f, r0	; 63
-    132c:	0f 90       	pop	r0
-    132e:	1f 90       	pop	r1
-    1330:	18 95       	reti
+    130c:	ef 91       	pop	r30
+    130e:	bf 91       	pop	r27
+    1310:	af 91       	pop	r26
+    1312:	9f 91       	pop	r25
+    1314:	8f 91       	pop	r24
+    1316:	7f 91       	pop	r23
+    1318:	6f 91       	pop	r22
+    131a:	5f 91       	pop	r21
+    131c:	4f 91       	pop	r20
+    131e:	3f 91       	pop	r19
+    1320:	2f 91       	pop	r18
+    1322:	0f 90       	pop	r0
+    1324:	0f be       	out	0x3f, r0	; 63
+    1326:	0f 90       	pop	r0
+    1328:	1f 90       	pop	r1
+    132a:	18 95       	reti
 
-00001332 <__vector_3>:
-    1332:	1f 92       	push	r1
+0000132c <__vector_3>:
+    132c:	1f 92       	push	r1
 
 //IRQ handled when memory read is complete.
 ISR(EDMA_CH0_vect)
 {
-    1334:	0f 92       	push	r0
-    1336:	0f b6       	in	r0, 0x3f	; 63
-    1338:	0f 92       	push	r0
-    133a:	11 24       	eor	r1, r1
-    133c:	8f 93       	push	r24
-    133e:	ef 93       	push	r30
-    1340:	ff 93       	push	r31
+    132e:	0f 92       	push	r0
+    1330:	0f b6       	in	r0, 0x3f	; 63
+    1332:	0f 92       	push	r0
+    1334:	11 24       	eor	r1, r1
+    1336:	8f 93       	push	r24
+    1338:	ef 93       	push	r30
+    133a:	ff 93       	push	r31
 
 	//Light file read is started here so we can be sure we are not trying to do two memory reads at the same time
 	//which could corrupt the data stream
 	
 	//End the read
 	while(!(EDMA.CH0.CTRLB & EDMA_CH_TRNIF_bm) && !(EDMA.CH1.CTRLB & EDMA_CH_TRNIF_bm));
-    1342:	e0 e0       	ldi	r30, 0x00	; 0
-    1344:	f1 e0       	ldi	r31, 0x01	; 1
-    1346:	81 89       	ldd	r24, Z+17	; 0x11
-    1348:	84 fd       	sbrc	r24, 4
-    134a:	03 c0       	rjmp	.+6      	; 0x1352 <__vector_3+0x20>
-    134c:	81 a1       	ldd	r24, Z+33	; 0x21
-    134e:	84 ff       	sbrs	r24, 4
-    1350:	fa cf       	rjmp	.-12     	; 0x1346 <__vector_3+0x14>
+    133c:	e0 e0       	ldi	r30, 0x00	; 0
+    133e:	f1 e0       	ldi	r31, 0x01	; 1
+    1340:	81 89       	ldd	r24, Z+17	; 0x11
+    1342:	84 fd       	sbrc	r24, 4
+    1344:	03 c0       	rjmp	.+6      	; 0x134c <__vector_3+0x20>
+    1346:	81 a1       	ldd	r24, Z+33	; 0x21
+    1348:	84 ff       	sbrs	r24, 4
+    134a:	fa cf       	rjmp	.-12     	; 0x1340 <__vector_3+0x14>
 
 	//Clear interrupt flags
 
 	EDMA.CH0.CTRLB &= EDMA_CH_TRNIF_bm | 0x0F; //Only clear the TRNIF flag and not the INT LVLs
-    1352:	e0 e0       	ldi	r30, 0x00	; 0
-    1354:	f1 e0       	ldi	r31, 0x01	; 1
-    1356:	81 89       	ldd	r24, Z+17	; 0x11
-    1358:	8f 71       	andi	r24, 0x1F	; 31
-    135a:	81 8b       	std	Z+17, r24	; 0x11
+    134c:	e0 e0       	ldi	r30, 0x00	; 0
+    134e:	f1 e0       	ldi	r31, 0x01	; 1
+    1350:	81 89       	ldd	r24, Z+17	; 0x11
+    1352:	8f 71       	andi	r24, 0x1F	; 31
+    1354:	81 8b       	std	Z+17, r24	; 0x11
 	EDMA.CH1.CTRLB &= EDMA_CH_TRNIF_bm | 0x0F; //Only clear the TRNIF flag and not the INT LVLs
-    135c:	81 a1       	ldd	r24, Z+33	; 0x21
-    135e:	8f 71       	andi	r24, 0x1F	; 31
-    1360:	81 a3       	std	Z+33, r24	; 0x21
+    1356:	81 a1       	ldd	r24, Z+33	; 0x21
+    1358:	8f 71       	andi	r24, 0x1F	; 31
+    135a:	81 a3       	std	Z+33, r24	; 0x21
 
 	
 	if (_setCS)
-    1362:	80 91 50 20 	lds	r24, 0x2050	; 0x802050 <_setCS>
-    1366:	88 23       	and	r24, r24
-    1368:	19 f0       	breq	.+6      	; 0x1370 <__vector_3+0x3e>
+    135c:	80 91 50 20 	lds	r24, 0x2050	; 0x802050 <_setCS>
+    1360:	88 23       	and	r24, r24
+    1362:	19 f0       	breq	.+6      	; 0x136a <__vector_3+0x3e>
 	{
 		//Set CS high
 		PORTD.OUTSET = PIN4_bm;	
-    136a:	80 e1       	ldi	r24, 0x10	; 16
-    136c:	80 93 65 06 	sts	0x0665, r24	; 0x800665 <__TEXT_REGION_LENGTH__+0x7f7665>
+    1364:	80 e1       	ldi	r24, 0x10	; 16
+    1366:	80 93 65 06 	sts	0x0665, r24	; 0x800665 <__TEXT_REGION_LENGTH__+0x7f7665>
 	}
 	
 	_readingMem = 0;
-    1370:	10 92 4f 20 	sts	0x204F, r1	; 0x80204f <_readingMem>
+    136a:	10 92 4f 20 	sts	0x204F, r1	; 0x80204f <_readingMem>
 }
-    1374:	ff 91       	pop	r31
-    1376:	ef 91       	pop	r30
-    1378:	8f 91       	pop	r24
-    137a:	0f 90       	pop	r0
-    137c:	0f be       	out	0x3f, r0	; 63
-    137e:	0f 90       	pop	r0
-    1380:	1f 90       	pop	r1
-    1382:	18 95       	reti
+    136e:	ff 91       	pop	r31
+    1370:	ef 91       	pop	r30
+    1372:	8f 91       	pop	r24
+    1374:	0f 90       	pop	r0
+    1376:	0f be       	out	0x3f, r0	; 63
+    1378:	0f 90       	pop	r0
+    137a:	1f 90       	pop	r1
+    137c:	18 95       	reti
 
-00001384 <__vector_18>:
+0000137e <__vector_18>:
 
 ISR(TCC5_OVF_vect)
 {
-    1384:	1f 92       	push	r1
-    1386:	0f 92       	push	r0
-    1388:	0f b6       	in	r0, 0x3f	; 63
-    138a:	0f 92       	push	r0
-    138c:	11 24       	eor	r1, r1
-    138e:	8f 93       	push	r24
-    1390:	9f 93       	push	r25
+    137e:	1f 92       	push	r1
+    1380:	0f 92       	push	r0
+    1382:	0f b6       	in	r0, 0x3f	; 63
+    1384:	0f 92       	push	r0
+    1386:	11 24       	eor	r1, r1
+    1388:	8f 93       	push	r24
+    138a:	9f 93       	push	r25
 	TCC5.INTFLAGS = TC5_OVFIF_bm;  //clear the overflow flag
-    1392:	81 e0       	ldi	r24, 0x01	; 1
-    1394:	80 93 4c 08 	sts	0x084C, r24	; 0x80084c <__TEXT_REGION_LENGTH__+0x7f784c>
+    138c:	81 e0       	ldi	r24, 0x01	; 1
+    138e:	80 93 4c 08 	sts	0x084C, r24	; 0x80084c <__TEXT_REGION_LENGTH__+0x7f784c>
 	_holdTimerCounter++;
-    1398:	80 91 59 20 	lds	r24, 0x2059	; 0x802059 <_holdTimerCounter>
-    139c:	90 91 5a 20 	lds	r25, 0x205A	; 0x80205a <_holdTimerCounter+0x1>
-    13a0:	01 96       	adiw	r24, 0x01	; 1
-    13a2:	80 93 59 20 	sts	0x2059, r24	; 0x802059 <_holdTimerCounter>
-    13a6:	90 93 5a 20 	sts	0x205A, r25	; 0x80205a <_holdTimerCounter+0x1>
+    1392:	80 91 59 20 	lds	r24, 0x2059	; 0x802059 <_holdTimerCounter>
+    1396:	90 91 5a 20 	lds	r25, 0x205A	; 0x80205a <_holdTimerCounter+0x1>
+    139a:	01 96       	adiw	r24, 0x01	; 1
+    139c:	80 93 59 20 	sts	0x2059, r24	; 0x802059 <_holdTimerCounter>
+    13a0:	90 93 5a 20 	sts	0x205A, r25	; 0x80205a <_holdTimerCounter+0x1>
 }
-    13aa:	9f 91       	pop	r25
-    13ac:	8f 91       	pop	r24
-    13ae:	0f 90       	pop	r0
-    13b0:	0f be       	out	0x3f, r0	; 63
-    13b2:	0f 90       	pop	r0
-    13b4:	1f 90       	pop	r1
-    13b6:	18 95       	reti
+    13a4:	9f 91       	pop	r25
+    13a6:	8f 91       	pop	r24
+    13a8:	0f 90       	pop	r0
+    13aa:	0f be       	out	0x3f, r0	; 63
+    13ac:	0f 90       	pop	r0
+    13ae:	1f 90       	pop	r1
+    13b0:	18 95       	reti
 
-000013b8 <__vector_7>:
+000013b2 <__vector_7>:
 
 ISR(RTC_OVF_vect)
 {
-    13b8:	1f 92       	push	r1
-    13ba:	0f 92       	push	r0
-    13bc:	0f b6       	in	r0, 0x3f	; 63
-    13be:	0f 92       	push	r0
-    13c0:	11 24       	eor	r1, r1
-    13c2:	2f 93       	push	r18
-    13c4:	3f 93       	push	r19
-    13c6:	8f 93       	push	r24
-    13c8:	9f 93       	push	r25
+    13b2:	1f 92       	push	r1
+    13b4:	0f 92       	push	r0
+    13b6:	0f b6       	in	r0, 0x3f	; 63
+    13b8:	0f 92       	push	r0
+    13ba:	11 24       	eor	r1, r1
+    13bc:	2f 93       	push	r18
+    13be:	3f 93       	push	r19
+    13c0:	8f 93       	push	r24
+    13c2:	9f 93       	push	r25
 	/*  set flag: it's time to measure touch    */
 	time_to_measure_touch = 1;
-    13ca:	81 e0       	ldi	r24, 0x01	; 1
-    13cc:	80 93 5f 20 	sts	0x205F, r24	; 0x80205f <time_to_measure_touch>
+    13c4:	81 e0       	ldi	r24, 0x01	; 1
+    13c6:	80 93 5f 20 	sts	0x205F, r24	; 0x80205f <time_to_measure_touch>
 
 	/*  update the current time  */
 	current_time_ms_touch += qt_measurement_period_msec;
-    13d0:	20 91 5d 20 	lds	r18, 0x205D	; 0x80205d <current_time_ms_touch>
-    13d4:	30 91 5e 20 	lds	r19, 0x205E	; 0x80205e <current_time_ms_touch+0x1>
-    13d8:	80 91 02 20 	lds	r24, 0x2002	; 0x802002 <qt_measurement_period_msec>
-    13dc:	90 91 03 20 	lds	r25, 0x2003	; 0x802003 <qt_measurement_period_msec+0x1>
-    13e0:	82 0f       	add	r24, r18
-    13e2:	93 1f       	adc	r25, r19
-    13e4:	80 93 5d 20 	sts	0x205D, r24	; 0x80205d <current_time_ms_touch>
-    13e8:	90 93 5e 20 	sts	0x205E, r25	; 0x80205e <current_time_ms_touch+0x1>
+    13ca:	20 91 5d 20 	lds	r18, 0x205D	; 0x80205d <current_time_ms_touch>
+    13ce:	30 91 5e 20 	lds	r19, 0x205E	; 0x80205e <current_time_ms_touch+0x1>
+    13d2:	80 91 02 20 	lds	r24, 0x2002	; 0x802002 <qt_measurement_period_msec>
+    13d6:	90 91 03 20 	lds	r25, 0x2003	; 0x802003 <qt_measurement_period_msec+0x1>
+    13da:	82 0f       	add	r24, r18
+    13dc:	93 1f       	adc	r25, r19
+    13de:	80 93 5d 20 	sts	0x205D, r24	; 0x80205d <current_time_ms_touch>
+    13e2:	90 93 5e 20 	sts	0x205E, r25	; 0x80205e <current_time_ms_touch+0x1>
 
-    13ec:	9f 91       	pop	r25
-    13ee:	8f 91       	pop	r24
-    13f0:	3f 91       	pop	r19
-    13f2:	2f 91       	pop	r18
-    13f4:	0f 90       	pop	r0
-    13f6:	0f be       	out	0x3f, r0	; 63
-    13f8:	0f 90       	pop	r0
-    13fa:	1f 90       	pop	r1
-    13fc:	18 95       	reti
+    13e6:	9f 91       	pop	r25
+    13e8:	8f 91       	pop	r24
+    13ea:	3f 91       	pop	r19
+    13ec:	2f 91       	pop	r18
+    13ee:	0f 90       	pop	r0
+    13f0:	0f be       	out	0x3f, r0	; 63
+    13f2:	0f 90       	pop	r0
+    13f4:	1f 90       	pop	r1
+    13f6:	18 95       	reti
 
-000013fe <__udivmodsi4>:
-    13fe:	a1 e2       	ldi	r26, 0x21	; 33
-    1400:	1a 2e       	mov	r1, r26
-    1402:	aa 1b       	sub	r26, r26
-    1404:	bb 1b       	sub	r27, r27
-    1406:	fd 01       	movw	r30, r26
-    1408:	0d c0       	rjmp	.+26     	; 0x1424 <__udivmodsi4_ep>
+000013f8 <__udivmodsi4>:
+    13f8:	a1 e2       	ldi	r26, 0x21	; 33
+    13fa:	1a 2e       	mov	r1, r26
+    13fc:	aa 1b       	sub	r26, r26
+    13fe:	bb 1b       	sub	r27, r27
+    1400:	fd 01       	movw	r30, r26
+    1402:	0d c0       	rjmp	.+26     	; 0x141e <__udivmodsi4_ep>
 
-0000140a <__udivmodsi4_loop>:
-    140a:	aa 1f       	adc	r26, r26
-    140c:	bb 1f       	adc	r27, r27
-    140e:	ee 1f       	adc	r30, r30
-    1410:	ff 1f       	adc	r31, r31
-    1412:	a2 17       	cp	r26, r18
-    1414:	b3 07       	cpc	r27, r19
-    1416:	e4 07       	cpc	r30, r20
-    1418:	f5 07       	cpc	r31, r21
-    141a:	20 f0       	brcs	.+8      	; 0x1424 <__udivmodsi4_ep>
-    141c:	a2 1b       	sub	r26, r18
-    141e:	b3 0b       	sbc	r27, r19
-    1420:	e4 0b       	sbc	r30, r20
-    1422:	f5 0b       	sbc	r31, r21
+00001404 <__udivmodsi4_loop>:
+    1404:	aa 1f       	adc	r26, r26
+    1406:	bb 1f       	adc	r27, r27
+    1408:	ee 1f       	adc	r30, r30
+    140a:	ff 1f       	adc	r31, r31
+    140c:	a2 17       	cp	r26, r18
+    140e:	b3 07       	cpc	r27, r19
+    1410:	e4 07       	cpc	r30, r20
+    1412:	f5 07       	cpc	r31, r21
+    1414:	20 f0       	brcs	.+8      	; 0x141e <__udivmodsi4_ep>
+    1416:	a2 1b       	sub	r26, r18
+    1418:	b3 0b       	sbc	r27, r19
+    141a:	e4 0b       	sbc	r30, r20
+    141c:	f5 0b       	sbc	r31, r21
 
-00001424 <__udivmodsi4_ep>:
-    1424:	66 1f       	adc	r22, r22
-    1426:	77 1f       	adc	r23, r23
-    1428:	88 1f       	adc	r24, r24
-    142a:	99 1f       	adc	r25, r25
-    142c:	1a 94       	dec	r1
-    142e:	69 f7       	brne	.-38     	; 0x140a <__udivmodsi4_loop>
-    1430:	60 95       	com	r22
-    1432:	70 95       	com	r23
-    1434:	80 95       	com	r24
-    1436:	90 95       	com	r25
-    1438:	9b 01       	movw	r18, r22
-    143a:	ac 01       	movw	r20, r24
-    143c:	bd 01       	movw	r22, r26
-    143e:	cf 01       	movw	r24, r30
-    1440:	08 95       	ret
+0000141e <__udivmodsi4_ep>:
+    141e:	66 1f       	adc	r22, r22
+    1420:	77 1f       	adc	r23, r23
+    1422:	88 1f       	adc	r24, r24
+    1424:	99 1f       	adc	r25, r25
+    1426:	1a 94       	dec	r1
+    1428:	69 f7       	brne	.-38     	; 0x1404 <__udivmodsi4_loop>
+    142a:	60 95       	com	r22
+    142c:	70 95       	com	r23
+    142e:	80 95       	com	r24
+    1430:	90 95       	com	r25
+    1432:	9b 01       	movw	r18, r22
+    1434:	ac 01       	movw	r20, r24
+    1436:	bd 01       	movw	r22, r26
+    1438:	cf 01       	movw	r24, r30
+    143a:	08 95       	ret
 
-00001442 <__muluhisi3>:
-    1442:	3a d0       	rcall	.+116    	; 0x14b8 <__umulhisi3>
-    1444:	a5 9f       	mul	r26, r21
-    1446:	90 0d       	add	r25, r0
-    1448:	b4 9f       	mul	r27, r20
-    144a:	90 0d       	add	r25, r0
-    144c:	a4 9f       	mul	r26, r20
-    144e:	80 0d       	add	r24, r0
-    1450:	91 1d       	adc	r25, r1
-    1452:	11 24       	eor	r1, r1
-    1454:	08 95       	ret
+0000143c <__muluhisi3>:
+    143c:	3a d0       	rcall	.+116    	; 0x14b2 <__umulhisi3>
+    143e:	a5 9f       	mul	r26, r21
+    1440:	90 0d       	add	r25, r0
+    1442:	b4 9f       	mul	r27, r20
+    1444:	90 0d       	add	r25, r0
+    1446:	a4 9f       	mul	r26, r20
+    1448:	80 0d       	add	r24, r0
+    144a:	91 1d       	adc	r25, r1
+    144c:	11 24       	eor	r1, r1
+    144e:	08 95       	ret
 
-00001456 <__prologue_saves__>:
-    1456:	2f 92       	push	r2
-    1458:	3f 92       	push	r3
-    145a:	4f 92       	push	r4
-    145c:	5f 92       	push	r5
-    145e:	6f 92       	push	r6
-    1460:	7f 92       	push	r7
-    1462:	8f 92       	push	r8
-    1464:	9f 92       	push	r9
-    1466:	af 92       	push	r10
-    1468:	bf 92       	push	r11
-    146a:	cf 92       	push	r12
-    146c:	df 92       	push	r13
-    146e:	ef 92       	push	r14
-    1470:	ff 92       	push	r15
-    1472:	0f 93       	push	r16
-    1474:	1f 93       	push	r17
-    1476:	cf 93       	push	r28
-    1478:	df 93       	push	r29
-    147a:	cd b7       	in	r28, 0x3d	; 61
-    147c:	de b7       	in	r29, 0x3e	; 62
-    147e:	ca 1b       	sub	r28, r26
-    1480:	db 0b       	sbc	r29, r27
-    1482:	cd bf       	out	0x3d, r28	; 61
-    1484:	de bf       	out	0x3e, r29	; 62
-    1486:	09 94       	ijmp
+00001450 <__prologue_saves__>:
+    1450:	2f 92       	push	r2
+    1452:	3f 92       	push	r3
+    1454:	4f 92       	push	r4
+    1456:	5f 92       	push	r5
+    1458:	6f 92       	push	r6
+    145a:	7f 92       	push	r7
+    145c:	8f 92       	push	r8
+    145e:	9f 92       	push	r9
+    1460:	af 92       	push	r10
+    1462:	bf 92       	push	r11
+    1464:	cf 92       	push	r12
+    1466:	df 92       	push	r13
+    1468:	ef 92       	push	r14
+    146a:	ff 92       	push	r15
+    146c:	0f 93       	push	r16
+    146e:	1f 93       	push	r17
+    1470:	cf 93       	push	r28
+    1472:	df 93       	push	r29
+    1474:	cd b7       	in	r28, 0x3d	; 61
+    1476:	de b7       	in	r29, 0x3e	; 62
+    1478:	ca 1b       	sub	r28, r26
+    147a:	db 0b       	sbc	r29, r27
+    147c:	cd bf       	out	0x3d, r28	; 61
+    147e:	de bf       	out	0x3e, r29	; 62
+    1480:	09 94       	ijmp
 
-00001488 <__epilogue_restores__>:
-    1488:	2a 88       	ldd	r2, Y+18	; 0x12
-    148a:	39 88       	ldd	r3, Y+17	; 0x11
-    148c:	48 88       	ldd	r4, Y+16	; 0x10
-    148e:	5f 84       	ldd	r5, Y+15	; 0x0f
-    1490:	6e 84       	ldd	r6, Y+14	; 0x0e
-    1492:	7d 84       	ldd	r7, Y+13	; 0x0d
-    1494:	8c 84       	ldd	r8, Y+12	; 0x0c
-    1496:	9b 84       	ldd	r9, Y+11	; 0x0b
-    1498:	aa 84       	ldd	r10, Y+10	; 0x0a
-    149a:	b9 84       	ldd	r11, Y+9	; 0x09
-    149c:	c8 84       	ldd	r12, Y+8	; 0x08
-    149e:	df 80       	ldd	r13, Y+7	; 0x07
-    14a0:	ee 80       	ldd	r14, Y+6	; 0x06
-    14a2:	fd 80       	ldd	r15, Y+5	; 0x05
-    14a4:	0c 81       	ldd	r16, Y+4	; 0x04
-    14a6:	1b 81       	ldd	r17, Y+3	; 0x03
-    14a8:	aa 81       	ldd	r26, Y+2	; 0x02
-    14aa:	b9 81       	ldd	r27, Y+1	; 0x01
-    14ac:	ce 0f       	add	r28, r30
-    14ae:	d1 1d       	adc	r29, r1
-    14b0:	cd bf       	out	0x3d, r28	; 61
-    14b2:	de bf       	out	0x3e, r29	; 62
-    14b4:	ed 01       	movw	r28, r26
-    14b6:	08 95       	ret
+00001482 <__epilogue_restores__>:
+    1482:	2a 88       	ldd	r2, Y+18	; 0x12
+    1484:	39 88       	ldd	r3, Y+17	; 0x11
+    1486:	48 88       	ldd	r4, Y+16	; 0x10
+    1488:	5f 84       	ldd	r5, Y+15	; 0x0f
+    148a:	6e 84       	ldd	r6, Y+14	; 0x0e
+    148c:	7d 84       	ldd	r7, Y+13	; 0x0d
+    148e:	8c 84       	ldd	r8, Y+12	; 0x0c
+    1490:	9b 84       	ldd	r9, Y+11	; 0x0b
+    1492:	aa 84       	ldd	r10, Y+10	; 0x0a
+    1494:	b9 84       	ldd	r11, Y+9	; 0x09
+    1496:	c8 84       	ldd	r12, Y+8	; 0x08
+    1498:	df 80       	ldd	r13, Y+7	; 0x07
+    149a:	ee 80       	ldd	r14, Y+6	; 0x06
+    149c:	fd 80       	ldd	r15, Y+5	; 0x05
+    149e:	0c 81       	ldd	r16, Y+4	; 0x04
+    14a0:	1b 81       	ldd	r17, Y+3	; 0x03
+    14a2:	aa 81       	ldd	r26, Y+2	; 0x02
+    14a4:	b9 81       	ldd	r27, Y+1	; 0x01
+    14a6:	ce 0f       	add	r28, r30
+    14a8:	d1 1d       	adc	r29, r1
+    14aa:	cd bf       	out	0x3d, r28	; 61
+    14ac:	de bf       	out	0x3e, r29	; 62
+    14ae:	ed 01       	movw	r28, r26
+    14b0:	08 95       	ret
 
-000014b8 <__umulhisi3>:
-    14b8:	a2 9f       	mul	r26, r18
-    14ba:	b0 01       	movw	r22, r0
-    14bc:	b3 9f       	mul	r27, r19
-    14be:	c0 01       	movw	r24, r0
-    14c0:	a3 9f       	mul	r26, r19
-    14c2:	70 0d       	add	r23, r0
-    14c4:	81 1d       	adc	r24, r1
-    14c6:	11 24       	eor	r1, r1
-    14c8:	91 1d       	adc	r25, r1
-    14ca:	b2 9f       	mul	r27, r18
-    14cc:	70 0d       	add	r23, r0
-    14ce:	81 1d       	adc	r24, r1
-    14d0:	11 24       	eor	r1, r1
-    14d2:	91 1d       	adc	r25, r1
-    14d4:	08 95       	ret
+000014b2 <__umulhisi3>:
+    14b2:	a2 9f       	mul	r26, r18
+    14b4:	b0 01       	movw	r22, r0
+    14b6:	b3 9f       	mul	r27, r19
+    14b8:	c0 01       	movw	r24, r0
+    14ba:	a3 9f       	mul	r26, r19
+    14bc:	70 0d       	add	r23, r0
+    14be:	81 1d       	adc	r24, r1
+    14c0:	11 24       	eor	r1, r1
+    14c2:	91 1d       	adc	r25, r1
+    14c4:	b2 9f       	mul	r27, r18
+    14c6:	70 0d       	add	r23, r0
+    14c8:	81 1d       	adc	r24, r1
+    14ca:	11 24       	eor	r1, r1
+    14cc:	91 1d       	adc	r25, r1
+    14ce:	08 95       	ret
 
-000014d6 <_exit>:
-    14d6:	f8 94       	cli
+000014d0 <_exit>:
+    14d0:	f8 94       	cli
 
-000014d8 <__stop_program>:
-    14d8:	ff cf       	rjmp	.-2      	; 0x14d8 <__stop_program>
+000014d2 <__stop_program>:
+    14d2:	ff cf       	rjmp	.-2      	; 0x14d2 <__stop_program>
