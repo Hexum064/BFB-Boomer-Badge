@@ -6,13 +6,9 @@
  */ 
 
 
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
-#include "touch_api.h"
+
 #include "init.h"
 
-#define MEM_READ_DATA 0x03
 #define FILE_COUNT_BUFF_LEN 2 
 #define FILE_ENTRY_BUFF_LEN 8 
 #define WAV_FILE_BUFF_LEN 128  
@@ -21,7 +17,41 @@
 #define LIGHT_METADATA_LEN 4
 #define MAX_LIGHT_COUNT 84
 
+#define MEM_READ 0x03
+#define MEM_WRITE 0x02
+#define MEM_ERASE 0xC7
+#define MEM_ENABLE_WRITE 0x06
+#define MEM_READ_STATUS 0x05
+#define MEM_READ_MAN_ID 0x90
+#define MEM_READ_JEDEC 0x9F
+#define MEM_READ_ID 0x4B
+//Operations: Erase All, Write n bytes to address, Read n bytes from address, Read mem id, Get status
 
+#define USART_ERASE_ALL 'e'
+#define USART_WRITE 'w'
+#define USART_READ 'r'
+#define USART_READ_ID 'i'
+#define USART_READ_JEDEC 'j'
+#define USART_GET_STATUS 's'
+
+#define OP_STATUS_FAILD 0x00
+#define OP_STATUS_SUCCESS 0x01
+#define OP_STATUS_BUSY 0x02
+#define OP_STATUS_WRITING 0x03
+#define OP_STATUS_READING 0x04
+
+#define OP_FAILED_BAD_INPUT 0x01
+#define OP_FAILED_NO_RESPONSE 0x02
+
+#define MEM_WRITE_ENABLED_STATUS_BIT 0x02
+#define MEM_BUSY_STATUS_BIT 0x01
+
+#define WRITE_CHUNK_SIZE 128 //Sum of this number needs to fall on a 256 page boundary
+#define DUMMY_BYTE 0x55
+//1 second timeout will reset operation
+#define INPUT_TIMEOUT_PER_MS 1000
+#define RETRY_MS 250
+#define RETRY_ATTEMPTS 10
 
 
 /*----------------------------------------------------------------------------
@@ -51,7 +81,7 @@ extern int16_t qt_get_sensor_delta( uint8_t sensor);
 /* Output can be observed in the watch window using this pointer */
 qt_touch_lib_measure_data_t *pqt_measure_data = &qt_measure_data;
 
-volatile uint8_t TX_DATA = 0x55;
+
 volatile uint8_t _wavBuff0[WAV_FILE_BUFF_LEN + 1]; //first byte is length, so +1 for the size
 volatile uint8_t _wavBuff1[WAV_FILE_BUFF_LEN + 1];
 volatile uint8_t _lightBuff[LIGHT_FILE_BUFF_LEN];
@@ -62,11 +92,22 @@ volatile uint32_t _totalSampleBytes = 0;
 volatile uint8_t _readLightMem = 0;
 volatile uint16_t _clkPer = 0;
 volatile uint8_t _usartCnt = 0;
-volatile uint8_t _setCS = 0;
-uint8_t * _inputBuff; //Pointer to the buffer we are currently filling
-uint8_t * _outputBuff; //Pointer to the buffer we are currently outputting as audio
+
+
+
+//For these arrays, could reuse the _waveBuff arrays but this lowers confusion.
+volatile uint8_t _buff0[WRITE_CHUNK_SIZE];
+volatile uint8_t _buff1[WRITE_CHUNK_SIZE];
+volatile uint8_t _propBuff[8];
+volatile uint8_t _currentOp;
+
+volatile uint8_t _inputTimeout = 0;
+volatile uint8_t *_memInBuff;
+volatile uint8_t *_memOutBuff;
+volatile uint8_t _dummyByte = DUMMY_BYTE;
 
 volatile uint8_t _readingMem = 0;
+volatile uint8_t _setCS = 0;
 
 struct WAV_Metadata
 {
@@ -110,7 +151,7 @@ void read_mem(uint32_t starting_address, uint8_t *buffer, uint8_t len)
 	_setCS = 0;
 	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
 		
-	read[0] = MEM_READ_DATA;
+	read[0] = MEM_READ;
 	read[1] = (starting_address >> 16) & 0xFF;
 	read[2] = (starting_address >> 8) & 0xFF;
 	read[3] = (starting_address >> 0) & 0xFF;
@@ -134,7 +175,7 @@ void read_mem(uint32_t starting_address, uint8_t *buffer, uint8_t len)
 	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
 	
 	EDMA.CH1.TRFCNT = len;
-	EDMA.CH1.ADDR = (uint16_t)&TX_DATA;
+	EDMA.CH1.ADDR = (uint16_t)&_dummyByte;
 	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
 	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
 	
@@ -233,30 +274,30 @@ void load_input_buffer()
 {
 	//The first byte of the input buffer holds the length
 	
-	_inputBuff[0] = WAV_FILE_BUFF_LEN;
+	_memInBuff[0] = WAV_FILE_BUFF_LEN;
 	
-	if (_totalSampleBytes < _inputBuff[0])
+	if (_totalSampleBytes < _memInBuff[0])
 	{
-		_inputBuff[0] = _wavMetadata.sampleCount;
+		_memInBuff[0] = _wavMetadata.sampleCount;
 	}
 	
 	//Update the number of sample bytes left
-	if (_inputBuff[0] > _totalSampleBytes)
+	if (_memInBuff[0] > _totalSampleBytes)
 	{
 		_totalSampleBytes = 0;
 	}
 	else
 	{
-		_totalSampleBytes -= _inputBuff[0];
+		_totalSampleBytes -= _memInBuff[0];
 	}
 	//When number of sample bytes <= 0, we reached the end.
 	
 	//Make sure nothing else is reading the mem.
 	//Not ideal making the audio wait but might be the only way.
 	
-	read_mem(_addresses.wavFileAddress, _inputBuff + 1, _inputBuff[0]);
+	read_mem(_addresses.wavFileAddress, _memInBuff + 1, _memInBuff[0]);
 	
-	_addresses.wavFileAddress += _inputBuff[0];
+	_addresses.wavFileAddress += _memInBuff[0];
 	
 
 	
@@ -264,15 +305,15 @@ void load_input_buffer()
 
 void swap_buffers()
 {
-	if (_inputBuff == _wavBuff0)
+	if (_memInBuff == _wavBuff0)
 	{
-		_inputBuff = _wavBuff1;
-		_outputBuff = _wavBuff0;		
+		_memInBuff = _wavBuff1;
+		_memOutBuff = _wavBuff0;		
 	}
 	else
 	{
-		_inputBuff = _wavBuff0;
-		_outputBuff = _wavBuff1;		
+		_memInBuff = _wavBuff0;
+		_memOutBuff = _wavBuff1;		
 	}
 	
 }
@@ -284,8 +325,8 @@ void start_audio_output()
 	load_input_buffer();
 	
 	//Set up EDMA and trigger the output DMA transfer by starting the clock
-	EDMA.CH2.TRFCNT = _outputBuff[0] ;                  // buff len is stored in first byte of buff
-	EDMA.CH2.ADDR = (uint16_t)_outputBuff + 1;           // this is the source SRAM address, skip first 1 bytes
+	EDMA.CH2.TRFCNT = _memOutBuff[0] ;                  // buff len is stored in first byte of buff
+	EDMA.CH2.ADDR = (uint16_t)_memOutBuff + 1;           // this is the source SRAM address, skip first 1 bytes
 	EDMA.CH2.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
 	TCC4.PER = _clkPer;
 
@@ -314,7 +355,7 @@ void play_entry(uint16_t entryNum)
 	}
 	
 	//Load the first buffer.
-	_inputBuff = _wavBuff0;
+	_memInBuff = _wavBuff0;
 	load_input_buffer();
 	while(_readingMem);
 	
@@ -341,82 +382,676 @@ void blank_lights()
 	write_lights();
 }
 
-/*============================================================================
-Name    :   qt_set_parameters
-------------------------------------------------------------------------------
-Purpose :   This will fill the default threshold values in the configuration 
-            data structure.But User can change the values of these parameters .
-Input   :   n/a
-Output  :   n/a
-Notes   :   initialize configuration data for processing
-============================================================================*/
+
+
+
+/*Start Mem Access Code*/
+
+
+
+
+void enable_rtc()
+{
+	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
+}
+
+void disable_rtc()
+{
+	CLK.RTCCTRL = 0;
+}
+
+
+
+
+void mem_read_prop(uint8_t prop, uint8_t *buffer, uint8_t len)
+{
+	//6 bytes: 1 for command, 3 for data retrieval
+	buffer[0] = prop;
+
+	for (uint8_t i = 1; i < len; i++)
+	{
+		buffer[i] = DUMMY_BYTE;
+	}
+
+
+	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
+	
+	_readingMem = 1;
+	_setCS = 1;
+	
+	EDMA.CH0.TRFCNT = len;
+	EDMA.CH0.ADDR = (uint16_t)buffer;
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+	
+	
+	EDMA.CH1.TRFCNT = len;
+	EDMA.CH1.ADDR = (uint16_t)buffer;;
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+
+
+	while(_readingMem);
+	
+
+	
+}
+
+void mem_write_prop(uint8_t prop, uint8_t *buffer, uint8_t len)
+{
+	//6 bytes: 1 for command, 3 for data retrieval
+	buffer[0] = prop;
+
+	for (uint8_t i = 1; i < len; i++)
+	{
+		buffer[i] = DUMMY_BYTE;
+	}
+
+
+	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
+	
+	_readingMem = 1;
+	_setCS = 1;
+	
+	EDMA.CH0.TRFCNT = len;
+	EDMA.CH0.ADDR = (uint16_t)buffer;
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+	
+	
+	EDMA.CH1.TRFCNT = len;
+	EDMA.CH1.ADDR = (uint16_t)buffer;;
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+
+
+	while(_readingMem);
+	
+
+	
+}
+
+void mem_write_data(uint32_t starting_address, uint8_t *buffer, uint8_t len)
+{
+	
+	volatile uint8_t write[4];
+	volatile uint8_t trash;
+	_setCS = 0;
+	_readingMem = 1;
+	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
+	
+	write[0] = MEM_WRITE;
+	write[1] = (starting_address >> 16) & 0xFF;
+	write[2] = (starting_address >> 8) & 0xFF;
+	write[3] = (starting_address >> 0) & 0xFF;
+
+	EDMA.CH0.TRFCNT = 4;
+	EDMA.CH0.ADDR = (uint16_t)&trash;
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+	
+	
+	EDMA.CH1.TRFCNT = 4;
+	EDMA.CH1.ADDR = write;
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+	
+	while(_readingMem);
+	_readingMem = 1;
+	_setCS = 1;
+	EDMA.CH0.TRFCNT = len;
+	EDMA.CH0.ADDR = (uint16_t)&trash;
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+	
+	EDMA.CH1.TRFCNT = len;
+	EDMA.CH1.ADDR = (uint16_t)buffer;
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+	
+	//while(_readingMem);
+
+	//PORTD.OUTSET = PIN4_bm;
+	
+}
+
+void mem_read_data(uint32_t starting_address, uint8_t *buffer, uint8_t len)
+{
+	volatile uint8_t read[4];
+	volatile uint8_t trash;
+	_readingMem = 1;
+	_setCS = 0;
+	PORTD.OUTCLR = PIN4_bm; //Set Pin 4 (CS) to low
+	
+	read[0] = MEM_READ;
+	read[1] = (starting_address >> 16) & 0xFF;
+	read[2] = (starting_address >> 8) & 0xFF;
+	read[3] = (starting_address >> 0) & 0xFF;
+
+	EDMA.CH0.TRFCNT = 4;
+	EDMA.CH0.ADDR = (uint16_t)&trash;
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+	
+	
+	EDMA.CH1.TRFCNT = 4;
+	EDMA.CH1.ADDR = read;
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+	
+	while(_readingMem);
+	_setCS = 1;
+	_readingMem = 1;
+	
+	EDMA.CH0.TRFCNT = len;
+	EDMA.CH0.ADDR = (uint16_t)buffer;
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH0.CTRLA |= EDMA_CH_ENABLE_bm;
+	
+	EDMA.CH1.TRFCNT = len;
+	EDMA.CH1.ADDR = (uint16_t)&_dummyByte;
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_FIXED_gc; //
+	EDMA.CH1.CTRLA |= EDMA_CH_ENABLE_bm | EDMA_CH_TRFREQ_bm;
+	
+	while(_readingMem);
+
+	
+	
+}
+
+uint8_t get_data_from_uart(uint8_t *buffer, uint8_t len, uint8_t offset)
+{
+
+	uint16_t i = 0;
+
+	RTC.CNT = 0;
+	enable_rtc();
+	
+
+	while(i < len)
+	{
+		while(!(USARTC0.STATUS & USART_RXCIF_bm) && !(RTC.INTFLAGS & RTC_OVFIF_bm));
+		RTC.CNT = 0;
+		if ((RTC.INTFLAGS & RTC_OVFIF_bm))
+		{
+			disable_rtc();
+			RTC.INTFLAGS = RTC_OVFIF_bm;
+
+			return 0;
+		}
+		
+		buffer[i + offset] = USARTC0.DATA;
+		i++;
+	}
+	
+	
+	disable_rtc();
+	return 1;
+}
+
+uint8_t get_uint_from_uart(uint32_t *intVal)
+{
+	static volatile uint8_t arr[4];
+	uint8_t i = 0;
+	volatile uint32_t val;
+	uint32_t *valPtr;
+
+	if (!get_data_from_uart(arr, 4, 0))
+	{
+		return 0;
+	}
+	
+	
+	valPtr = arr;
+	val = *valPtr;
+	*intVal = val;
+	return 1;
+}
+
+
+
+void transmit_data(uint8_t *data, uint8_t len, uint8_t offset)
+{
+	uint16_t i = 0;
+	uint8_t trash = USARTC0.DATA; //make sure data is clear
+	USARTC0.STATUS = USART_TXCIF_bm | USART_DREIF_bm ;
+	while(i < len)
+	{
+
+		USARTC0.DATA = data[offset + i];
+		while(!(USARTC0.STATUS & USART_TXCIF_bm));
+		USARTC0.STATUS = USART_TXCIF_bm | USART_DREIF_bm ;
+		i++;
+	}
+	
+}
+
+void transmit_status(uint8_t status)
+{
+	_propBuff[0] = status;
+	//Transmit status byte
+	transmit_data(_propBuff, 1, 0);
+	return;
+}
+
+void transmit_status_and_data(uint8_t status, uint32_t data)
+{
+	_propBuff[0] = status;
+	_propBuff[1] = (data >> 0) & 0xFF;
+	_propBuff[2] = (data >> 8) & 0xFF;
+	_propBuff[3] = (data >> 16) & 0xFF;
+	_propBuff[4] = (data >> 24) & 0xFF;
+
+	//Transmit status byte
+	transmit_data(_propBuff, 5, 0);
+	return;
+}
+
+void get_mem()
+{
+
+	volatile uint32_t address;
+	volatile uint32_t length;
+
+	if (!get_uint_from_uart(&address) || !get_uint_from_uart(&length))
+	{
+		transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
+		return;
+	}
+
+	transmit_status(OP_STATUS_SUCCESS);
+	while (length > 255)
+	{
+		mem_read_data(address, _buff0, 255);
+		address += 255;
+		length -= 255;
+		transmit_data(_buff0, 255, 0);
+	}
+	
+	if (length > 0)
+	{
+		mem_read_data(address, _buff0, length);
+		transmit_data(_buff0, length, 0);
+	}
+	
+}
+
+void get_mem_id()
+{
+	mem_read_prop(MEM_READ_ID, _propBuff, 6);
+	transmit_status(OP_STATUS_SUCCESS);
+	transmit_data(_propBuff, 2, 4);
+}
+
+void get_mem_jedec()
+{
+	mem_read_prop(MEM_READ_JEDEC, _propBuff, 4);
+	transmit_status(OP_STATUS_SUCCESS);
+	transmit_data(_propBuff, 3, 1);
+}
+
+void get_mem_status()
+{
+	mem_read_prop(MEM_READ_STATUS, _propBuff, 2);
+	transmit_status(OP_STATUS_SUCCESS);
+	transmit_data(_propBuff, 1, 1);
+}
+
+uint8_t mem_enable_write()
+{
+	uint8_t retryCount = 0;
+	mem_write_prop(MEM_ENABLE_WRITE, _propBuff, 1);
+	
+	
+	while(retryCount++ < RETRY_ATTEMPTS)
+	{
+		mem_read_prop(MEM_READ_STATUS, _propBuff, 2);
+		if ((_propBuff[1] & MEM_WRITE_ENABLED_STATUS_BIT))
+		{
+			return 1;
+		}
+		_delay_ms(RETRY_MS);
+	}
+	
+	return 0;
+}
+
+
+void erase_mem()
+{
+	if (!mem_enable_write())
+	{
+		transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_NO_RESPONSE);
+		return;
+	}
+
+	mem_write_prop(MEM_ERASE, _buff1, 1);
+	RTC.PER = INPUT_TIMEOUT_PER_MS;
+	
+	while(1)
+	{
+		mem_read_prop(MEM_READ_STATUS, _buff1, 2);
+		if (!(_buff1[1] & MEM_BUSY_STATUS_BIT))
+		{
+			transmit_status(OP_STATUS_SUCCESS);
+			return;
+		}
+		_delay_ms(RETRY_MS);
+		
+		transmit_status(OP_STATUS_BUSY);
+	}
+	
+	
+	
+}
+
+void swap_write_buffs()
+{
+	
+	if (_memInBuff == _buff0)
+	{
+		_memInBuff = _buff1;
+		_memOutBuff = _buff0;
+	}
+	else
+	{
+		_memInBuff = _buff0;
+		_memOutBuff = _buff1;
+	}
+}
+
+uint8_t small_write_mem(uint8_t *buffer, uint32_t address, uint8_t length)
+{
+	
+	if (!mem_enable_write())
+	{
+		transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_NO_RESPONSE);
+		return 0;
+	}
+	
+	mem_write_data(address, buffer, length);
+
+	return 1;
+}
+
+void write_mem()
+{
+	uint32_t address;
+	uint32_t length;
+	uint32_t total = 0;
+	uint32_t leftToRead = length;
+	uint32_t leftToWrite = length;
+	uint8_t transLen;
+	uint8_t lengthOffset;
+	
+	if (!get_uint_from_uart(&address) || !get_uint_from_uart(&length))
+	{
+		transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
+		return;
+	}
+
+
+	
+	lengthOffset = WRITE_CHUNK_SIZE - (address % WRITE_CHUNK_SIZE);
+	
+	//because of timing (needing to read everything from the UART), if the length is small, handle the write in one or two ops first
+	if (length < WRITE_CHUNK_SIZE)
+	{
+		if (!get_data_from_uart(_buff0, length, 0))
+		{
+			transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
+			return;
+		}
+		
+		//if the data will still fit within a page boundary, even with the address offset, set the lengthOffset to 0 so we just write the data normally
+		if (lengthOffset > length)
+		{
+			lengthOffset = 0;
+		}
+		
+		//If the data is going to go over a page boundary
+		if (lengthOffset > 0)
+		{
+			
+			
+			if (!small_write_mem(_buff0, address, lengthOffset))
+			{
+				return;
+			}
+			while(_readingMem);
+			//We need to wait until the memory is ready for the last write
+			_delay_ms(1);
+		}
+		
+		//Send the rest. if lengthOffset was 0, then everything gets sent here
+		if (!small_write_mem(_buff0 + lengthOffset, address + lengthOffset, length - lengthOffset))
+		{
+			return;
+		}
+		
+		while(_readingMem);
+		
+		transmit_status_and_data(OP_STATUS_SUCCESS, length);
+		return;
+	}
+
+
+	leftToRead = length;
+	leftToWrite = length;
+	
+	_memInBuff = _buff0;
+	_memOutBuff = _buff1;
+	
+	//Here we know that the size of the data is larger so get a chunck to handle the address offset and page-align the writes.
+	if (lengthOffset > 0)
+	{
+		if (!get_data_from_uart(_memInBuff, lengthOffset, 0))
+		{
+			transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
+			return;
+		}
+		swap_write_buffs();
+		
+		if (!small_write_mem(_memOutBuff, address, lengthOffset))
+		{
+			return;
+		}
+		
+		leftToRead -= lengthOffset;
+		leftToWrite -= lengthOffset;
+		address += lengthOffset;
+	}
+	
+	while (leftToRead > 0 || leftToWrite > 0)
+	{
+		
+
+		if (leftToRead > WRITE_CHUNK_SIZE)
+		{
+			transLen = WRITE_CHUNK_SIZE;
+		}
+		else
+		{
+			transLen = leftToRead;
+		}
+		
+		if (transLen > 0)
+		{
+			if (!get_data_from_uart(_memInBuff, transLen, 0))
+			{
+				transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
+				return;
+			}
+			swap_write_buffs();
+		}
+		
+		leftToRead -= transLen;
+		
+		if (leftToWrite > WRITE_CHUNK_SIZE)
+		{
+			transLen = WRITE_CHUNK_SIZE;
+		}
+		else
+		{
+			transLen = leftToWrite;
+			//We need to wait until the memory is ready for the last write
+			_delay_ms(1);
+			
+		}
+		
+
+		if (!small_write_mem(_memOutBuff, address, transLen))
+		{
+			return;
+		}
+
+		leftToWrite -= transLen;
+		address += transLen;
+
+	}
+	
+	
+	while(_readingMem);
+	
+	transmit_status_and_data(OP_STATUS_SUCCESS, length);
+	
+}
+
+void get_uart_command()
+{
+
+	while(!(USARTC0.STATUS & USART_RXCIF_bm))
+	USARTC0.STATUS = USART_RXCIF_bm;
+	
+	_currentOp = USARTC0.DATA;
+	switch(_currentOp)
+	{
+		
+		case USART_ERASE_ALL:
+		erase_mem();
+		break;
+		case USART_WRITE:
+		write_mem();
+		break;
+		case USART_READ:
+		get_mem();
+		break;
+		case USART_READ_ID:
+		get_mem_id();
+		break;
+		case USART_READ_JEDEC:
+		get_mem_jedec();
+		break;
+		case USART_GET_STATUS:
+		get_mem_status();
+		break;
+
+	}
+}
+
+
+
+/*Start global code*/
+
+
+
+
+
+uint8_t get_start_mode()
+{
+	if (PORTD.IN & PIN6_bm)
+	{
+		PORTD.OUTSET = PIN7_bm;
+		return 1;
+	}
+	else
+	{
+		PORTD.OUTCLR = PIN7_bm;
+		return 0;
+	}
+	
+}
 
 
 int main(void)
 {
-	//status flags to indicate the re-burst for library
-	uint16_t status_flag = 0;
-	uint16_t burst_flag = 0;
-
-		
-	init_main_config();
+	init_start_mode_pins();
 	
+	if (get_start_mode())
+	{
+		//Start mem access mode
+		init_mem_access_config();
 
+		/* Replace with your application code */
+		while (1)
+		{
+			get_uart_command();
+		}
+	}
+	else
+	{
+		//status flags to indicate the re-burst for library
+		uint16_t status_flag = 0;
+		uint16_t burst_flag = 0;
 	
-	load_entry_count();
+		init_main_config();
+
+		load_entry_count();
 	
-    while (1) 
-    {
-        if(time_to_measure_touch )
-        {
+		while (1)
+		{
+			if(time_to_measure_touch )
+			{
 
-	        /*  clear flag: it's time to measure touch  */
-	        time_to_measure_touch = 0u;
+				/*  clear flag: it's time to measure touch  */
+				time_to_measure_touch = 0u;
 
-	        do {
-		        /*  one time measure touch sensors    */
-		        status_flag = qt_measure_sensors( current_time_ms_touch );
-		        if (status_flag & QTLIB_STATUS_CHANGE)
-		        {
-					if (qt_measure_data.qt_touch_status.sensor_states[0] == 1)
+				do {
+					/*  one time measure touch sensors    */
+					status_flag = qt_measure_sensors( current_time_ms_touch );
+					if (status_flag & QTLIB_STATUS_CHANGE)
 					{
-						play_entry(_entryIndex);
-					}
-					else if (qt_measure_data.qt_touch_status.sensor_states[0] == 2)
-					{
-						
-						_entryIndex++;
-						
-						if (_entryIndex == _entryCount)
+						if (qt_measure_data.qt_touch_status.sensor_states[0] == 1)
 						{
-							_entryIndex = 0;
+							play_entry(_entryIndex);
 						}
+						else if (qt_measure_data.qt_touch_status.sensor_states[0] == 2)
+						{
 						
-						play_entry(_entryIndex);
-					}
-					else if (qt_measure_data.qt_touch_status.sensor_states[0] == 4)
-					{
-						if (_entryIndex > 0)
-						{
-							_entryIndex--;
+							_entryIndex++;
+						
+							if (_entryIndex == _entryCount)
+							{
+								_entryIndex = 0;
+							}
+						
+							play_entry(_entryIndex);
 						}
-						else
+						else if (qt_measure_data.qt_touch_status.sensor_states[0] == 4)
 						{
-							_entryIndex = _entryCount - 1;
+							if (_entryIndex > 0)
+							{
+								_entryIndex--;
+							}
+							else
+							{
+								_entryIndex = _entryCount - 1;
+							}
+							play_entry(_entryIndex);
 						}
-						play_entry(_entryIndex);
-					}
 					
 
-		        }
-		        
-		        burst_flag = status_flag & QTLIB_BURST_AGAIN;
+					}
+				
+					burst_flag = status_flag & QTLIB_BURST_AGAIN;
 
-		        /* Time-critical host application code goes here */
+					/* Time-critical host application code goes here */
 
-	        }while (burst_flag) ;
-        }
-    }
+				}while (burst_flag) ;
+			}
+		}		
+	}
+
 }
 
 //IRQ handled when data is done being send to the DAC

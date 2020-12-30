@@ -240,68 +240,68 @@ void init_usart_mem_access()
  160:	15 82       	std	Z+5, r1	; 0x05
  162:	08 95       	ret
 
-00000164 <init_input_timeout_timer>:
-
-
-
-void init_input_timeout_timer()
-{
-	RTC.PER = INPUT_TIMEOUT_PER_MS;
- 164:	e0 e0       	ldi	r30, 0x00	; 0
- 166:	f4 e0       	ldi	r31, 0x04	; 4
- 168:	88 ee       	ldi	r24, 0xE8	; 232
- 16a:	93 e0       	ldi	r25, 0x03	; 3
- 16c:	82 87       	std	Z+10, r24	; 0x0a
- 16e:	93 87       	std	Z+11, r25	; 0x0b
-	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
- 170:	81 e0       	ldi	r24, 0x01	; 1
- 172:	80 83       	st	Z, r24
- 174:	08 95       	ret
-
-00000176 <enable_rtc>:
-
-}
-
-void enable_rtc()
-{
-	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
- 176:	81 e0       	ldi	r24, 0x01	; 1
- 178:	80 93 43 00 	sts	0x0043, r24	; 0x800043 <__TEXT_REGION_LENGTH__+0x7f7043>
- 17c:	08 95       	ret
-
-0000017e <disable_rtc>:
-}
-
-void disable_rtc()
-{
-	CLK.RTCCTRL = 0;	
- 17e:	10 92 43 00 	sts	0x0043, r1	; 0x800043 <__TEXT_REGION_LENGTH__+0x7f7043>
- 182:	08 95       	ret
-
-00000184 <init_clock_mem_access>:
+00000164 <init_clock_mem_access>:
 }
 
 void init_clock_mem_access()
 {
 	
 	OSC_CTRL |= OSC_RC32MEN_bm; //Setup 32Mhz internal
- 184:	e0 e5       	ldi	r30, 0x50	; 80
- 186:	f0 e0       	ldi	r31, 0x00	; 0
- 188:	80 81       	ld	r24, Z
- 18a:	82 60       	ori	r24, 0x02	; 2
- 18c:	80 83       	st	Z, r24
+ 164:	e0 e5       	ldi	r30, 0x50	; 80
+ 166:	f0 e0       	ldi	r31, 0x00	; 0
+ 168:	80 81       	ld	r24, Z
+ 16a:	82 60       	ori	r24, 0x02	; 2
+ 16c:	80 83       	st	Z, r24
 	
 	while(!(OSC_STATUS & OSC_RC32MRDY_bm));
- 18e:	80 91 51 00 	lds	r24, 0x0051	; 0x800051 <__TEXT_REGION_LENGTH__+0x7f7051>
- 192:	81 ff       	sbrs	r24, 1
- 194:	fc cf       	rjmp	.-8      	; 0x18e <init_clock_mem_access+0xa>
+ 16e:	80 91 51 00 	lds	r24, 0x0051	; 0x800051 <__TEXT_REGION_LENGTH__+0x7f7051>
+ 172:	81 ff       	sbrs	r24, 1
+ 174:	fc cf       	rjmp	.-8      	; 0x16e <init_clock_mem_access+0xa>
 	
 	CCP = CCP_IOREG_gc; //Trigger protection mechanism
- 196:	88 ed       	ldi	r24, 0xD8	; 216
- 198:	84 bf       	out	0x34, r24	; 52
+ 176:	88 ed       	ldi	r24, 0xD8	; 216
+ 178:	84 bf       	out	0x34, r24	; 52
 	CLK_CTRL = CLK_SCLKSEL_RC32M_gc; //Enable internal  32Mhz internal
- 19a:	81 e0       	ldi	r24, 0x01	; 1
- 19c:	80 93 40 00 	sts	0x0040, r24	; 0x800040 <__TEXT_REGION_LENGTH__+0x7f7040>
+ 17a:	81 e0       	ldi	r24, 0x01	; 1
+ 17c:	80 93 40 00 	sts	0x0040, r24	; 0x800040 <__TEXT_REGION_LENGTH__+0x7f7040>
+ 180:	08 95       	ret
+
+00000182 <init_input_timeout_timer>:
+}
+
+
+void init_input_timeout_timer()
+{
+	RTC.PER = INPUT_TIMEOUT_PER_MS;
+ 182:	e0 e0       	ldi	r30, 0x00	; 0
+ 184:	f4 e0       	ldi	r31, 0x04	; 4
+ 186:	88 ee       	ldi	r24, 0xE8	; 232
+ 188:	93 e0       	ldi	r25, 0x03	; 3
+ 18a:	82 87       	std	Z+10, r24	; 0x0a
+ 18c:	93 87       	std	Z+11, r25	; 0x0b
+	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
+ 18e:	81 e0       	ldi	r24, 0x01	; 1
+ 190:	80 83       	st	Z, r24
+ 192:	08 95       	ret
+
+00000194 <enable_rtc>:
+
+}
+
+void enable_rtc()
+{
+	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
+ 194:	81 e0       	ldi	r24, 0x01	; 1
+ 196:	80 93 43 00 	sts	0x0043, r24	; 0x800043 <__TEXT_REGION_LENGTH__+0x7f7043>
+ 19a:	08 95       	ret
+
+0000019c <disable_rtc>:
+}
+
+void disable_rtc()
+{
+	CLK.RTCCTRL = 0;	
+ 19c:	10 92 43 00 	sts	0x0043, r1	; 0x800043 <__TEXT_REGION_LENGTH__+0x7f7043>
  1a0:	08 95       	ret
 
 000001a2 <mem_read_prop>:
@@ -774,7 +774,7 @@ uint8_t get_data_from_uart(uint8_t *buffer, uint8_t len, uint8_t offset)
  3f8:	10 92 08 04 	sts	0x0408, r1	; 0x800408 <__TEXT_REGION_LENGTH__+0x7f7408>
  3fc:	10 92 09 04 	sts	0x0409, r1	; 0x800409 <__TEXT_REGION_LENGTH__+0x7f7409>
 	enable_rtc();
- 400:	0e 94 bb 00 	call	0x176	; 0x176 <enable_rtc>
+ 400:	0e 94 ca 00 	call	0x194	; 0x194 <enable_rtc>
 }
 
 uint8_t get_data_from_uart(uint8_t *buffer, uint8_t len, uint8_t offset)
@@ -809,7 +809,7 @@ uint8_t get_data_from_uart(uint8_t *buffer, uint8_t len, uint8_t offset)
  426:	07 c0       	rjmp	.+14     	; 0x436 <__EEPROM_REGION_LENGTH__+0x36>
 		{
 			disable_rtc();
- 428:	0e 94 bf 00 	call	0x17e	; 0x17e <disable_rtc>
+ 428:	0e 94 ce 00 	call	0x19c	; 0x19c <disable_rtc>
 			RTC.INTFLAGS = RTC_OVFIF_bm;
  42c:	81 e0       	ldi	r24, 0x01	; 1
  42e:	80 93 03 04 	sts	0x0403, r24	; 0x800403 <__TEXT_REGION_LENGTH__+0x7f7403>
@@ -847,7 +847,7 @@ uint8_t get_data_from_uart(uint8_t *buffer, uint8_t len, uint8_t offset)
 	
 	
 	disable_rtc();	
- 454:	0e 94 bf 00 	call	0x17e	; 0x17e <disable_rtc>
+ 454:	0e 94 ce 00 	call	0x19c	; 0x19c <disable_rtc>
 	return 1;
  458:	81 e0       	ldi	r24, 0x01	; 1
 }
@@ -1550,7 +1550,7 @@ void write_mem()
  816:	13 c1       	rjmp	.+550    	; 0xa3e <write_mem+0x26e>
 	}
 
-	//because of timing (needing to read everything from the UART), if the length is small, handle the write in two ops first
+
 	
 	lengthOffset = WRITE_CHUNK_SIZE - (address % WRITE_CHUNK_SIZE);
  818:	89 81       	ldd	r24, Y+1	; 0x01
@@ -1558,6 +1558,7 @@ void write_mem()
  81c:	10 e8       	ldi	r17, 0x80	; 128
  81e:	18 1b       	sub	r17, r24
 	
+	//because of timing (needing to read everything from the UART), if the length is small, handle the write in one or two ops first
 	if (length < WRITE_CHUNK_SIZE)
  820:	cd 80       	ldd	r12, Y+5	; 0x05
  822:	de 80       	ldd	r13, Y+6	; 0x06
@@ -1590,7 +1591,7 @@ void write_mem()
  852:	f5 c0       	rjmp	.+490    	; 0xa3e <write_mem+0x26e>
 		}
 		
-			//if, even with the mem offset, the length will not cross a page boundary, then length because the lengthOffset will be larger than the length
+		//if the data will still fit within a page boundary, even with the address offset, set the lengthOffset to 0 so we just write the data normally
 		if (lengthOffset > length)
  854:	81 2f       	mov	r24, r17
  856:	90 e0       	ldi	r25, 0x00	; 0
@@ -1700,6 +1701,7 @@ void write_mem()
  8ee:	80 93 11 22 	sts	0x2211, r24	; 0x802211 <_memOutBuff>
  8f2:	90 93 12 22 	sts	0x2212, r25	; 0x802212 <_memOutBuff+0x1>
 	
+	//Here we know that the size of the data is larger so get a chunck to handle the address offset and page-align the writes.
 	if (lengthOffset > 0)
  8f6:	11 23       	and	r17, r17
  8f8:	b1 f1       	breq	.+108    	; 0x966 <write_mem+0x196>
@@ -2057,13 +2059,13 @@ int main(void)
  ac2:	f8 94       	cli
 	
 	init_clock_mem_access();
- ac4:	0e 94 c2 00 	call	0x184	; 0x184 <init_clock_mem_access>
+ ac4:	0e 94 b2 00 	call	0x164	; 0x164 <init_clock_mem_access>
 	init_usart_mem_access();
  ac8:	0e 94 9a 00 	call	0x134	; 0x134 <init_usart_mem_access>
 	init_edma_mem_access();
  acc:	0e 94 88 00 	call	0x110	; 0x110 <init_edma_mem_access>
 	init_input_timeout_timer();
- ad0:	0e 94 b2 00 	call	0x164	; 0x164 <init_input_timeout_timer>
+ ad0:	0e 94 c1 00 	call	0x182	; 0x182 <init_input_timeout_timer>
 	
 	sei();
  ad4:	78 94       	sei

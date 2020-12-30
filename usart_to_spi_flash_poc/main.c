@@ -118,6 +118,17 @@ void init_usart_mem_access()
 
 }
 
+void init_clock_mem_access()
+{
+	
+	OSC_CTRL |= OSC_RC32MEN_bm; //Setup 32Mhz internal
+	
+	while(!(OSC_STATUS & OSC_RC32MRDY_bm));
+	
+	CCP = CCP_IOREG_gc; //Trigger protection mechanism
+	CLK_CTRL = CLK_SCLKSEL_RC32M_gc; //Enable internal  32Mhz internal
+	
+}
 
 
 void init_input_timeout_timer()
@@ -137,17 +148,7 @@ void disable_rtc()
 	CLK.RTCCTRL = 0;	
 }
 
-void init_clock_mem_access()
-{
-	
-	OSC_CTRL |= OSC_RC32MEN_bm; //Setup 32Mhz internal
-	
-	while(!(OSC_STATUS & OSC_RC32MRDY_bm));
-	
-	CCP = CCP_IOREG_gc; //Trigger protection mechanism
-	CLK_CTRL = CLK_SCLKSEL_RC32M_gc; //Enable internal  32Mhz internal
-	
-}
+
 
 
 void mem_read_prop(uint8_t prop, uint8_t *buffer, uint8_t len)

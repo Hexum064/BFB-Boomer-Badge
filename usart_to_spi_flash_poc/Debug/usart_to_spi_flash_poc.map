@@ -330,18 +330,18 @@ END GROUP
  .text.init_usart_mem_access
                 0x00000134       0x30 main.o
                 0x00000134                init_usart_mem_access
- .text.init_input_timeout_timer
-                0x00000164       0x12 main.o
-                0x00000164                init_input_timeout_timer
- .text.enable_rtc
-                0x00000176        0x8 main.o
-                0x00000176                enable_rtc
- .text.disable_rtc
-                0x0000017e        0x6 main.o
-                0x0000017e                disable_rtc
  .text.init_clock_mem_access
-                0x00000184       0x1e main.o
-                0x00000184                init_clock_mem_access
+                0x00000164       0x1e main.o
+                0x00000164                init_clock_mem_access
+ .text.init_input_timeout_timer
+                0x00000182       0x12 main.o
+                0x00000182                init_input_timeout_timer
+ .text.enable_rtc
+                0x00000194        0x8 main.o
+                0x00000194                enable_rtc
+ .text.disable_rtc
+                0x0000019c        0x6 main.o
+                0x0000019c                disable_rtc
  .text.mem_read_prop
                 0x000001a2       0x5a main.o
                 0x000001a2                mem_read_prop

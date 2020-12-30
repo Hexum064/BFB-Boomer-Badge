@@ -12,30 +12,16 @@
 #include "touch_api.h"
 #include "init.h"
 
-void init_pins_normal()
+
+void init_start_mode_pins()
 {
-	PORTA.DIRSET = PIN0_bm | PIN2_bm;
-
-	PORTD.DIRSET = PIN1_bm | PIN3_bm | PIN4_bm;
-	PORTD.DIRCLR = PIN2_bm;
+	//this pin will be used to detect the startup mode
+	PORTD.DIRSET = PIN7_bm;
+	PORTD.PIN6CTRL = PORT_OPC_PULLDOWN_gc;
 	
-	
-	// Setup port pins for TxD, XCK and LUT0OUT
-	PORTC.PIN0CTRL = PORT_OPC_TOTEM_gc;                         // LUT0OUT (data to WS2812)
-	PORTC.PIN1CTRL = PORT_OPC_TOTEM_gc | PORT_ISC_RISING_gc;    // XCK
-	PORTC.PIN3CTRL = PORT_OPC_TOTEM_gc | PORT_ISC_LEVEL_gc;     // TxD
-	PORTC.DIRSET = PIN0_bm | PIN1_bm | PIN3_bm;
+	//This pin is for a mode indicator light
+	PORTD.DIRCLR = PIN6_bm;
 
-}
-
-void init_pins_mem_access()
-{
-	PORTA.DIRSET = PIN0_bm | PIN2_bm;
-
-	PORTD.DIRSET = PIN1_bm | PIN3_bm | PIN4_bm;
-	PORTD.DIRCLR = PIN2_bm;	
-	
-	//TODO:Make sure USARTC Pins are set up;
 }
 
 void enable_interrupts()
@@ -43,7 +29,7 @@ void enable_interrupts()
 	PMIC.CTRL = PMIC_HILVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_LOLVLEN_bm 	;	  //  enable interrupts
 }
 
-void init_clock_normal()
+void init_clock()
 {
 	
 	OSC_CTRL |= OSC_RC32MEN_bm; //Setup 32Mhz internal
@@ -55,16 +41,29 @@ void init_clock_normal()
 	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
 }
 
-void init_clock_mem_access()
+
+
+
+/*Section for normal run mode init*/
+
+void init_pins_normal()
 {
+	PORTA.DIRSET = PIN0_bm | PIN2_bm;
+
+	PORTD.DIRSET = PIN1_bm | PIN3_bm | PIN4_bm | PIN7_bm;
+	PORTD.DIRCLR = PIN2_bm | PIN6_bm;
 	
-	OSC_CTRL |= OSC_RC32MEN_bm; //Setup 32Mhz internal
 	
-	while(!(OSC_STATUS & OSC_RC32MRDY_bm));
+	// Setup port pins for TxD, XCK and LUT0OUT
+	PORTC.PIN0CTRL = PORT_OPC_TOTEM_gc;                         // LUT0OUT (data to WS2812)
+	PORTC.PIN1CTRL = PORT_OPC_TOTEM_gc | PORT_ISC_RISING_gc;    // XCK
+	PORTC.PIN3CTRL = PORT_OPC_TOTEM_gc | PORT_ISC_LEVEL_gc;     // TxD
+	PORTC.DIRSET = PIN0_bm | PIN1_bm | PIN3_bm;
 	
-	CCP = CCP_IOREG_gc; //Trigger protection mechanism
-	CLK_CTRL = CLK_SCLKSEL_RC32M_gc; //Enable internal  32Mhz internal
+
+
 }
+
 
 void init_usart_normal()
 {
@@ -90,25 +89,7 @@ void init_usart_normal()
 	USARTC0.CTRLB = USART_TXEN_bm;
 }
 
-void init_usart_mem_access()
-{
 
-	
-	//Mem USART in SPI
-	USARTD0.CTRLA = USART_TXCINTLVL_OFF_gc; //No interrupts
-	USARTD0.CTRLB = USART_TXEN_bm | USART_RXEN_bm;// | USART_CLK2X_bm;
-	USARTD0.CTRLC = USART_CMODE_MSPI_gc;
-	USARTD0.CTRLD = 0; //No decoding or encoding
-	USARTD0_BAUDCTRLA = 1;
-	USARTD0.BAUDCTRLB = 0;
-	
-
-	
-	//interface
-	USARTC0.BAUDCTRLA = 19;                                     // 800.000 baud (1250 ns @ 32 MHz)
-	USARTC0.BAUDCTRLB = 0;
-
-}
 
 void init_edma_normal()
 {
@@ -144,20 +125,7 @@ void init_edma_normal()
 
 }
 
-void init_edma_mem_access()
-{
-	//RX
-	EDMA.CH0.CTRLA = EDMA_CH_SINGLE_bm;//no repeat, single shot, burst len = 1
-	EDMA.CH0.CTRLB = EDMA_CH_TRNINTLVL_HI_gc; //ERR level = 0, TRN int level hi
-	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
-	EDMA.CH0.TRIGSRC = EDMA_CH_TRIGSRC_USARTD0_RXC_gc;
 
-	//TX
-	EDMA.CH1.CTRLA = EDMA_CH_SINGLE_bm;//no repeat, single shot, burst len = 1
-	EDMA.CH1.CTRLB = 0; //ERR and TRN int level = 0
-	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
-	EDMA.CH1.TRIGSRC = EDMA_CH_TRIGSRC_USARTD0_DRE_gc;
-}
 
 void init_xcl(void)
 {
@@ -197,13 +165,6 @@ void init_qTouch_timer()
 	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
 	RTC.INTCTRL = RTC_OVFINTLVL_LO_gc;
 	
-}
-
-void init_input_timeout_timer()
-{
-	RTC.PER = INPUT_TIMEOUT_PER_MS;
-	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
-	RTC.INTCTRL = RTC_OVFINTLVL_LO_gc;
 }
 
 void init_event_channels()
@@ -255,6 +216,71 @@ void config_keys(void)
 }
 
 
+
+/*Start of mem access init*/
+
+void init_input_timeout_timer()
+{
+	RTC.PER = INPUT_TIMEOUT_PER_MS;
+	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
+
+}
+
+void init_pins_mem_access()
+{
+	PORTA.DIRSET = PIN0_bm | PIN2_bm;
+
+	PORTD.DIRSET = PIN1_bm | PIN3_bm | PIN4_bm | PIN7_bm;
+	PORTD.DIRCLR = PIN2_bm | PIN6_bm;
+	
+	PORTC.DIRSET = PIN3_bm;
+	PORTC.DIRCLR = PIN2_bm;
+	
+}
+
+void init_edma_mem_access()
+{
+	//RX
+	EDMA.CH0.CTRLA = EDMA_CH_SINGLE_bm;//no repeat, single shot, burst len = 1
+	EDMA.CH0.CTRLB = EDMA_CH_TRNINTLVL_HI_gc; //ERR level = 0, TRN int level hi
+	EDMA.CH0.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH0.TRIGSRC = EDMA_CH_TRIGSRC_USARTD0_RXC_gc;
+
+	//TX
+	EDMA.CH1.CTRLA = EDMA_CH_SINGLE_bm;//no repeat, single shot, burst len = 1
+	EDMA.CH1.CTRLB =  0; //EDMA_CH_TRNINTLVL_HI_gc; //ERR level = 0, TRN int level hi
+	EDMA.CH1.ADDRCTRL = EDMA_CH_RELOAD_TRANSACTION_gc | EDMA_CH_DIR_INC_gc; //
+	EDMA.CH1.TRIGSRC = EDMA_CH_TRIGSRC_USARTD0_DRE_gc;
+	
+	EDMA.CTRL = EDMA_ENABLE_bm | EDMA_PRIMODE_RR123_gc; //perif mode, no double buff,  Ch0 > round robin
+}
+
+void init_usart_mem_access()
+{
+
+	
+	//Mem USART in SPI
+	USARTD0.CTRLA = USART_TXCINTLVL_OFF_gc; //No interrupts
+	USARTD0.CTRLB = USART_TXEN_bm | USART_RXEN_bm;// | USART_CLK2X_bm;
+	USARTD0.CTRLC = USART_CMODE_MSPI_gc;
+	USARTD0.CTRLD = 0; //No decoding or encoding
+	USARTD0_BAUDCTRLA = 1;
+	USARTD0.BAUDCTRLB = 0;
+	
+
+	
+	//interface. BAUD=921600
+	USARTC0.BAUDCTRLA = 75;// 131;
+	USARTC0.BAUDCTRLB = 0xA0;//-6 0xD0; //-3
+	USARTC0.CTRLA = USART_TXCINTLVL_OFF_gc; //No interrupts
+	USARTC0.CTRLB = USART_TXEN_bm | USART_RXEN_bm;
+	USARTC0.CTRLC = USART_CMODE_ASYNCHRONOUS_gc | USART_PMODE_DISABLED_gc | USART_CHSIZE_8BIT_gc; //Mode:Async,8,None,1
+	USARTC0.CTRLD = 0; //No decoding or encoding
+
+}
+
+
+
 void init_main_config()
 {
 	init_pins_normal();
@@ -274,7 +300,7 @@ void init_main_config()
 	
 	cli();
 	
-	init_clock_normal();
+	init_clock();
 	init_usart_normal();
 	init_edma_normal();
 	
@@ -304,12 +330,17 @@ void init_main_config()
 void init_mem_access_config()
 {
 	enable_interrupts();
+	init_pins_mem_access();
 	
 	cli();
-		
-	init_clock_mem_access();
+	
+	init_clock();
 	init_usart_mem_access();
 	init_edma_mem_access();
+	init_input_timeout_timer();
 	
 	sei();
+	
+	//Set CS high
+	PORTD.OUTSET = PIN4_bm;
 }
