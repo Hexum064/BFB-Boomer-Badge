@@ -48,8 +48,8 @@
 
 #define WRITE_CHUNK_SIZE 128 //Sum of this number needs to fall on a 256 page boundary
 #define DUMMY_BYTE 0x55
-//1 second timeout will reset operation
-#define INPUT_TIMEOUT_PER_MS 1000
+
+
 #define RETRY_MS 250
 #define RETRY_ATTEMPTS 10
 
@@ -96,8 +96,8 @@ volatile uint8_t _usartCnt = 0;
 
 
 //For these arrays, could reuse the _waveBuff arrays but this lowers confusion.
-volatile uint8_t _buff0[WRITE_CHUNK_SIZE];
-volatile uint8_t _buff1[WRITE_CHUNK_SIZE];
+volatile uint8_t _buff0[255];
+volatile uint8_t _buff1[255];
 volatile uint8_t _propBuff[8];
 volatile uint8_t _currentOp;
 
@@ -393,10 +393,12 @@ void blank_lights()
 void enable_rtc()
 {
 	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
+	RTC.INTFLAGS = RTC_OVFIF_bm;
 }
 
 void disable_rtc()
 {
+	RTC.INTFLAGS = RTC_OVFIF_bm;
 	CLK.RTCCTRL = 0;
 }
 
@@ -564,28 +566,29 @@ uint8_t get_data_from_uart(uint8_t *buffer, uint8_t len, uint8_t offset)
 
 	uint16_t i = 0;
 
-	RTC.CNT = 0;
-	enable_rtc();
+	//RTC.CNT = 0;
+	//enable_rtc();
 	
 
 	while(i < len)
 	{
-		while(!(USARTC0.STATUS & USART_RXCIF_bm) && !(RTC.INTFLAGS & RTC_OVFIF_bm));
-		RTC.CNT = 0;
-		if ((RTC.INTFLAGS & RTC_OVFIF_bm))
-		{
-			disable_rtc();
-			RTC.INTFLAGS = RTC_OVFIF_bm;
-
-			return 0;
-		}
+		while(!(USARTC0.STATUS & USART_RXCIF_bm) /*&& !(RTC.INTFLAGS & RTC_OVFIF_bm)*/);
+		//RTC.CNT = 0;
+		//if ((RTC.INTFLAGS & RTC_OVFIF_bm))
+		//{
+			//disable_rtc();
+			//
+//
+			//return 0;
+		//}
 		
 		buffer[i + offset] = USARTC0.DATA;
 		i++;
+		//RTC.INTFLAGS = RTC_OVFIF_bm;
 	}
 	
 	
-	disable_rtc();
+	//disable_rtc();
 	return 1;
 }
 
@@ -792,7 +795,13 @@ void write_mem()
 
 
 	
-	lengthOffset = WRITE_CHUNK_SIZE - (address % WRITE_CHUNK_SIZE);
+	lengthOffset = (address % WRITE_CHUNK_SIZE);
+	
+	//If there is an offset, calculate the difference 
+	if (lengthOffset > 0)
+	{
+		lengthOffset = WRITE_CHUNK_SIZE - lengthOffset;
+	}
 	
 	//because of timing (needing to read everything from the UART), if the length is small, handle the write in one or two ops first
 	if (length < WRITE_CHUNK_SIZE)
@@ -877,11 +886,12 @@ void write_mem()
 		
 		if (transLen > 0)
 		{
-			if (!get_data_from_uart(_memInBuff, transLen, 0))
-			{
-				transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
-				return;
-			}
+			get_data_from_uart(_memInBuff, transLen, 0);
+			//if (!get_data_from_uart(_memInBuff, transLen, 0))
+			//{
+				//transmit_status_and_data(OP_STATUS_FAILD, OP_FAILED_BAD_INPUT);
+				//return;
+			//}
 			swap_write_buffs();
 		}
 		

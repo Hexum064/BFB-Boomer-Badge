@@ -38,7 +38,7 @@ void init_clock()
 	
 	CCP = CCP_IOREG_gc; //Trigger protection mechanism
 	CLK_CTRL = CLK_SCLKSEL_RC32M_gc; //Enable internal  32Mhz internal
-	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
+	
 }
 
 
@@ -164,7 +164,7 @@ void init_qTouch_timer()
 	RTC.PER = TICKS_PER_MS * qt_measurement_period_msec;
 	RTC.CTRL = RTC_PRESCALER_DIV1_gc;
 	RTC.INTCTRL = RTC_OVFINTLVL_LO_gc;
-	
+	CLK.RTCCTRL = CLK_RTCSRC_ULP_gc | CLK_RTCEN_bm; //Set the RTC clock source to the 1kHz ULP and enable it.
 }
 
 void init_event_channels()
